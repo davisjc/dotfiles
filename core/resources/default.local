@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Specify any machine-specific settings here. These will be loaded after the
+# synchronized version stored in the dotfile repository.
+#
+
