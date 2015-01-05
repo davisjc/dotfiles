@@ -11,7 +11,7 @@
 #
 #     1. Copy the file to a .backup file if the file already exists.
 #
-#     2. Create a symlink to the corresponding file in the dotfiles repo.
+#     2. Create a new file composited from dotfiles repo data.
 #
 #     3. Create a new .local file to allow for any machine-specific settings to
 #        be run after running the version stored in the dotfiles repo.
