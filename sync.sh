@@ -21,5 +21,5 @@
 # transfer lines over from the .backup file to your .local file as you see fit.
 #
 
-./core/sync.sh
+$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/core/sync.sh
 

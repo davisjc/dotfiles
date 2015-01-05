@@ -4,8 +4,9 @@
 # This file should be sourced, not executed directly.
 #
 
-DOTFILES_ROOT=$(cd $(dirname "$0")/../..; pwd)
+DOTFILES_ROOT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../..
 DOTFILES_CORE="$DOTFILES_ROOT/core"
+DOTFILES_ENV="$DOTFILES_CORE/env"
 DOTFILES_SCRIPTS="$DOTFILES_CORE/scripts"
 DOTFILES_SETTINGS="$DOTFILES_CORE/settings.conf"
 

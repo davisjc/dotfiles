@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "Darwin" == "$(uname)" ]; then
+if command -v pacman > /dev/null; then
     exit 0
 else
     exit 1
