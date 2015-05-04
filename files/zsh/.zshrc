@@ -1,4 +1,16 @@
 
+#
+# This dotfiles setup is largely inspired by hbw's dotfiles. I was also
+# frustrated by the bloat in oh-my-zsh and decided to rip out the parts I
+# wanted. I still use some of the lighter-weight components of oh-my-zsh, e.g.,
+# a few plugins.
+#
+# hbw's dotfiles: https://bitbucket.org/hbw/dotfiles-min
+# oh-my-zsh: https://github.com/robbyrussell/oh-my-zsh
+#
+# @author: Johnathan Davis
+#
+
 # Colors!
 autoload colors; colors;
 
