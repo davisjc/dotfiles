@@ -1,10 +1,8 @@
 dotfiles
 ========
 
-My dotfiles.
-
 1. Clone to ~/dot
-2. Run the root install.sh.
+2. Run the root install.sh
 
 The necessary hooking dotfiles will by symlinked into the home directory.
 

@@ -1,0 +1,38 @@
+#!/bin/sh
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
+# Disable caps lock to control.
+setxkbmap -option ctrl:nocaps
+
+# Swap Alt/Meta keys.
+if [ -s $HOME/.Xmodmap ]; then
+    xmodmap $HOME/.Xmodmap
+fi
+
+# Bind custom keys.
+xbindkeys &
+
+# Load .Xresources.
+xrdb -merge $HOME/.Xresources &
+
+# Adjust mouse sensitivity/acceleration.
+xset m 1 10 &
+xset r rate 220 25 &
+
+# Set background.
+sh $HOME/.fehbg &
+
+# Start flux.
+pidof xflux >& /dev/null
+if [ $? -ne 0 ]; then
+	xflux -z 98105 -k 4100 &
+fi
+
+exec i3 -V >> $HOME/.i3/i3log 2>&1
+

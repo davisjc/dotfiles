@@ -23,7 +23,7 @@ if [[ -f $SYMLINK_DIR/$FILENAME ]]; then
 		ln -s $TARGET_DIR/$FILENAME $SYMLINK_DIR/$FILENAME
 	fi
 else
-	echo "       installing: $FILENAME"
+	echo "         installing: $FILENAME"
 	ln -s $TARGET_DIR/$FILENAME $SYMLINK_DIR/$FILENAME
 fi
 

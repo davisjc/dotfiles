@@ -1,6 +1,8 @@
 #!/bin/sh
 
+LINK=$DOTFILES/core/link.sh
+
 INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-$DOTFILES/core/link.sh .profile $INSTALL_DIR $HOME
+$LINK .profile $INSTALL_DIR $HOME
 
