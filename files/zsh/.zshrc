@@ -5,7 +5,7 @@ autoload colors; colors;
 # Load some plugins.
 plugins=(colored-man sprunge extract)
 for plugin in "${plugins[@]}"; do
-	source ~/.zshplugins/$plugin/$plugin.plugin.zsh
+	source $DOTFILES/files/zsh/.plugins/$plugin/$plugin.plugin.zsh
 done
 
 # ZSH completion (man zshcompsys).
@@ -104,7 +104,7 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
 fi
 
 # Load theme -- TODO: DIY.
-source ~/.bureau.zsh-theme
+source $DOTFILES/files/zsh/.bureau.zsh-theme
 
 # Fix some binds.
 bindkey "^R" history-incremental-search-backward

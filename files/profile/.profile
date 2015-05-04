@@ -1,5 +1,7 @@
+
 #!/bin/sh
 
+export DOTFILES=$HOME/dot/files
 export HISTFILE=$HOME/.histfile
 export EDITOR=vim
 export VISUAL=vim
@@ -12,7 +14,7 @@ killall ssh-agent >& /dev/null
 eval "$(ssh-agent -s)" > /dev/null
 
 # Colors!
-source ~/.dir_colors
+source $HOME/.dir_colors
 
 ulimit -c unlimited
 

@@ -7,7 +7,7 @@
 # backed up as .backup files.
 #
 # Machine specific settings can by saved as .loc files in many instances, e.g.,
-# a ~/.zshrc.loc may be specified with additional settings for zsh
+# a ~/.zshrc.loc may be specified with additional settings for zsh.
 #
 # @author: Johnathan Davis
 #
