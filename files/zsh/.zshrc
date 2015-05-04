@@ -106,6 +106,9 @@ fi
 # Load theme -- TODO: DIY.
 source ~/.bureau.zsh-theme
 
+# Fix some binds.
+bindkey "^R" history-incremental-search-backward
+
 # -----------------------------------------------------------------------------
 
 alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
