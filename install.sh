@@ -4,9 +4,7 @@
 #
 # Install scripts found at $DOTFILES/*/*.install.sh will be executed to symlink
 # files into the home directory. Existing files in the home directory will be
-# backed up to .backup files (note that this will only save you once, only the
-# most current file will be saved as .backup; running this script twice in a
-# row will obliterate any target files currently in the home directory).
+# backed up as .backup files.
 #
 # Machine specific settings can by saved as .loc files in many instances, e.g.,
 # a ~/.zshrc.loc may be specified with additional settings for zsh
