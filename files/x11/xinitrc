@@ -34,5 +34,10 @@ if [ $? -ne 0 ]; then
 	xflux -z 98105 -k 4100 &
 fi
 
+# Load machine-specific stuff.
+if [ -f $HOME/.xinitrc.loc ]; then
+	source $HOME/.xinitrc.loc
+fi
+
 exec i3 -V >> $HOME/.i3/i3log 2>&1
 

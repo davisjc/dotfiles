@@ -10,13 +10,13 @@
 
 # Parameters.
 
-local SOURCE_FILE=$1  # the target of the symlink
-local LINK=$2         # the path to the symlink
+SOURCE_FILE=$1  # the target of the symlink
+LINK=$2         # the path to the symlink
 
 
 # Internal variables.
 
-local FILENAME=$(basename $LINK)
+FILENAME=$(basename $LINK)
 
 
 # Ensure destination path exists.
@@ -28,6 +28,7 @@ if [[ -f $LINK ]]; then
 		echo "         skipping: $FILENAME -- already installed"
 	else
 		echo "         installing: $FILENAME -- original is ${FILENAME}.backup"
+		cp -r $LINK ${LINK}.backup
 		rm -r $LINK
 		ln -s $SOURCE_FILE $LINK
 	fi
