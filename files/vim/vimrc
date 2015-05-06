@@ -1,0 +1,57 @@
+
+" Enable mouse.
+set mouse=a
+
+" Enable line numbers.
+set number
+
+" Highlight current line and line end.
+set cursorline
+set colorcolumn=80
+
+" Enable syntax.
+syntax on
+
+" Indentation.
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+nmap <S-Tab> <<
+imap <S-Tab> <Esc><<i
+
+" Tab completion.
+set wildmode=longest,list,full                                                  
+set wildmenu 
+
+" Fix backspace.
+set backspace=indent,eol,start
+
+" Fix PGUP/PGDN.
+map <silent> <PageUp> 1000<C-U>
+map <silent> <PageDown> 1000<C-D>
+imap <silent> <PageUp> <C-O>1000<C-U>
+imap <silent> <PageDown> <C-O>1000<C-D>
+set nostartofline
+
+" Solarized colors.
+set nocompatible
+set t_Co=16
+call pathogen#infect()
+set background=dark " dark | light "
+colorscheme solarized
+filetype plugin on
+
+" Enable toggle between dark and light theme.
+call togglebg#map("<F5>")
+
+" Airline options.
+set laststatus=2
+let g:airline_theme = 'powerlineish'
+let g:airline_powerline_fonts = 1
+
+" Fix clipboard.
+set clipboard=unnamed
+
+" Sudo save shortcut.
+cmap w!! w !sudo tee > /dev/null %
+
