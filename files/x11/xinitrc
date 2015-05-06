@@ -23,7 +23,7 @@ xrdb -merge $HOME/.Xresources &
 
 # Adjust mouse sensitivity/acceleration.
 xset m 1 10 &
-xset r rate 220 25 &
+xset r rate 220 40 &
 
 # Set background.
 sh $HOME/.fehbg &
