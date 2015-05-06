@@ -7,23 +7,32 @@
 # @author: Johnathan Davis
 #
 
-FILENAME=$1         # the name of the file to symlink
-TARGET_DIR=$2       # the target of the symlink
-SYMLINK_DIR=$3      # create the symlink in this directory
 
-mkdir -p $SYMLINK_DIR
+# Parameters.
 
-if [[ -f $SYMLINK_DIR/$FILENAME ]]; then
+local SOURCE_FILE=$1  # the target of the symlink
+local LINK=$2         # the path to the symlink
+
+
+# Internal variables.
+
+local FILENAME=$(basename $LINK)
+
+
+# Ensure destination path exists.
+mkdir -p `dirname $LINK`
+
+if [[ -f $LINK ]]; then
 	# Target exists.
-	if cmp $TARGET_DIR/$FILENAME $SYMLINK_DIR/$FILENAME >/dev/null 2>&1; then
+	if cmp $LINK $SOURCE_FILE >/dev/null 2>&1; then
 		echo "         skipping: $FILENAME -- already installed"
 	else
 		echo "         installing: $FILENAME -- original is ${FILENAME}.backup"
-		rm -r $SYMLINK_DIR/$FILENAME
-		ln -s $TARGET_DIR/$FILENAME $SYMLINK_DIR/$FILENAME
+		rm -r $LINK
+		ln -s $SOURCE_FILE $LINK
 	fi
 else
 	echo "         installing: $FILENAME"
-	ln -s $TARGET_DIR/$FILENAME $SYMLINK_DIR/$FILENAME
+	ln -s $SOURCE_FILE $LINK
 fi
 

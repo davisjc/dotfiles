@@ -2,9 +2,9 @@
 #
 # This is the main entry point for my dotfiles setup.
 #
-# Install scripts found at $DOTFILES/*/*.install.sh will be executed to symlink
-# files into the home directory. Existing files in the home directory will be
-# backed up as .backup files.
+# Install scripts found at $DOTFILES/files/*/install.sh will be executed to
+# symlink files into the home directory. Existing files in the home directory
+# will be backed up as .backup files.
 #
 # Machine specific settings can by saved as .loc files in many instances, e.g.,
 # a ~/.zshrc.loc may be specified with additional settings for zsh.
@@ -27,4 +27,5 @@ echo "---> Finished installing dotfiles"
 echo
 echo 'NOTE: You may have to re-login to ensure that the $DOTFILES variable has'
 echo '      been successfully sourced into your shell.'
+echo
 
