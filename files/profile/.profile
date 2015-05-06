@@ -1,7 +1,7 @@
 
 #!/bin/sh
 
-export DOTFILES=$HOME/dot/files
+export DOTFILES=$HOME/dot
 export HISTFILE=$HOME/.histfile
 export EDITOR=vim
 export VISUAL=vim
