@@ -27,5 +27,4 @@ echo "---> Finished installing dotfiles"
 echo
 echo 'NOTE: You may have to re-login to ensure that the $DOTFILES variable has'
 echo '      been successfully sourced into your shell.'
-echo
 
