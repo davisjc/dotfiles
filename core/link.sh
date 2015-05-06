@@ -22,7 +22,7 @@ FILENAME=$(basename $LINK)
 # Ensure destination path exists.
 mkdir -p `dirname $LINK`
 
-if [[ -f $LINK ]]; then
+if [[ -e $LINK || -L $LINK ]]; then
 	# Target exists.
 	if cmp $LINK $SOURCE_FILE >/dev/null 2>&1; then
 		echo "         skipping: $FILENAME -- already installed"
