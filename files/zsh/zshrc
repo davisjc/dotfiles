@@ -11,7 +11,14 @@
 # @author: Johnathan Davis
 #
 
+export DOTFILES=$HOME/dot
+export HISTFILE=$HOME/.histfile
+export EDITOR=vim
+export VISUAL=vim
+export GIT_EDITOR=vim
+
 # Colors!
+source $HOME/.dir_colors
 autoload colors; colors;
 
 # Load some plugins.
@@ -120,6 +127,9 @@ source $DOTFILES/files/zsh/bureau.zsh-theme
 
 # Fix some binds.
 bindkey "^R" history-incremental-search-backward
+
+# Completely disable ctrl-s/ctrl-q shell flow control.
+stty -ixon
 
 # -----------------------------------------------------------------------------
 
