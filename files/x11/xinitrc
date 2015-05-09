@@ -29,9 +29,12 @@ xset r rate 220 40 &
 sh $HOME/.fehbg &
 
 # Start flux.
-pidof xflux >& /dev/null
+hash xflux 2> /dev/null
 if [ $? -ne 0 ]; then
-	xflux -z 98105 -k 4100 &
+	pidof xflux >& /dev/null
+	if [ $? -ne 0 ]; then
+		xflux -z 98105 -k 4100 &
+	fi
 fi
 
 # Load machine-specific stuff.
