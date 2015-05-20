@@ -2,7 +2,7 @@
 " Vundle init.
 set nocompatible
 filetype off
-set rtp+=~/.vim/bootstrap/Vundle.vim
+set rtp+=~/.vim/bootstrap
 
 " Vundle plugins.
 call vundle#begin()
