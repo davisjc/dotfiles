@@ -12,9 +12,6 @@ Plugin 'altercation/vim-colors-solarized' " colors
 Plugin 'bling/vim-airline'                " status bar
 call vundle#end()
 
-" Remap leader.
-let mapleader=" "
-
 " Colors!
 set background=dark
 colorscheme solarized
@@ -25,6 +22,9 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme = 'powerlineish'
 let g:airline#extensions#tabline#enabled = 1
+
+" Remap leader.
+let mapleader=" "
 
 " Enable syntax.
 syntax enable
