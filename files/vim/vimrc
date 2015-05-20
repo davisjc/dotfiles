@@ -1,4 +1,37 @@
 
+" Vundle init.
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+
+" Vundle plugins.
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'                " required
+Plugin 'tpope/vim-fugitive'               " git wrapper
+Plugin 'altercation/vim-colors-solarized' " colors
+Plugin 'bling/vim-airline'                " status bar
+call vundle#end()
+
+" Remap leader.
+let mapleader=" "
+
+" Colors!
+set background=dark
+colorscheme solarized
+
+" Airline.
+set laststatus=2
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme = 'powerlineish'
+let g:airline#extensions#tabline#enabled = 1
+
+" Enable syntax.
+syntax enable
+
+" Clipboard
+set clipboard=unnamed
+
 " Enable mouse.
 set mouse=a
 
@@ -7,10 +40,11 @@ set number
 
 " Highlight current line and line end.
 set cursorline
-set colorcolumn=80
+set colorcolumn=100
 
-" Enable syntax.
-syntax on
+" Tab completion.
+set wildmode=longest,list,full
+set wildmenu
 
 " Indentation.
 filetype plugin indent on
@@ -18,10 +52,6 @@ set tabstop=4
 set shiftwidth=4
 nmap <S-Tab> <<
 imap <S-Tab> <Esc><<i
-
-" Tab completion.
-set wildmode=longest,list,full                                                  
-set wildmenu 
 
 " Fix backspace.
 set backspace=indent,eol,start
@@ -33,24 +63,15 @@ imap <silent> <PageUp> <C-O>1000<C-U>
 imap <silent> <PageDown> <C-O>1000<C-D>
 set nostartofline
 
-" Solarized colors.
-set nocompatible
-set t_Co=16
-call pathogen#infect()
-set background=dark " dark | light "
-colorscheme solarized
-filetype plugin on
+" Trailing whitespace.
+match ErrorMsg '\s\+$'
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
-" Enable toggle between dark and light theme.
-call togglebg#map("<F5>")
-
-" Airline options.
-set laststatus=2
-let g:airline_theme = 'powerlineish'
-let g:airline_powerline_fonts = 1
-
-" Fix clipboard.
-set clipboard=unnamed
+" Buffer/tab mappings.
+nnoremap gb :bnext<CR>
+nnoremap gB :bprevious<CR>
+nnoremap gd :bdelete<CR>
+nnoremap gD :tabclose<CR>
 
 " Sudo save shortcut.
 cmap w!! w !sudo tee > /dev/null %
