@@ -16,7 +16,10 @@ if [ -s $HOME/.Xmodmap ]; then
 fi
 
 # Bind custom keys.
-xbindkeys &
+hash xbindkeys 2> /dev/null
+if [ $? -eq 0 ]; then
+	xbindkeys &
+fi
 
 # Load .Xresources.
 xrdb -merge $HOME/.Xresources &
@@ -30,7 +33,7 @@ sh $HOME/.fehbg &
 
 # Start flux.
 hash xflux 2> /dev/null
-if [ $? -ne 0 ]; then
+if [ $? -eq 0 ]; then
 	pidof xflux >& /dev/null
 	if [ $? -ne 0 ]; then
 		xflux -z 98105 -k 4100 &
