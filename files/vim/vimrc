@@ -8,13 +8,13 @@ set rtp+=~/.vim/bootstrap
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'                " required
 Plugin 'tpope/vim-fugitive'               " git wrapper
-Plugin 'altercation/vim-colors-solarized' " colors
 Plugin 'bling/vim-airline'                " status bar
 call vundle#end()
 
 " Colors!
-set background=dark
-colorscheme solarized
+set t_ut=
+set t_Co=256
+colorscheme aurora
 
 " Airline.
 set laststatus=2
