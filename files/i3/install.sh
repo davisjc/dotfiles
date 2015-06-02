@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [[ "$(uname)" != "Linux" ]]; then
+	exit 0
+fi
+
 LINK=$DOTFILES/core/link.sh
 INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
