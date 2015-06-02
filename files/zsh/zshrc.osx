@@ -1,0 +1,7 @@
+
+# Aliases.
+alias ls='LC_COLLATE=C /opt/local/libexec/gnubin/ls `echo $LS_OPTIONS`'
+
+alias yp='pwd | pbcopy'
+alias pp='cd $(pbpaste)'
+
