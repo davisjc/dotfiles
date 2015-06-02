@@ -151,18 +151,20 @@ alias wifi='sudo wifi-menu'
 alias yp='pwd | xclip -i'
 alias pp='cd `xclip -o`'
 
+# -----------------------------------------------------------------------------
+
 # Load OS X stuff.
-if [[ "$(uname)" == "Darwin" ]]; then
-	source ~/.zshrc.osx
+if [ -f $HOME/.zshrc.osx ]; then
+	source $HOME/.zshrc.osx
 fi
 
 # Load Linux stuff.
-if [[ "$(uname)" == "Linux" ]]; then
-	source ~/.zshrc.linux
+if [ -f $HOME/.zshrc.linux ]; then
+	source $HOME/.zshrc.linux
 fi
 
 # Load machine-specific stuff.
-if [ -f ~/.zshrc.loc ]; then
-	source ~/.zshrc.loc
+if [ -f $HOME/.zshrc.loc ]; then
+	source $HOME/.zshrc.loc
 fi
 
