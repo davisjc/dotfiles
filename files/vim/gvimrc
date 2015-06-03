@@ -1,0 +1,14 @@
+
+"
+" gVim options.
+"
+
+set transparency=7
+set guifont=Consolas:h14
+
+" Hide scrollbar.
+set guioptions-=r
+
+" Hide titlebar.
+set guioptions-=r
+

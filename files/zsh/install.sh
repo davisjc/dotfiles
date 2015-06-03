@@ -12,3 +12,4 @@ fi
 if [[ "$(uname)" == "Darwin" ]]; then
 	$LINK $INSTALL_DIR/zshrc.osx $HOME/.zshrc.osx
 fi
+
