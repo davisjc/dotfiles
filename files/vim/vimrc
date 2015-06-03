@@ -8,6 +8,7 @@ set rtp+=~/.vim/bootstrap
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'                " required
 Plugin 'tpope/vim-fugitive'               " git wrapper
+Plugin 'kien/ctrlp.vim'                   " let's get fuzzy!
 Plugin 'bling/vim-airline'                " status bar
 Plugin 'pangloss/vim-javascript'          " javascript syntax
 Plugin 'mxw/vim-jsx'                      " depends on vim-javascript
