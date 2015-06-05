@@ -45,7 +45,9 @@ set number
 
 " Highlight current line and line end.
 set cursorline
-set colorcolumn=100
+if version >= 703
+	set colorcolumn=100
+endif
 
 " Tab completion.
 set wildmode=longest,list,full
