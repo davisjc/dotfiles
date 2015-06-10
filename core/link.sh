@@ -23,17 +23,17 @@ FILENAME=$(basename $LINK)
 mkdir -p `dirname $LINK`
 
 if [[ -e $LINK || -L $LINK ]]; then
-	# Target exists.
-	if cmp $LINK $SOURCE_FILE >/dev/null 2>&1; then
-		echo "         skipping: $FILENAME -- already installed"
-	else
-		echo "         installing: $FILENAME -- original is ${FILENAME}.backup"
-		cp -r $LINK ${LINK}.backup
-		rm -r $LINK
-		ln -s $SOURCE_FILE $LINK
-	fi
+    # Target exists.
+    if cmp $LINK $SOURCE_FILE >/dev/null 2>&1; then
+        echo "         skipping: $FILENAME -- already installed"
+    else
+        echo "         installing: $FILENAME -- original is ${FILENAME}.backup"
+        cp -r $LINK ${LINK}.backup
+        rm -r $LINK
+        ln -s $SOURCE_FILE $LINK
+    fi
 else
-	echo "         installing: $FILENAME"
-	ln -s $SOURCE_FILE $LINK
+    echo "         installing: $FILENAME"
+    ln -s $SOURCE_FILE $LINK
 fi
 

@@ -1,21 +1,21 @@
 #!/bin/sh
 
 if [ -z "$TMUX" ]; then
-	ulimit -c unlimited
+    ulimit -c unlimited
 fi
 
 # Load Linux stuff.
 if [ -e $HOME/.profile.linux ]; then
-	source $HOME/.profile.linux
+    source $HOME/.profile.linux
 fi
 
 # Load OS X stuff.
 if [ -e $HOME/.profile.osx ]; then
-	source $HOME/.profile.osx
+    source $HOME/.profile.osx
 fi
 
 # Load machine-specific stuff.
 if [ -e $HOME/.profile.loc ]; then
-	source $HOME/.profile.loc
+    source $HOME/.profile.loc
 fi
 

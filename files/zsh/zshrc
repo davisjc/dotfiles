@@ -24,7 +24,7 @@ autoload colors; colors;
 # Load some plugins.
 plugins=(colored-man sprunge extract)
 for plugin in "${plugins[@]}"; do
-	source $DOTFILES/files/zsh/plugins/$plugin/$plugin.plugin.zsh
+    source $DOTFILES/files/zsh/plugins/$plugin/$plugin.plugin.zsh
 done
 
 # ZSH completion (man zshcompsys).
@@ -146,16 +146,16 @@ alias mosh='mosh -a'
 
 # Load Linux stuff.
 if [ -e $HOME/.zshrc.linux ]; then
-	source $HOME/.zshrc.linux
+    source $HOME/.zshrc.linux
 fi
 
 # Load OS X stuff.
 if [ -e $HOME/.zshrc.osx ]; then
-	source $HOME/.zshrc.osx
+    source $HOME/.zshrc.osx
 fi
 
 # Load machine-specific stuff.
 if [ -e $HOME/.zshrc.loc ]; then
-	source $HOME/.zshrc.loc
+    source $HOME/.zshrc.loc
 fi
 

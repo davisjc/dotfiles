@@ -18,8 +18,8 @@ echo
 echo "---> Installing dotfiles"
 
 for install_script in $DOTFILES/files/*/install.sh; do
-	echo "       running $install_script..."
-	$install_script
+    echo "       running $install_script..."
+    $install_script
 done
 
 echo "---> Finished installing dotfiles"

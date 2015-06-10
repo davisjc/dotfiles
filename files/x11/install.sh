@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [[ "$(uname)" != "Linux" ]]; then
-	exit 0
+    exit 0
 fi
 
 LINK=$DOTFILES/core/link.sh

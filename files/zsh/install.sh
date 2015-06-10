@@ -7,9 +7,9 @@ $LINK $INSTALL_DIR/zshrc $HOME/.zshrc
 $LINK $INSTALL_DIR/zprofile $HOME/.zprofile
 
 if [[ "$(uname)" == "Linux" ]]; then
-	$LINK $INSTALL_DIR/zshrc.linux $HOME/.zshrc.linux
+    $LINK $INSTALL_DIR/zshrc.linux $HOME/.zshrc.linux
 fi
 if [[ "$(uname)" == "Darwin" ]]; then
-	$LINK $INSTALL_DIR/zshrc.osx $HOME/.zshrc.osx
+    $LINK $INSTALL_DIR/zshrc.osx $HOME/.zshrc.osx
 fi
 

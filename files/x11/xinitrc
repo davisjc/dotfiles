@@ -1,10 +1,10 @@
 #!/bin/sh
 
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
-  for f in /etc/X11/xinit/xinitrc.d/*; do
-    [ -x "$f" ] && . "$f"
-  done
-  unset f
+    for f in /etc/X11/xinit/xinitrc.d/*; do
+        [ -x "$f" ] && . "$f"
+    done
+    unset f
 fi
 
 # Disable caps lock to control.
@@ -18,7 +18,7 @@ fi
 # Bind custom keys.
 hash xbindkeys 2> /dev/null
 if [ $? -eq 0 ]; then
-	xbindkeys &
+    xbindkeys &
 fi
 
 # Load .Xresources.
@@ -34,33 +34,33 @@ sh $HOME/.fehbg &
 # Start compton.
 hash compton 2> /dev/null
 if [ $? -eq 0 ]; then
-	pidof compton >& /dev/null
-	if [ $? -ne 0 ]; then
-		compton &
-	fi
+    pidof compton >& /dev/null
+    if [ $? -ne 0 ]; then
+        compton &
+    fi
 fi
 
 # Start flux.
 hash xflux 2> /dev/null
 if [ $? -eq 0 ]; then
-	pidof xflux >& /dev/null
-	if [ $? -ne 0 ]; then
-		xflux -z 98105 -k 4100 &
-	fi
+    pidof xflux >& /dev/null
+    if [ $? -ne 0 ]; then
+        xflux -z 98105 -k 4100 &
+    fi
 fi
 
 # Start mpdscribble. TODO: Move to systemd --user
 hash mpdscribble 2> /dev/null
 if [ $? -eq 0 ]; then
-	pidof mpdscribble >& /dev/null
-	if [ $? -ne 0 ]; then
-		mpdscribble &
-	fi
+    pidof mpdscribble >& /dev/null
+    if [ $? -ne 0 ]; then
+        mpdscribble &
+    fi
 fi
 
 # Load machine-specific stuff.
 if [ -e $HOME/.xinitrc.loc ]; then
-	source $HOME/.xinitrc.loc
+    source $HOME/.xinitrc.loc
 fi
 
 exec i3 -V >> $HOME/.i3/i3log 2>&1

@@ -55,6 +55,7 @@ set wildmenu
 
 " Indentation.
 filetype plugin indent on
+set expandtab
 set tabstop=4
 set shiftwidth=4
 nmap <S-Tab> <<
