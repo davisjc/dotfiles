@@ -5,17 +5,17 @@ if [ -z "$TMUX" ]; then
 fi
 
 # Load Linux stuff.
-if [ -f $HOME/.profile.linux ]; then
+if [ -e $HOME/.profile.linux ]; then
 	source $HOME/.profile.linux
 fi
 
 # Load OS X stuff.
-if [ -f $HOME/.profile.osx ]; then
+if [ -e $HOME/.profile.osx ]; then
 	source $HOME/.profile.osx
 fi
 
 # Load machine-specific stuff.
-if [ -f $HOME/.profile.loc ]; then
+if [ -e $HOME/.profile.loc ]; then
 	source $HOME/.profile.loc
 fi
 

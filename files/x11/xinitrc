@@ -11,7 +11,7 @@ fi
 setxkbmap -option ctrl:nocaps
 
 # Swap Alt/Meta keys.
-if [ -s $HOME/.Xmodmap ]; then
+if [ -e $HOME/.Xmodmap ]; then
     xmodmap $HOME/.Xmodmap
 fi
 
@@ -31,6 +31,15 @@ xset r rate 220 40 &
 # Set background.
 sh $HOME/.fehbg &
 
+# Start compton.
+hash compton 2> /dev/null
+if [ $? -eq 0 ]; then
+	pidof compton >& /dev/null
+	if [ $? -ne 0 ]; then
+		compton &
+	fi
+fi
+
 # Start flux.
 hash xflux 2> /dev/null
 if [ $? -eq 0 ]; then
@@ -40,8 +49,17 @@ if [ $? -eq 0 ]; then
 	fi
 fi
 
+# Start mpdscribble. TODO: Move to systemd --user
+hash mpdscribble 2> /dev/null
+if [ $? -eq 0 ]; then
+	pidof mpdscribble >& /dev/null
+	if [ $? -ne 0 ]; then
+		mpdscribble &
+	fi
+fi
+
 # Load machine-specific stuff.
-if [ -f $HOME/.xinitrc.loc ]; then
+if [ -e $HOME/.xinitrc.loc ]; then
 	source $HOME/.xinitrc.loc
 fi
 

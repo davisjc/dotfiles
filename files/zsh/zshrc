@@ -145,17 +145,17 @@ alias mosh='mosh -a'
 # -----------------------------------------------------------------------------
 
 # Load Linux stuff.
-if [ -f $HOME/.zshrc.linux ]; then
+if [ -e $HOME/.zshrc.linux ]; then
 	source $HOME/.zshrc.linux
 fi
 
 # Load OS X stuff.
-if [ -f $HOME/.zshrc.osx ]; then
+if [ -e $HOME/.zshrc.osx ]; then
 	source $HOME/.zshrc.osx
 fi
 
 # Load machine-specific stuff.
-if [ -f $HOME/.zshrc.loc ]; then
+if [ -e $HOME/.zshrc.loc ]; then
 	source $HOME/.zshrc.loc
 fi
 
