@@ -2,7 +2,7 @@
 URxvt.scrollBar: false
 
 ! Set terminal font.
-URxvt.font: xft:Consolas:size=13
+URxvt.font: xft:Consolas:size=16
 
 ! Clickable URLs.
 URxvt.perl-ext-common: default,matcher
