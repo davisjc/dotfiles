@@ -12,7 +12,7 @@ client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
 client.unfocused #073642 #073642 #93a1a1 #586e75
 client.urgent #d33682 #d33682 #fdf6e3 #dc322f
 bar {
-    status_command i3status
+    status_command i3blocks -c /home/eddie/.i3/i3blocks.conf
     colors {
         separator #dc322f
         background #002b36
