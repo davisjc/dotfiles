@@ -87,3 +87,8 @@ nnoremap gD :tabclose<CR>
 " Sudo save shortcut.
 cmap w!! w !sudo tee > /dev/null %
 
+" Load machine-specific stuff.
+if filereadable(expand("$HOME/.vimrc.loc"))
+    source $HOME/.vimrc.loc
+endif
+
