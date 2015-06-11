@@ -6,7 +6,7 @@
 force_xinerama yes
 
 # Looks!
-font pango:Trebuchet MS 14
+font pango:Trebuchet MS 16
 bar {
     status_command i3status
 }
