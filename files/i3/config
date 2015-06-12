@@ -6,13 +6,14 @@
 force_xinerama yes
 
 # Looks!
-font pango:Consolas bold 16
+font pango:Consolas 16
 client.focused #859900 #859900 #fdf6e3 #dc322f
 client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
 client.unfocused #073642 #073642 #93a1a1 #586e75
 client.urgent #d33682 #d33682 #fdf6e3 #dc322f
 bar {
     status_command i3blocks -c /home/eddie/.i3/i3blocks.conf
+    position top
     colors {
         separator #dc322f
         background #002b36
