@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export I3_STATUS_BAR_CONF=i3blocks.conf
+
