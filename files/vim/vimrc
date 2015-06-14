@@ -6,14 +6,14 @@ set rtp+=~/.vim/bootstrap
 
 " Vundle plugins.
 call vundle#begin()
-Plugin 'bling/vim-airline'                " status bar
-Plugin 'kien/ctrlp.vim'                   " let's get fuzzy!
-Plugin 'mxw/vim-jsx'                      " depends on vim-javascript
-Plugin 'pangloss/vim-javascript'          " javascript syntax
-Plugin 'tpope/vim-fugitive'               " git wrapper
-Plugin 'tpope/vim-repeat'                 " ability to repeat plugin actions
-Plugin 'tpope/vim-surround'               " surround things
-Plugin 'lilydjwg/colorizer'
+Plugin 'bling/vim-airline'          " status bar
+Plugin 'kien/ctrlp.vim'             " let's get fuzzy!
+Plugin 'mxw/vim-jsx'                " depends on vim-javascript
+Plugin 'pangloss/vim-javascript'    " javascript syntax
+Plugin 'tpope/vim-fugitive'         " git wrapper
+Plugin 'tpope/vim-repeat'           " ability to repeat plugin actions
+Plugin 'tpope/vim-surround'         " surround things
+Plugin 'lilydjwg/colorizer'         " color definition highlighting
 call vundle#end()
 
 " Colors!
