@@ -58,8 +58,7 @@ if [ $? -eq 0 ]; then
     fi
 fi
 
-# Set screen blanking.
-xset s 3600
+# Set screen blanking. TODO
 
 # Start mpdscribble. TODO: Move to systemd --user
 hash mpdscribble 2> /dev/null
