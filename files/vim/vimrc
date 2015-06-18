@@ -36,7 +36,7 @@ syntax enable
 
 " Clipboard
 if $TMUX == ''
-	set clipboard+=unnamed
+	set clipboard=unnamed
 endif
 
 " Enable mouse.
