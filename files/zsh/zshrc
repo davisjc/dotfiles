@@ -12,11 +12,6 @@
 #
 
 export DOTFILES=$HOME/dot
-export HISTFILE=$HOME/.histfile
-export EDITOR=vim
-export VISUAL=vim
-export GIT_EDITOR=vim
-
 PATH=$PATH:$DOTFILES/bin
 
 # Colors!
