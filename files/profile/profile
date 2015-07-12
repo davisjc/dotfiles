@@ -1,7 +1,5 @@
 #!/bin/sh
 
-PATH=$PATH:$DOTFILES/bin
-
 if [ -z "$TMUX" ]; then
     ulimit -c unlimited
 fi

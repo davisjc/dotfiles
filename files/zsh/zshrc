@@ -17,6 +17,8 @@ export EDITOR=vim
 export VISUAL=vim
 export GIT_EDITOR=vim
 
+PATH=$PATH:$DOTFILES/bin
+
 # Colors!
 source $HOME/.dir_colors
 autoload colors; colors;
