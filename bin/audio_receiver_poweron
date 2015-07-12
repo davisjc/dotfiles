@@ -1,0 +1,14 @@
+#!/bin/sh
+
+VOLUME_DAT=$HOME/.receiver_volume.dat
+
+# Turn on receiver.
+curl -X POST -H "Content-Type: text/xml" -d '<YAMAHA_AV cmd="PUT"><Zone_2><Power_Control><Power>On</Power></Power_Control></Zone_2></YAMAHA_AV>' http://yamaha/YamahaRemoteControl/ctrl
+
+# Request current volume level.
+VOLUME_LEVEL=$(curl -X POST -H "Content-Type: text/xml" -d '<YAMAHA_AV cmd="GET"><Zone_2><Volume><Lvl>GetParam</Lvl></Volume></Zone_2></YAMAHA_AV>' http://yamaha/YamahaRemoteControl/ctrl)
+VOLUME_LEVEL=$(echo $VOLUME_LEVEL | sed -r 's/.*<Val>(.*)<\/Val>.*/\1/')
+
+# Store volume level.
+echo $VOLUME_LEVEL > $VOLUME_DAT
+

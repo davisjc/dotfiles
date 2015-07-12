@@ -1,0 +1,4 @@
+#!/bin/sh
+
+curl -s -X POST -H "Content-Type: text/xml" -d '<YAMAHA_AV cmd="PUT"><Zone_2><Power_Control><Power>Standby</Power></Power_Control></Zone_2></YAMAHA_AV>' http://yamaha/YamahaRemoteControl/ctrl
+
