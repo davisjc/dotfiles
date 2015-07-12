@@ -1,4 +1,4 @@
 #!/bin/sh
 
-xbacklight -inc 10 -time 0
+xbacklight -inc 5 -time 0 -steps 1
 
