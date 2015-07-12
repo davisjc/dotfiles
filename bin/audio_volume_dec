@@ -1,0 +1,10 @@
+#!/bin/sh
+
+VOLUME_STEP=1
+CHANNEL=$(audio_get_channel)
+
+amixer set $CHANNEL ${VOLUME_STEP}%-
+
+# Update i3blocks volume display.
+pkill -RTMIN+1 i3block
+

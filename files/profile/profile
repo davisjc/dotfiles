@@ -1,5 +1,8 @@
 #!/bin/sh
 
+export DOTFILES=$HOME/dot
+PATH=$PATH:$DOTFILES/bin
+
 if [ -z "$TMUX" ]; then
     ulimit -c unlimited
 fi

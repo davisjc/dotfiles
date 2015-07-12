@@ -1,0 +1,4 @@
+#!/bin/sh
+
+amixer scontrols | head -n 1 | sed "s/.*'\([a-zA-Z]*\)'.*/\1/"
+
