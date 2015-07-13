@@ -31,6 +31,9 @@ let g:airline#extensions#tabline#enabled = 1
 " Remap leader.
 let mapleader=" "
 
+" Remove escape delay.
+set timeoutlen=1000 ttimeoutlen=0
+
 " Enable syntax.
 syntax enable
 
