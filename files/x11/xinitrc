@@ -14,7 +14,7 @@ if [ -e $HOME/.xvars.loc ]; then
 fi
 
 # Disable caps lock to control.
-setxkbmap -option ctrl:nocaps
+setxkbmap -option caps:escape
 
 # Swap Alt/Meta keys.
 if [ -e $HOME/.Xmodmap ]; then
