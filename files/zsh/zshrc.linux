@@ -4,6 +4,8 @@ alias poweroff='sudo systemctl poweroff'
 alias reboot='sudo systemctl reboot'
 alias wifi='sudo wifi-menu'
 
+alias ui='startx'
+
 # TODO: Use separate clipboard mechanism.
 alias yp='pwd | xclip -i'
 alias pp='cd `xclip -o`'
