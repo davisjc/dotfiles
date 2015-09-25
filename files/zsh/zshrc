@@ -137,6 +137,7 @@ alias la='ls -a'
 alias lla='ls -lah'
 alias info='info --vi-keys'
 alias g='git'
+alias gs='git status'
 alias v='vim'
 alias mosh='mosh -a'
 
