@@ -24,7 +24,6 @@ bar {
         urgent_workspace #d33682 #d33682 #fdf6e3
     }
 }
-workspace 2 output derp # force second monitor to start on workspace 3
 
 # Mod key.
 set $mod Mod4
