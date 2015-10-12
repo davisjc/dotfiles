@@ -47,23 +47,23 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 
 # ZSH options (man zshoptions).
-setopt always_to_end        # move cursor to end of word after completion
-setopt auto_pushd           # automatically pushd on cd
-setopt complete_in_word     # perform bi-directional completion from position
-setopt extended_glob        # use #,~,^ for filename generation
-setopt extended_history     # save time info to histfile
-setopt hist_ignore_space    # don't write space-prefixed commands to histfile
-setopt hist_verify          # reload history expansion in command buffer
-setopt inc_append_history   # multiple zsh instances write to same histfile
-setopt long_list_jobs       # list jobs in long format
-setopt no_match             # print error when no match for filename generation
-setopt notify               # print status of background jobs immediately
-setopt prompt_subst         # perform expansion in prompts
-setopt pushd_ignore_dups    # don't pushd duplicate dirs
-setopt pushd_silent         # suppress popd output
-unsetopt beep               # be quiet, you..
-unsetopt flow_control       # don't use ctrl-s/ctrl-q for shell flow control
-unsetopt share_history      # favor inc_append_history
+setopt always_to_end # move cursor to end of word after completion
+setopt auto_pushd # automatically pushd on cd
+setopt complete_in_word # perform bi-directional completion from position
+setopt extended_glob # use #,~,^ for filename generation
+setopt extended_history # save time info to histfile
+setopt hist_ignore_space # don't write space-prefixed commands to histfile
+setopt hist_verify # reload history expansion in command buffer
+setopt inc_append_history # multiple zsh instances write to same histfile
+setopt long_list_jobs # list jobs in long format
+setopt no_match # print error when no match for filename generation
+setopt notify # print status of background jobs immediately
+setopt prompt_subst # perform expansion in prompts
+setopt pushd_ignore_dups # don't pushd duplicate dirs
+setopt pushd_silent # suppress popd output
+unsetopt beep # be quiet, you..
+unsetopt flow_control # don't use ctrl-s/ctrl-q for shell flow control
+unsetopt share_history # favor inc_append_history
 
 # Load ZSH completion.
 autoload -Uz compinit
