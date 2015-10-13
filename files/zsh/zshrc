@@ -16,7 +16,7 @@ PATH=$PATH:$DOTFILES/bin
 
 # Colors!
 source $HOME/.dir_colors
-autoload colors; colors;
+autoload -U colors && colors;
 
 # Load some plugins.
 plugins=(colored-man sprunge extract)
@@ -70,7 +70,7 @@ autoload -Uz compinit
 compinit -i
 
 # Define ZSH's definition of a "word".
-autoload select-word-style
+autoload -U select-word-style
 select-word-style shell
 
 # Compile zcompdump if necessary.
@@ -120,8 +120,57 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-finish
 fi
 
-# Load theme -- TODO: DIY.
-source $DOTFILES/files/zsh/bureau.zsh-theme
+# Vi mode indicator
+function vi_mode_prompt_info() {
+    local MODE_INDICATOR="%{$fg_bold[magenta]%}<%{$reset_color%}%{$fg[magenta]%}<<%{$reset_color%}"
+    echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+}
+
+# Git branch/dirty indicator
+function git_status_info() {
+    local branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+    if [ "$branch" ]; then
+        local git_status="$(git status --untracked-files=no --porcelain 2>/dev/null)"
+        if [ "$git_status" ]; then
+            local dirty="*";
+        fi
+        echo "<$branch$dirty>"
+    fi
+}
+
+# Runs each time before the shell prompt is printed. We override this to allow
+# zshrc scripts source'd after this one to hook into the prompt by setting
+# $STATUS_EXT. However, we don't allow the prompt itself to be extended because
+# that causes too many strange issues with redrawing and such.
+function precmd() {
+    local _return_code="%(?.%{$fg_bold[green]%}%{$fg[green]%}0 %{$reset_color%}.%{$fg_bold[red]%}%{$fg[red]%}%? %{$reset_color%})"
+
+    # ANSI color range is 0-14, so hash the hostname to a value between that.
+    local _host_cksum=$(( ($(echo "`whoami`@`hostname`" | cksum | cut -d\  -f1) / 14) % 14 ))
+    local _host_colored="%F{$_host_cksum}%n@%m%f"
+
+    # ANSI colors 8-14 mirror colors 0-7, but as bold. Since zsh's %F syntax
+    # doesn't take this into account, we'll have to make them bold manually.
+    if [[ $_host_cksum -ge 8 ]]; then
+        _host_colored="%B${_host_colored}%b"
+    fi
+
+    # Since I use dark terminal backgrounds, black on dark doesn't look so good.
+    # So in that case, surround the hostname with a white background color.
+    #
+    # I adjusted my other terminal colors to not be so dark, but if you don't
+    # want to do this, you can add a similar background color addition for other
+    # darkish colors (e.g. blue, magenta).
+    if [[ $(( $_host_cksum % 8 )) -eq 0 ]]; then
+        _host_colored="%K{7}${_host_colored}%k"
+    fi
+
+    PROMPT="%{${_host_colored}%} %{${fg[green]}%}%3~%{$reset_color%}${fg_bold[cyan]}$reset_color$STATUS_EXT"$'\n'
+    PROMPT="$PROMPT$_return_code%{${fg_bold[blue]}%}$%{${reset_color}%} "
+    RPROMPT='%{${fg_bold[cyan]}%}$(git_status_info)%{${reset_color}%}'
+    export PROMPT
+    export RPROMPT
+}
 
 # Fix some binds.
 bindkey "^R" history-incremental-search-backward
@@ -129,8 +178,7 @@ bindkey "^R" history-incremental-search-backward
 # Completely disable ctrl-s/ctrl-q shell flow control.
 stty -ixon
 
-# -----------------------------------------------------------------------------
-
+# Aliases.
 alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
 alias l='ls -lh'
 alias ll='ls -lh'
@@ -140,9 +188,6 @@ alias info='info --vi-keys'
 alias g='git'
 alias gs='git status'
 alias v='vim'
-alias mosh='mosh -a'
-
-# -----------------------------------------------------------------------------
 
 # Load Linux stuff.
 if [ -e $HOME/.zshrc.linux ]; then
