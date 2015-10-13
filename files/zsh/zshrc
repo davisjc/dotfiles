@@ -146,8 +146,11 @@ function precmd() {
     local _return_code="%(?.%{$fg_bold[green]%}%{$fg[green]%}0 %{$reset_color%}.%{$fg_bold[red]%}%{$fg[red]%}%? %{$reset_color%})"
 
     # ANSI color range is 0-14, so hash the hostname to a value between that.
-    local _host_cksum=$(( ($(echo "`whoami`@`hostname`" | cksum | cut -d\  -f1) / 14) % 14 ))
+    local _host_cksum=$(( ($(echo "$(whoami)@$(hostname)" | cksum | cut -d\  -f1) / 14) % 14 ))
     local _host_colored="%F{$_host_cksum}%n@%m%f"
+    if [[ ! -z $SSH_CONNECTION ]]; then
+        _host_colored="ssh://$_host_colored"
+    fi
 
     # ANSI colors 8-14 mirror colors 0-7, but as bold. Since zsh's %F syntax
     # doesn't take this into account, we'll have to make them bold manually.
