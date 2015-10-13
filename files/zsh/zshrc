@@ -149,7 +149,7 @@ function precmd() {
     local _host_cksum=$(( ($(echo "$(whoami)@$(hostname)" | cksum | cut -d\  -f1) / 14) % 14 ))
     local _host_colored="%F{$_host_cksum}%n@%m%f"
     if [[ ! -z $SSH_CONNECTION ]]; then
-        _host_colored="ssh://$_host_colored"
+        _host_colored="%{$fg_bold[green]%}ssh://%{$reset_color%}$_host_colored"
     fi
 
     # ANSI colors 8-14 mirror colors 0-7, but as bold. Since zsh's %F syntax
