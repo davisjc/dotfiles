@@ -1,0 +1,17 @@
+
+commonly installed AUR packages:
+
+
+asoundconf
+compton-git
+dmenu-xft
+google-chrome
+htop-vim-git
+i3blocks-git
+j4-dmenu-desktop-git
+mpdscribble-git
+packer
+rar2fs
+rxvt-unicode-patched
+xflux
+
