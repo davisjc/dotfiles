@@ -145,27 +145,9 @@ function git_status_info() {
 function precmd() {
     local _return_code="%(?.%{$fg_bold[green]%}%{$fg[green]%}0 %{$reset_color%}.%{$fg_bold[red]%}%{$fg[red]%}%? %{$reset_color%})"
 
-    # ANSI color range is 0-14, so hash the hostname to a value between that.
-    local _host_cksum=$(( ($(echo "$(whoami)@$(hostname)" | cksum | cut -d\  -f1) / 14) % 14 ))
-    local _host_colored="%F{$_host_cksum}%n@%m%f"
+    local _host_colored="%F{7}%n@%m%f"
     if [[ ! -z $SSH_CONNECTION ]]; then
         _host_colored="%{$fg_bold[green]%}ssh://%{$reset_color%}$_host_colored"
-    fi
-
-    # ANSI colors 8-14 mirror colors 0-7, but as bold. Since zsh's %F syntax
-    # doesn't take this into account, we'll have to make them bold manually.
-    if [[ $_host_cksum -ge 8 ]]; then
-        _host_colored="%B${_host_colored}%b"
-    fi
-
-    # Since I use dark terminal backgrounds, black on dark doesn't look so good.
-    # So in that case, surround the hostname with a white background color.
-    #
-    # I adjusted my other terminal colors to not be so dark, but if you don't
-    # want to do this, you can add a similar background color addition for other
-    # darkish colors (e.g. blue, magenta).
-    if [[ $(( $_host_cksum % 8 )) -eq 0 ]]; then
-        _host_colored="%K{7}${_host_colored}%k"
     fi
 
     PROMPT="%{${_host_colored}%} %{${fg[green]}%}%3~%{$reset_color%}${fg_bold[cyan]}$reset_color$STATUS_EXT"$'\n'
