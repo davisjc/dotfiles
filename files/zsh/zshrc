@@ -122,7 +122,7 @@ fi
 
 # Vi mode indicator
 function vi_mode_prompt_info() {
-    local MODE_INDICATOR="%{$fg_bold[magenta]%}<%{$reset_color%}%{$fg[magenta]%}<<%{$reset_color%}"
+    local MODE_INDICATOR="%{$fg[magenta]%}<%{$reset_color%}%{$fg[magenta]%}<<%{$reset_color%}"
     echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
 }
 
@@ -143,16 +143,30 @@ function git_status_info() {
 # $STATUS_EXT. However, we don't allow the prompt itself to be extended because
 # that causes too many strange issues with redrawing and such.
 function precmd() {
-    local _return_code="%(?.%{$fg_bold[green]%}%{$fg[green]%}0 %{$reset_color%}.%{$fg_bold[red]%}%{$fg[red]%}%? %{$reset_color%})"
+    local _return_code="%(?.%{$fg[green]%}%{$fg[green]%}0 %{$reset_color%}.%{$fg[red]%}%{$fg[red]%}%? %{$reset_color%})"
 
-    local _host_colored="%F{7}%n@%m%f"
-    if [[ ! -z $SSH_CONNECTION ]]; then
-        _host_colored="%{$fg_bold[green]%}ssh://%{$reset_color%}$_host_colored"
+    local _is_root=$(( 0 == $EUID ))
+    local _host
+    if [[ 1 == $_is_root ]]; then
+        _host="%{${fg[red]}%}%n@%m%{${reset_color}%}"
+    else
+        _host="%{${fg[white]}%}%n@%m%{${reset_color}%}"
     fi
 
-    PROMPT="%{${_host_colored}%} %{${fg[green]}%}%3~%{$reset_color%}${fg_bold[cyan]}$reset_color$STATUS_EXT"$'\n'
-    PROMPT="$PROMPT$_return_code%{${fg_bold[blue]}%}$%{${reset_color}%} "
-    RPROMPT=' %{${fg_bold[cyan]}%}$(git_status_info)%{${reset_color}%}'
+    if [ ! -z $SSH_CONNECTION ]; then
+        _host="%{$fg[green]%}ssh://%{$reset_color%}$_host"
+    fi
+
+    local _symbol
+    if [[ 1 == $_is_root ]]; then
+        _symbol="%{${fg[red]}%}#%{${reset_color}%}"
+    else
+        _symbol="%{${fg[blue]}%}$%{${reset_color}%}"
+    fi
+
+    PROMPT="%{${_host}%} %{${fg[yellow]}%}%3~%{$reset_color%}${fg[cyan]}$reset_color$STATUS_EXT"$'\n'
+    PROMPT="$PROMPT$_return_code$_symbol%{${reset_color}%} "
+    RPROMPT=' %{${fg[cyan]}%}$(git_status_info)%{${reset_color}%}'
     export PROMPT
     export RPROMPT
 }
