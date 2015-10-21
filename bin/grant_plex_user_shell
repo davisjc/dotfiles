@@ -1,0 +1,4 @@
+#!/bin/sh
+
+usermod -s /bin/bash plex
+
