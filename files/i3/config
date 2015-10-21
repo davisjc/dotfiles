@@ -6,7 +6,7 @@
 force_xinerama yes
 
 # Looks!
-font pango:Consolas 14
+font pango:hack 10
 client.focused #859900 #859900 #fdf6e3 #dc322f
 client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
 client.unfocused #073642 #073642 #93a1a1 #586e75
@@ -30,7 +30,7 @@ set $mod Mod4
 floating_modifier $mod
 
 # Run launcher.
-bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Consolas:bold:size=24'"
+bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'hack:bold:size=16'"
 
 # Start terminal.
 bindsym $mod+Return exec i3-sensible-terminal
