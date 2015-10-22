@@ -2,9 +2,6 @@
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# Multi-mon support.
-force_xinerama yes
-
 # Looks!
 font pango:hack 10
 client.focused #859900 #859900 #fdf6e3 #dc322f
