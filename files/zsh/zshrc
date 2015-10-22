@@ -84,7 +84,10 @@ SAVEHIST=1000
 
 # Setup vim keys (bindkey -v needs to happen before the mass key[] fix).
 bindkey -v
-bindkey -v '^?' backward-delete-char
+bindkey "^?" backward-delete-char
+bindkey "^W" backward-kill-word
+bindkey "^H" backward-delete-char
+bindkey "^U" backward-kill-line
 KEYTIMEOUT=0 # don't delay esc
 
 # Fix bindings in zle (pulled from arch wiki).
