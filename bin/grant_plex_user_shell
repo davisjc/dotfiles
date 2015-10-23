@@ -1,4 +1,4 @@
 #!/bin/sh
 
-usermod -s /bin/bash plex
+usermod -aG users -s /bin/bash plex
 
