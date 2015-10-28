@@ -71,7 +71,7 @@ compinit -i
 
 # Define ZSH's definition of a "word".
 autoload -U select-word-style
-select-word-style shell
+select-word-style bash
 
 # Compile zcompdump if necessary.
 if [ ~/.zcompdump -nt ~/.zcompdump.zwc -o ! -e ~/.zcompdump.zwc ]; then
