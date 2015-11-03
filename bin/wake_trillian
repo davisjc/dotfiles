@@ -1,0 +1,4 @@
+#!/bin/sh
+
+wol -i trillian "D0:50:99:81:76:52"
+
