@@ -1,0 +1,4 @@
+#!/bin/sh
+
+wol -i marvin "c8:60:00:ca:4c:8e"
+
