@@ -75,7 +75,9 @@ if [ -e $HOME/.xinitrc.loc ]; then
 fi
 
 # Start window manager.
-if [ -e $HOME/.i3/config.loc ]; then
+if [[ "$(hostname)" == "zaphod" ]]; then
+    exec startxfce4
+elif [ -e $HOME/.i3/config.loc ]; then
     exec i3 -c $HOME/.i3/config.loc -V >> $HOME/.i3/i3log 2>&1
 else
     exec i3 -c $HOME/.i3/config -V >> $HOME/.i3/i3log 2>&1
