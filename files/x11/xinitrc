@@ -54,7 +54,7 @@ hash xflux 2> /dev/null
 if [ $? -eq 0 ]; then
     pidof xflux >& /dev/null
     if [ $? -ne 0 ]; then
-        xflux -z 98105 -k 4100 &
+        xflux -z 98105 -k 3800 &
     fi
 fi
 
