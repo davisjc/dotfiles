@@ -1,6 +1,5 @@
 
-commonly installed AUR packages:
-
+COMMONLY INSTALLED AUR PACKAGES
 
 asoundconf
 compton-git
