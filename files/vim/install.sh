@@ -12,3 +12,6 @@ $LINK $INSTALL_DIR/bootstrap $HOME/.vim/bootstrap
 mkdir -p $HOME/.vim/colors
 $LINK $INSTALL_DIR/colors/aurora.vim $HOME/.vim/colors/aurora.vim
 
+echo "         running :VundleInstall.."
+vim +VundleInstall +qall
+
