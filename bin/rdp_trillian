@@ -1,0 +1,4 @@
+#!/bin/sh
+
+xfreerdp +clipboard /w:1280 /h:720 /v:trillian /u:eddie
+
