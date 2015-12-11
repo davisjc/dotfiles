@@ -37,9 +37,6 @@ fi
 xset m 1 10 &
 xset r rate 220 40 &
 
-# Set background.
-sh $HOME/.fehbg &
-
 # Start compton.
 hash compton 2> /dev/null
 if [ $? -eq 0 ]; then
@@ -60,7 +57,7 @@ fi
 
 # Set screen blanking. TODO
 
-# Start mpdscribble. TODO: Move to systemd --user
+# Start mpdscribble.
 hash mpdscribble 2> /dev/null
 if [ $? -eq 0 ]; then
     pidof mpdscribble >& /dev/null
@@ -72,6 +69,14 @@ fi
 # Load machine-specific stuff.
 if [ -e $HOME/.xinitrc.loc ]; then
     source $HOME/.xinitrc.loc
+fi
+
+# Set background.
+sh $HOME/.fehbg &
+
+# Set display.
+if [[ "$(hostname)" == "marvin" ]]; then
+    (sleep 3 && display_1920_1080_60_rotated_and_1920_1080_120 && sh $HOME/.fehbg) &
 fi
 
 # Start window manager.
