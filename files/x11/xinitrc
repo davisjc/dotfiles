@@ -76,7 +76,7 @@ sh $HOME/.fehbg &
 
 # Set display.
 if [[ "$(hostname)" == "marvin" ]]; then
-    (sleep 3 && display_1920_1080_60_rotated_and_1920_1080_120 && sh $HOME/.fehbg) &
+    (sleep 4 && display_1920_1080_60_rotated_and_1920_1080_120 && sh $HOME/.fehbg) &
 fi
 
 # Start window manager.
