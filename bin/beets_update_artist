@@ -1,0 +1,16 @@
+#!/bin/sh
+
+search_query=$1
+albumartist=$2
+albumartist_credit=$albumartist
+if [[ ${albumartist:0:4} == "The " ]]; then
+    albumartist_sort="${albumartist:4}, The"
+else
+    albumartist_sort=$albumartist
+fi
+
+beet modify -a -m $search_query \
+    albumartist="$albumartist" \
+    albumartist_credit="$albumartist_credit" \
+    albumartist_sort="$albumartist_sort"
+
