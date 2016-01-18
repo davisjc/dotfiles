@@ -8,7 +8,6 @@ cd $_src_repo_dir || kill -INT $$
 
 echo "Archiving music changes to repo..."
 git annex add || kill -INT $$
-git add -A
 git commit -m "automatic music archive update"
 git annex dropunused all --force
 git gc
