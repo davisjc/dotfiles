@@ -8,8 +8,8 @@ _dst_repo=car
 
 cd $_mid_repo_dir || kill -INT $$
 
-local _src_repo_dir=$(git ls-remote --get-url $_src_repo)
-local _dst_repo_dir=$(git ls-remote --get-url $_dst_repo)
+_src_repo_dir=$(git ls-remote --get-url $_src_repo)
+_dst_repo_dir=$(git ls-remote --get-url $_dst_repo)
 
 echo "Syncing music archive to transport..."
 git annex sync $_src_repo
