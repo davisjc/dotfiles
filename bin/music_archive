@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Commits changes in music directory to git-annex.
+
+_src_repo_dir=/mnt/storage/music
+
+cd $_src_repo_dir || kill -INT $$
+
+echo "Archiving music changes to repo..."
+git annex add || kill -INT $$
+git add -A
+git commit -m "automatic music archive update"
+git annex dropunused all --force
+git gc
+git annex unlock
+echo "Done archiving music changes to repo..."
+
