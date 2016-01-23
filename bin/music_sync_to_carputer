@@ -14,12 +14,10 @@ _dst_repo_dir=$(git ls-remote --get-url $_dst_repo)
 cd $_dst_repo_dir || kill -INT $$
 
 echo "Syncing music from transport..."
-git annex lock --force || kill -INT $$
-git annex sync
+git annex sync || kill -INT $$
 git annex dropunused all --force
 git annex get
 git gc
-git annex unlock
 cd $_mid_repo_dir || kill -INT $$
 git annex sync $_dst_repo || kill -INT $$
 git annex drop --in=$_src_repo --and --in=$_dst_repo --and --in=here
