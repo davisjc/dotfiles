@@ -1,0 +1,6 @@
+#!/bin/bash
+
+FEH_IMAGE_PATH=$HOME/.config/mpd/art/albumart
+
+feh -F -Z -R 1 "$FEH_IMAGE_PATH"
+

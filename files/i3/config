@@ -39,7 +39,7 @@ bindsym $mod+Ctrl+Return exec i3-sensible-terminal -e ranger
 bindsym $mod+m exec i3-sensible-terminal -name ncmpcpp -e ncmpcpp
 
 # View album art.
-bindsym $mod+n exec ~/scripts/mpd/display_albumart.sh
+bindsym $mod+n exec albumart_display
 
 # Kill window.
 bindsym $mod+Shift+q kill

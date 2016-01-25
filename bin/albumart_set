@@ -1,0 +1,34 @@
+#!/bin/bash
+
+ART_DIR=$HOME/.config/mpd/art
+LOCK_DIR=$ART_DIR/lock
+BLANK_IMAGE_PATH=$ART_DIR/black.jpg
+FEH_IMAGE_PATH=$ART_DIR/albumart
+
+MUSIC_DIR=~/music
+MUSIC_FILE="$(mpc current -f %file%)"
+ALBUM_DIR=$MUSIC_DIR/$(dirname "$MUSIC_FILE")
+
+# Check for image file in album directory.
+if [ "$MUSIC_FILE" ]; then
+	IMAGE_PATH=$(find "$ALBUM_DIR" -iregex "^.*\(jpg\|png\)$" | head -1)
+else
+	IMAGE_PATH=""
+fi
+
+# Determine new image path.
+if [ -f "$IMAGE_PATH" ]; then
+	SRC_IMAGE_PATH="$IMAGE_PATH"
+else
+	SRC_IMAGE_PATH="$BLANK_IMAGE_PATH"
+fi
+
+if (mkdir $LOCK_DIR 2> /dev/null); then
+	# Create a new symlink to the current album art.
+	rm $FEH_IMAGE_PATH 2> /dev/null
+	ln -s "$SRC_IMAGE_PATH" "$FEH_IMAGE_PATH"
+
+	# Release lock.
+	rm -r $LOCK_DIR
+fi
+

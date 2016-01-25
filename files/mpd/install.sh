@@ -13,5 +13,6 @@ touch $HOME/.config/mpd/sticker.sql
 
 if [[ "$(uname)" == "Linux" ]]; then
     $LINK $INSTALL_DIR/mpd.conf.linux $HOME/.config/mpd/mpd.conf
+    $LINK $INSTALL_DIR/black.jpg $HOME/.config/mpd/art/black.jpg
 fi
 

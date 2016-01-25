@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [[ "$#" -eq 1 ]]; then
+    ART_ADDR=$1
+    ART_NAME="albumart"
+    ART_EXT=$(echo $ART_ADDR | sed 's/.*\.//')
+
+    MUSIC_DIR=~/music
+    MUSIC_FILE=$(mpc current -f %file%)
+    ALBUM_DIR=$MUSIC_DIR/$(dirname "$MUSIC_FILE")
+
+    # Delete any existing album art.
+    rm "$ALBUM_DIR/*.jpg" 2> /dev/null
+    rm "$ALBUM_DIR/*.png" 2> /dev/null
+
+    # Download new album art.
+    wget -O "$ALBUM_DIR/$ART_NAME.$ART_EXT" "$ART_ADDR"
+
+    # Trigger album art update.
+    albumart_set
+fi
+
