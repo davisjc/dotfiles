@@ -4,6 +4,7 @@ LINK=$DOTFILES/core/link.sh
 INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 mkdir -p $HOME/.config/mpd
+mkdir -p $HOME/.config/mpd/art
 mkdir -p $HOME/.config/mpd/playlists
 touch $HOME/.config/mpd/log
 touch $HOME/.config/mpd/pid
