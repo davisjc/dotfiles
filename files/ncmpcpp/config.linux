@@ -286,7 +286,7 @@ visualizer_type = spectrum
 ## Attention: It doesn't support song format anymore.
 ## Use `ncmpcpp --now-playing SONG_FORMAT` instead.
 ##
-execute_on_song_change = "~/scripts/mpd/set_current_albumart.sh"
+execute_on_song_change = "albumart_set"
 #
 #playlist_show_remaining_time = no
 #
