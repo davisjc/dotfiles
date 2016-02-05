@@ -181,8 +181,9 @@ bindkey "^R" history-incremental-search-backward
 stty -ixon
 
 # Aliases.
+alias c='cd'
 alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
-alias l='ls -lh'
+alias l='ls -h'
 alias ll='ls -lh'
 alias la='ls -a'
 alias lla='ls -lah'
