@@ -48,12 +48,22 @@ set mouse=a
 
 " Enable line numbers.
 set number
+nmap <Leader>l :setlocal number!<CR>
 
 " Highlight line end.
-set cursorline
 if version >= 703
 	set colorcolumn=100
+    " Toggle column guide
+    fun! ToggleColorColumn()
+        if empty(&colorcolumn)
+            setlocal colorcolumn=100
+        else
+            setlocal colorcolumn=
+        endif
+    endfun
+    nnoremap <Leader>\ :call ToggleColorColumn()<CR>
 endif
+
 
 " Highlight current line only on focused window.
 set cursorline
