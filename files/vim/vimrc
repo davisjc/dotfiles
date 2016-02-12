@@ -112,6 +112,9 @@ nnoremap <Leader>cc cc<ESC>
 nnoremap <Leader>o o<ESC>
 nnoremap <Leader>O O<ESC>
 
+" Toggle paste-mode.
+nnoremap <Leader>p :set paste!<CR>
+
 " Sudo save shortcut.
 cmap w!! w !sudo tee > /dev/null %
 
