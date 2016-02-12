@@ -108,9 +108,9 @@ nnoremap gd :bdelete<CR>
 nnoremap gD :tabclose<CR>
 
 " Versions of cc and o that don't exit normal mode
-nmap <leader>cc cc<ESC>
-nmap <leader>o o<ESC>
-nmap <leader>O O<ESC>
+nnoremap <Leader>cc cc<ESC>
+nnoremap <Leader>o o<ESC>
+nnoremap <Leader>O O<ESC>
 
 " Sudo save shortcut.
 cmap w!! w !sudo tee > /dev/null %
