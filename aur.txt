@@ -13,4 +13,5 @@ packer
 rar2fs
 rxvt-unicode-patched
 xflux
+xurls
 
