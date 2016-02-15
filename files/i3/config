@@ -30,7 +30,7 @@ floating_modifier $mod
 bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'hack:bold:size=16'"
 
 # Start terminal.
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # Browse files.
 bindsym $mod+Ctrl+Return exec i3-sensible-terminal -e ranger
