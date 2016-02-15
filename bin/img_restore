@@ -1,0 +1,23 @@
+#!/bin/sh
+
+_src=$1
+_dst=$2
+
+if [[ $# < 2 ]]; then
+    echo "Usage: img_restore SOURCE DEST"
+    echo "Restore a compressed, byte-level backup at SOURCE to DEST."
+    kill -INT $$
+fi
+
+_gzip="pigz"
+
+hash pigz 2> /dev/null
+if [ $? -ne 0 ]; then
+    echo "pigz not available - falling back to plain gzip."
+    _gzip="gzip"
+fi
+
+_command="sudo pv -i 0.5 -p -r -t -e -EE -B 128m $_src | $_gzip -cd > $_dst"
+
+echo "$_command"
+eval $_command
