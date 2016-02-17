@@ -103,11 +103,10 @@ let g:jsx_ext_required = 0
 match ErrorMsg '\s\+$'
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
-" Buffer/tab mappings.
+" Buffer mappings.
 nnoremap gb :bnext<CR>
 nnoremap gB :bprevious<CR>
 nnoremap gd :bdelete<CR>
-nnoremap gD :tabclose<CR>
 
 " Versions of cc and o that don't exit normal mode
 nnoremap <Leader>cc cc<ESC>
