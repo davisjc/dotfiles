@@ -57,6 +57,8 @@ if version >= 703
     fun! ToggleColorColumn()
         if empty(&colorcolumn)
             setlocal colorcolumn=100
+        elseif &colorcolumn == 100
+            setlocal colorcolumn=80
         else
             setlocal colorcolumn=
         endif
