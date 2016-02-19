@@ -3,7 +3,7 @@
 if [[ "$#" -eq 1 ]]; then
     ART_ADDR=$1
     ART_NAME="albumart"
-    ART_EXT=$(echo $ART_ADDR | sed 's/.*\.//')
+    ART_EXT=$(echo $ART_ADDR | sed 's/.*\.//' | sed 's/jpeg/jpg/')
 
     MUSIC_DIR=~/music
     MUSIC_FILE=$(mpc current -f %file%)
