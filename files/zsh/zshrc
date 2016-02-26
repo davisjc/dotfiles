@@ -191,6 +191,7 @@ alias info='info --vi-keys'
 alias g='git'
 alias gs='git status'
 alias v='vim'
+alias vcat='vimcat'
 
 # Load Linux stuff.
 if [ -e $HOME/.zshrc.linux ]; then
