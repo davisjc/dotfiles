@@ -116,11 +116,6 @@ nnoremap gb :bnext<CR>
 nnoremap gB :bprevious<CR>
 nnoremap gd :bdelete<CR>
 
-" Versions of cc and o that don't exit normal mode
-nnoremap <Leader>cc cc<ESC>
-nnoremap <Leader>o o<ESC>
-nnoremap <Leader>O O<ESC>
-
 " Toggle paste-mode.
 nnoremap <Leader>p :set paste!<CR>
 
