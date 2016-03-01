@@ -17,10 +17,23 @@ Plugin 'tpope/vim-unimpaired' " some simple pair mappings
 Plugin 'lilydjwg/colorizer' " color definition highlighting
 call vundle#end()
 
+" Remap leader.
+let mapleader=" "
+
 " Colors!
 set t_ut=
 set t_Co=256
 colorscheme aurora
+
+" Toggle colorscheme.
+fun! ToggleColorScheme()
+    if "aurora" ==? g:colors_name
+        colorscheme industry
+    else
+        colorscheme aurora
+    endif
+endfun
+nnoremap <Leader>c :call ToggleColorScheme()<CR>
 
 " Airline.
 set laststatus=2
@@ -28,9 +41,6 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme = 'powerlineish'
 let g:airline#extensions#tabline#enabled = 1
-
-" Remap leader.
-let mapleader=" "
 
 " Remove escape delay.
 set timeoutlen=1000 ttimeoutlen=0
