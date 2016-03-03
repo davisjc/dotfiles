@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sudo vim -c 'call UncommentMirrorList()' /etc/pacman.d/mirrorlist
+

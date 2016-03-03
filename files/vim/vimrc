@@ -119,6 +119,11 @@ nnoremap gd :bdelete<CR>
 " Toggle paste-mode.
 nnoremap <Leader>p :set paste!<CR>
 
+" Uncomment US in pacman mirrorlist.
+fun! UncommentMirrorList()
+    exec "silent! normal! /United States\<CR>jV/\\n\\n\<CR>:s/\#//g\<CR>:wq\<CR>"
+endfun
+
 " Sudo save shortcut.
 cmap w!! w !sudo tee > /dev/null %
 
