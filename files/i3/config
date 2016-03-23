@@ -33,13 +33,13 @@ bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'hack
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # Browse files.
-bindsym $mod+Ctrl+Return exec i3-sensible-terminal -e ranger
+bindsym $mod+Ctrl+Return exec --no-startup-id i3-sensible-terminal -e ranger
 
 # Browse music.
-bindsym $mod+m exec i3-sensible-terminal -e ncmpcpp
+bindsym $mod+m exec --no-startup-id i3-sensible-terminal -e ncmpcpp
 
 # View album art.
-bindsym $mod+n exec albumart_display
+bindsym $mod+n exec --no-startup-id albumart_display
 
 # Kill window.
 bindsym $mod+Shift+q kill
