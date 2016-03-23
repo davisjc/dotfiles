@@ -10,6 +10,8 @@ sticker_file            "~/.config/mpd/sticker.sql"
 follow_inside_symlinks  "yes"
 follow_outside_symlinks "yes"
 
+bind_to_address "/tmp/mpd.sock"
+
 input {
     plugin "curl"
 }

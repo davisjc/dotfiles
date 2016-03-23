@@ -7,11 +7,14 @@ FEH_IMAGE_PATH=$ART_DIR/albumart
 
 MUSIC_DIR=~/music
 MUSIC_FILE="$(mpc current -f %file%)"
-ALBUM_DIR=$MUSIC_DIR/$(dirname "$MUSIC_FILE")
+ALBUM_DIR=$(dirname "$MUSIC_FILE")
+if [[ "$MUSIC_FILE" != /* ]]; then # not absolute path
+    ALBUM_DIR=$MUSIC_DIR/$ALBUM_DIR
+fi
 
 # Check for image file in album directory.
 if [ "$MUSIC_FILE" ]; then
-	IMAGE_PATH=$(find "$ALBUM_DIR" -iregex "^.*\(jpg\|png\)$" | head -1)
+	IMAGE_PATH=$(find "$ALBUM_DIR" -maxdepth 1 -iregex "^.*\(jpg\|png\)$" | head -1)
 else
 	IMAGE_PATH=""
 fi
