@@ -197,7 +197,7 @@ alias tmux='tmux -2'
 alias tn='tmux new-session -s'
 alias v='vim'
 alias vcat='vimcat'
-alias feh='feh --scale-down --image-bg black'
+alias feh='feh -q --scale-down --image-bg black'
 function gl() {
     local n=$([ -z $1 ] && echo 10 || echo $1)
     git log --pretty=oneline HEAD~$n..HEAD
