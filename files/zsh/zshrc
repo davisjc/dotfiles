@@ -179,12 +179,11 @@ bindkey "^R" history-incremental-search-backward
 # Completely disable ctrl-s/ctrl-q shell flow control.
 stty -ixon
 
-# Aliases.
+# Aliases/functions.
 alias c='cd'
 alias g='git'
 alias gd='git diff'
 alias gds='git diff --staged'
-alias gl='git log --pretty=oneline HEAD~10..HEAD'
 alias gs='git status'
 alias info='info --vi-keys'
 alias l='ls -h'
@@ -199,6 +198,10 @@ alias tn='tmux new-session -s'
 alias v='vim'
 alias vcat='vimcat'
 alias feh='feh --scale-down --image-bg black'
+function gl() {
+    local n=$([ -z $1 ] && echo 10 || echo $1)
+    git log --pretty=oneline HEAD~$n..HEAD
+}
 
 # Load Linux stuff.
 if [ -e $HOME/.zshrc.linux ]; then
