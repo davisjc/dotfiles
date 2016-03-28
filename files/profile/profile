@@ -1,16 +1,18 @@
 #!/bin/sh
 
-export DOTFILES=$HOME/dot
-export HISTFILE=$HOME/.histfile
-export EDITOR=vim
-export VISUAL=vim
-export GIT_EDITOR=vim
-export MPD_HOST=/tmp/mpd.sock
-
 PATH=$PATH:$DOTFILES/bin
 
 if [ -z "$TMUX" ]; then
     ulimit -c unlimited
+
+    export DOTFILES=$HOME/dot
+    export HISTFILE=$HOME/.histfile
+    export EDITOR=vim
+    export VISUAL=vim
+    export GIT_EDITOR=vim
+    if [[ "$(hostname)" != "ford" ]]; then
+        export MPD_HOST=/tmp/mpd.sock
+    fi
 fi
 
 # Load Linux stuff.

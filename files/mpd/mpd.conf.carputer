@@ -1,0 +1,23 @@
+
+music_directory         "~/music"
+db_file                 "~/music/mpd_database"
+playlist_directory      "~/.config/mpd/playlists"
+log_file                "~/.config/mpd/log"
+pid_file                "~/.config/mpd/pid"
+state_file              "~/.config/mpd/state"
+sticker_file            "~/.config/mpd/sticker.sql"
+
+follow_inside_symlinks  "yes"
+follow_outside_symlinks "yes"
+
+input {
+    plugin "curl"
+}
+
+audio_output {
+    type            "alsa"
+    name            "ALSA"
+    auto_resample   "no"
+    use_mmap        "yes"
+}
+
