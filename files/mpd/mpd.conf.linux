@@ -11,6 +11,7 @@ follow_inside_symlinks  "yes"
 follow_outside_symlinks "yes"
 
 bind_to_address "/tmp/mpd.sock"
+bind_to_address "any"
 
 input {
     plugin "curl"
