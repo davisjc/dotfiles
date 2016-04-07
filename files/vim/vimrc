@@ -8,7 +8,6 @@ set rtp+=~/.vim/bootstrap
 call vundle#begin()
 Plugin 'bling/vim-airline' " status bar
 Plugin 'kien/ctrlp.vim' " let's get fuzzy!
-Plugin 'mxw/vim-jsx' " depends on vim-javascript
 Plugin 'pangloss/vim-javascript' " javascript syntax
 Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'tpope/vim-repeat' " ability to repeat plugin actions
@@ -103,9 +102,6 @@ map <silent> <PageDown> 1000<C-D>
 imap <silent> <PageUp> <C-O>1000<C-U>
 imap <silent> <PageDown> <C-O>1000<C-D>
 set nostartofline
-
-" JSX.
-let g:jsx_ext_required = 0
 
 " Trailing whitespace.
 match ErrorMsg '\s\+$'
