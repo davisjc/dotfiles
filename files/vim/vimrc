@@ -135,6 +135,21 @@ endfun
 map zr :call ScrollToPercent(25)<CR>
 map zv :call ScrollToPercent(75)<CR>
 
+" Configure search.
+set ignorecase
+set smartcase " respect case in query only if a capital exists
+set incsearch " jump while entering query
+set hlsearch
+nnoremap <Leader>h :noh<CR>
+
+" Center search jumps.
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
 " Toggle paste-mode.
 nnoremap <Leader>p :set paste!<CR>
 
