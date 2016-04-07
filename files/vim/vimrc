@@ -112,6 +112,29 @@ nnoremap gb :bnext<CR>
 nnoremap gB :bprevious<CR>
 nnoremap gd :bdelete<CR>
 
+" Steal hbw's line centering mappings.
+fun! ScrollToPercent(percent)
+    let movelines=winheight(0)*(50-a:percent)/100
+    echo movelines
+    if movelines<0
+        let motion='k'
+        let rmotion='j'
+        let movelines=-movelines
+    elseif movelines>0
+        let motion='j'
+        let rmotion='k'
+    else
+        return 0
+    endif
+    if has('float') && type(movelines)==type(0.0)
+        let movelines=float2nr(movelines)
+    endif
+    execute 'normal! zz'.movelines.motion.'zz'.movelines.rmotion
+endfun
+
+map zr :call ScrollToPercent(25)<CR>
+map zv :call ScrollToPercent(75)<CR>
+
 " Toggle paste-mode.
 nnoremap <Leader>p :set paste!<CR>
 
