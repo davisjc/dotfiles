@@ -7,9 +7,16 @@ if [ -z "$TMUX" ]; then
 
     export DOTFILES=$HOME/dot
     export HISTFILE=$HOME/.histfile
-    export EDITOR=vim
-    export VISUAL=vim
-    export GIT_EDITOR=vim
+    export VISUAL=vi
+    hash vim 2> /dev/null
+    if [[ 0 == $? ]]; then
+        VISUAL=vim
+    fi
+    hash nvim 2> /dev/null
+    if [[ 0 == $? ]]; then
+        VISUAL=nvim
+    fi
+    export EDITOR=$VISUAL
     if [[ "$(hostname)" != "ford" ]]; then
         export MPD_HOST=/tmp/mpd.sock
     fi

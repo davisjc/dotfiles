@@ -195,7 +195,7 @@ alias ta='tmux attach-session -t'
 alias tl='tmux list-sessions'
 alias tmux='tmux -2'
 alias tn='tmux new-session -s'
-alias v='vim'
+alias v="$EDITOR"
 alias vcat='vimcat'
 alias feh='feh -q --scale-down --image-bg black'
 function gl() {
