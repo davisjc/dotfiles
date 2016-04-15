@@ -136,8 +136,6 @@ map zr :call ScrollToPercent(25)<CR>
 map zv :call ScrollToPercent(75)<CR>
 
 " Configure search.
-set ignorecase
-set smartcase " respect case in query only if a capital exists
 set incsearch " jump while entering query
 set hlsearch
 nnoremap <Leader>h :noh<CR>
