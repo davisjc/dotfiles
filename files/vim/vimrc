@@ -140,6 +140,10 @@ set incsearch " jump while entering query
 set hlsearch
 nnoremap <Leader>h :noh<CR>
 
+" Completion settings (:help ins-completion)
+set complete+=i " scan current and included files
+set complete+=d " scan current and included files for defined name or macro
+
 " Toggle paste-mode.
 nnoremap <Leader>p :set paste!<CR>
 
