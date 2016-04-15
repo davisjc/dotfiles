@@ -1,0 +1,15 @@
+#!/bin/sh
+
+files=$*
+if [[ $# == 0 ]]; then
+    files="*.c"
+fi
+
+echo -n "Generating tags for \"$files\"... "
+
+gcc -M $files | sed -e 's/[\\ ]/\n/g' | \
+    sed -e '/^$/d' -e '/\.o:[ \t]*$/d' | \
+    ctags -L - --c++-kinds=+p --fields=+iaS --extra=+q
+
+echo "done."
+
