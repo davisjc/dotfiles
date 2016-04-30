@@ -163,7 +163,7 @@ function precmd() {
     if [[ 1 == $_is_root ]]; then
         _symbol="%{${fg[red]}%}#%{${reset_color}%}"
     else
-        _symbol="%{${fg[blue]}%}$%{${reset_color}%}"
+        _symbol="%{${fg[yellow]}%}$%{${reset_color}%}"
     fi
 
     PROMPT="%{${_host}%} %{${fg[yellow]}%}%3~%{$reset_color%}${fg[cyan]}$reset_color$STATUS_EXT"$'\n'
