@@ -49,29 +49,22 @@ let g:colors_name="aurora"
 " Basic syntax highlighting
 " -----------------------------------------------------------------------------
 
-" Solarized fg/bg
+" The base palette is inspired by the Solarized Dark color scheme. We use it as
+" a starting point to build the other colors.
 hi Normal       guifg=#bcbcbc guibg=#002b36
 
-" There isn't a good X11 color name for this, and the xterm color name is stupid
-" ("DarkSlateGray2"), so I'm just gonna call this 'bright cyan'.
-hi Comment      ctermfg=87    guifg=#55ffff
-hi! link Identifier Comment
+" Operators and delimeters occur frequently in code, so having them stand out
+" too much can add a lot of gratuitous, obnoxious visual noise. Instead, I want
+" them to appear pretty close to normal text, but just slightly different enough
+" to tell them apart from normal text.
+hi Operator     ctermfg=110   guifg=#87afdf
+hi! link Delimiter Operator
 
-hi Statement    ctermfg=83    guifg=SeaGreen2
-hi! link Conditional Statement
-hi! link Repeat Statement
-hi! link Label Statement
-hi! link Structure Statement
-
-hi PreProc      ctermfg=111   guifg=SkyBlue2
-hi! link Include PreProc
-
-hi Type         term=NONE     cterm=NONE
-hi Type         ctermfg=121   guifg=PaleGreen1
-
-hi Function     ctermfg=39    guifg=DeepSkyBlue1
-hi Operator     ctermfg=76    guifg=Chartreuse2
-
+" Constants, especially string literals, can take up a lot of screen real
+" real estate, so I don't want these to be too noisy either. However, they occur
+" infrequently enough and are semantically different enough from symbols that I
+" want them to be easily distinguishable when scanning code. Thus, they're a
+" lighter sea green that's similar, in hue, to the dark sea green background.
 hi Constant     ctermfg=44    guifg=LightSeaGreen
 hi! link String Constant
 hi! link Character Constant
@@ -80,6 +73,49 @@ hi! link Number Constant
 hi! link Float Constant
 hi! link Special Constant
 
+" Functions are the fundamental tool for abstracting logic and control flow:
+" function names and their usages are often the most distinguishable clues for
+" figuring out the logic and intent of code. I chose this blue frankly because
+" I find it aesthetically pleasing: it's a bold, deep blue, but not too dark to
+" get lost in the dark sea green background. I like looking at it, which is
+" important for a syntax element that I wind up looking at a lot.
+hi Function     ctermfg=39    guifg=DeepSkyBlue1
+hi! link Identifier Function
+hi! link Tag Function
+
+" Preprocessor directives are often used as a way to 'break out' of a language's
+" conventional syntax constructs, and as such, can have unusual semantics. Thus,
+" I chose to highlight preprocessor directives with a light purple: while still
+" in the general theme of 'aurora' colors, it stands out from the other colors
+" and has no equal in this color scheme.
+hi PreProc      ctermfg=111   guifg=#87afff
+hi! link Include PreProc
+hi! link Debug PreProc
+
+" Keywords generally indictate control flow or some sort of built-in action.
+" They are conceptually not too different from functions, and thus are similar
+" in color intensity to Function and PreProc. However, since keywords are built-
+" in, rather than user-definable, they are of a more greenish hue to subtly
+" associate them with the color of built-in types.
+hi Keyword      ctermfg=106   guifg=#87af00
+hi! link Statement Keyword
+hi! link Conditional Keyword
+hi! link Repeat Keyword
+hi! link Label Keyword
+hi! link Structure Keyword
+
+" Types indicate the characteristics and shape of the data that code operates
+" with. Thus, to contrast with the darker colors used to mark control flow, I
+" used a lighter green to mark this as something of an 'annotation'.
+hi Type         ctermfg=119   guifg=#87ff5f
+
+" In a similar vein to type highlighting, comments are another form of
+" annotation (except more free-form and not checked by the compiler), and thus
+" get a lighter, pale blue to complement the type color.
+hi Comment      ctermfg=87    guifg=#55ffff
+
+" Customarily, vim colorschemes seem to make TODO markers loud and noisy, using
+" some sort of bright background and text. As they say, when in Rome...
 hi Todo         ctermfg=196   guifg=Red1
 hi Todo         ctermbg=227   guibg=LightGoldenrod1
 
@@ -155,14 +191,16 @@ hi DiffDelete   ctermbg=95    guibg=#875f5f
 
 " DiffChange/DiffText refer to lines that have been modified, compared to lines
 " that have been wholly added or removed. In this case, what I've done is only
-" highlight the portions of text that changed (i.e. DiffText). Thus,
-" DiffChange,
-" i.e.  the lines containing these changed portions of text, has no
-" highlight.
+" highlight the portions of text that changed (i.e. DiffText). Thus, DiffChange,
+" i.e. the lines containing these changed portions of text, has no highlight.
 hi DiffChange   term=NONE     cterm=NONE
 hi DiffChange   ctermbg=NONE  guibg=NONE
 hi DiffText     term=NONE     cterm=bold
 hi DiffText     ctermbg=23    guibg=#005f5f
+
+" Less noisy versions of add/remove diff highlighting for things like git logs
+hi diffAdded    ctermfg=40    guifg=#00df00
+hi diffRemoved  ctermfg=160   guifg=#df0000
 
 " -----------------------------------------------------------------------------
 " Vim syntax highlighting
