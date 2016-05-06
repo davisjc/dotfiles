@@ -1,0 +1,4 @@
+#!/bin/sh
+
+systemctl --user restart mpd.service
+
