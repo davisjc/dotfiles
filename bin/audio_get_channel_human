@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [[ $(audio_get_channel) == "Headphone" ]]; then
+    echo "🎧 Headset"
+else
+    echo "🔊 Speakers"
+fi
