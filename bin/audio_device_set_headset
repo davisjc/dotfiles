@@ -1,5 +1,8 @@
 #!/bin/sh
 
 asoundconf set-default-card Headset
+
+i3_update_volume
+
 mpd_restart
 

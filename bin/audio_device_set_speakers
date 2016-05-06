@@ -1,5 +1,8 @@
 #!/bin/sh
 
 asoundconf set-default-card PCH
+
+i3_update_volume
+
 mpd_restart
 

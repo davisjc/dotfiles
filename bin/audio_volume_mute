@@ -4,6 +4,5 @@ CHANNEL=$(audio_get_channel)
 
 amixer set $CHANNEL toggle
 
-# Update i3blocks volume display.
-pkill -RTMIN+1 i3block
+i3_update_volume
 
