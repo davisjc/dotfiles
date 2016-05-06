@@ -3,5 +3,5 @@
 if [[ $(audio_get_channel) == "Headphone" ]]; then
     echo "🎧 Headset"
 else
-    echo "🔊 Speakers"
+    echo "♫ Speakers"
 fi
