@@ -1,0 +1,5 @@
+#!/bin/sh
+
+asoundconf set-default-card Headset
+mpd_restart
+
