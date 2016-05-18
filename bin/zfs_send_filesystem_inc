@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Duplicate a zfs filesystem to another machine by sending only the neceessary
+# Duplicate a zfs filesystem to another machine by sending only the necessary
 # data to reach parity.
 #
 # Note: ensure appropriate allowances are made in each machine's sudoers file.
