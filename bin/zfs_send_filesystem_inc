@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# Duplicate a zfs filesystem to another machine by sending only the neceessary
+# data to reach parity.
+#
+# Note: ensure appropriate allowances are made in each machine's sudoers file.
+
+remote_host=$1
+zfs_filesystem=$2
+
+if (( $# < 1 )); then
+    >&2 echo "Please specify remote host."
+    exit 1
+fi
+if (( $# < 2 )); then
+    >&2 echo "Please specify zfs filesystem to mirror."
+    exit 1
+fi
+
+if ! ping -c 1 -w 2 $remote_host > /dev/null; then
+    >&2 echo "Unable to reach $remote_host."
+    exit 1
+fi
+
+most_recent_local=$(sudo zfs list -o name -r -t snapshot $zfs_filesystem 2> /dev/null | tail -n 1)
+if [[ -z $most_recent_local ]]; then
+    >&2 echo "Couldn't find '$zfs_filesystem' on $(hostname)."
+    exit 1
+fi
+
+most_recent_remote=$(ssh $remote_host sudo zfs list -o name -r -t snapshot $zfs_filesystem 2> /dev/null | tail -n 1)
+if [[ -z $most_recent_remote ]]; then
+    echo "Couldn't find any '$zfs_filesystem' snapshots on $remote_host."
+    echo "Sending entire replication stream:"
+    echo -n "'$zfs_filesystem' -> '$most_recent_local'... "
+    sudo zfs send -R $most_recent_local | \
+        ssh $remote_host sudo zfs receive -F $zfs_filesystem
+    echo "done."
+elif [[ $most_recent_remote == $most_recent_local ]]; then
+    echo "Host $remote_host is already up-to-date with '$most_recent_local'."
+else
+    echo "Sending incremental replication stream:"
+    echo -n "'$most_recent_remote' -> '$most_recent_local'... "
+    sudo zfs send -R -I $most_recent_remote $most_recent_local | \
+        ssh $remote_host sudo zfs receive -F $zfs_filesystem
+    echo "done."
+fi
+
