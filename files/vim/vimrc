@@ -49,7 +49,7 @@ syntax enable
 
 " Clipboard
 if $TMUX == ''
-	set clipboard=unnamedplus
+	set clipboard+=unnamed
 endif
 
 " Enable mouse.
