@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ssh heartofgold -D 1080 -N
+
