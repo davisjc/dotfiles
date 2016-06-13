@@ -152,9 +152,6 @@ fun! UncommentMirrorList()
     exec "silent! normal! /United States\<CR>jV/\\n\\n\<CR>:s/\#//g\<CR>:wq\<CR>"
 endfun
 
-" Save shortcut.
-nnoremap <Leader>w :w<CR>
-
 " Sudo save shortcut.
 cmap w!! w !sudo tee > /dev/null %
 
