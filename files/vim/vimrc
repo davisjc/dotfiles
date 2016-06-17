@@ -108,9 +108,10 @@ match ErrorMsg '\s\+$'
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " Buffer mappings.
-nnoremap gb :bnext<CR>
-nnoremap gB :bprevious<CR>
-nnoremap gd :bdelete<CR>
+nnoremap <Leader>b :buffer 
+nnoremap <Leader>n :bnext<CR>
+nnoremap <Leader>p :bprevious<CR>
+nnoremap <Leader>d :bdelete<CR>
 
 " Steal hbw's line centering mappings.
 fun! ScrollToPercent(percent)
@@ -145,7 +146,7 @@ set complete+=i " scan current and included files
 set complete+=d " scan current and included files for defined name or macro
 
 " Toggle paste-mode.
-nnoremap <Leader>p :set paste!<CR>
+nnoremap <Leader>v :set paste!<CR>
 
 " Uncomment US in pacman mirrorlist.
 fun! UncommentMirrorList()
