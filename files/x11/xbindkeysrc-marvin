@@ -1,0 +1,98 @@
+
+#
+# Display.
+#
+
+"display_1920_1080_60_and_1920_1080_120 && sh $HOME/.fehbg"
+Mod4 + F1
+
+"display_1920_1080_60_rotated_and_1920_1080_120 && sh $HOME/.fehbg"
+Mod4 + F2
+
+"display_1920_1080_120 && sh $HOME/.fehbg"
+Mod4 + F3
+
+"display_1920_1080_144 && sh $HOME/.fehbg"
+Mod4 + F4
+
+
+#
+# Sound.
+#
+
+"audio_volume_inc"
+Mod4 + m:0x0 + b:4
+
+"audio_volume_dec"
+Mod4 + m:0x0 + b:5
+
+"audio_volume_mute"
+Mod4 + m:0x0 + b:2
+
+"audio_volume_inc"
+Mod4 + KP_Add
+
+"audio_volume_inc"
+Mod4 + plus
+
+"audio_volume_inc"
+Mod4 + Mod1 + k
+
+"audio_volume_dec"
+Mod4 + KP_Subtract
+
+"audio_volume_dec"
+Mod4 + minus
+
+"audio_volume_dec"
+Mod4 + Mod1 + j
+
+"audio_volume_mute"
+Mod4 + KP_Multiply
+
+"audio_volume_mute"
+Mod4 + Mod1 + m
+
+"audio_device_set_headset"
+Mod4 + F11
+
+"audio_device_set_speakers"
+Mod4 + F12
+
+
+#
+# MPD.
+#
+
+"mpc toggle"
+Mod4 + Mod1 + space
+
+"mpc prev"
+Mod4 + Mod1 + Left
+
+"mpc next"
+Mod4 + Mod1 + Right
+
+"mpc prev"
+Mod4 + Mod1 + h
+
+"mpc next"
+Mod4 + Mod1 + l
+
+"mpc seek -1"
+Shift + Mod4 + Mod1 + h
+
+"mpc seek +1"
+Shift + Mod4 + Mod1 + l
+
+
+#
+# System control.
+#
+
+"sudo systemctl poweroff"
+Mod4 + Mod1 + Pause
+
+"sudo systemctl reboot"
+Shift + Mod4 + Mod1 + Pause
+
