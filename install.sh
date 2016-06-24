@@ -10,7 +10,6 @@
 # a ~/.zshrc.loc may be specified with additional settings for zsh.
 #
 # @author: Johnathan Davis
-#
 
 export DOTFILES=$(cd "$(dirname "$0")"; pwd -P)
 

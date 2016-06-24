@@ -6,6 +6,15 @@
 #
 # @author: Johnathan Davis
 
+if (( $# < 1 )); then
+    echo "Please specify symlink target."
+    kill -INT $$
+fi
+if (( $# < 2 )); then
+    echo "Please specify destination path."
+    kill -INT $$
+fi
+
 sym_target=$1
 sym_path=$2
 filename=$(basename $sym_path)
