@@ -4,10 +4,10 @@ if [[ "$(uname)" != "Linux" ]]; then
     exit 0
 fi
 
-LINK=$DOTFILES/core/link.sh
-INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+link=$DOTFILES/link.sh
+install_dir=$(cd "$(dirname "$0")"; pwd -P)
 
 mkdir -p $HOME/.mpv
-$LINK $INSTALL_DIR/input.conf $HOME/.mpv/input.conf
-$LINK $INSTALL_DIR/config $HOME/.mpv/config
+$link $instALL_DIR/input.conf $HOME/.mpv/input.conf
+$link $instALL_DIR/config $HOME/.mpv/config
 

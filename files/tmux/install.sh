@@ -1,7 +1,7 @@
 #!/bin/sh
 
-LINK=$DOTFILES/core/link.sh
-INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+link=$DOTFILES/link.sh
+install_dir=$(cd "$(dirname "$0")"; pwd -P)
 
-$LINK $INSTALL_DIR/tmux.conf $HOME/.tmux.conf
+$link $install_dir/tmux.conf $HOME/.tmux.conf
 

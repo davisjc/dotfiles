@@ -1,11 +1,11 @@
 #!/bin/sh
 
-LINK=$DOTFILES/core/link.sh
-INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+link=$DOTFILES/link.sh
+install_dir=$(cd "$(dirname "$0")"; pwd -P)
 
 if [[ "$(uname)" == "Linux" ]]; then
     mkdir -p $HOME/.ncmpcpp
-    $LINK $INSTALL_DIR/config.linux $HOME/.ncmpcpp/config
-    $LINK $INSTALL_DIR/bindings.linux $HOME/.ncmpcpp/bindings
+    $link $install_dir/config.linux $HOME/.ncmpcpp/config
+    $link $install_dir/bindings.linux $HOME/.ncmpcpp/bindings
 fi
 

@@ -4,15 +4,15 @@ if [[ "$(uname)" != "Linux" ]]; then
     exit 0
 fi
 
-LINK=$DOTFILES/core/link.sh
-INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+link=$DOTFILES/link.sh
+install_dir=$(cd "$(dirname "$0")"; pwd -P)
 
-$LINK $INSTALL_DIR/xvars $HOME/.xvars
-$LINK $INSTALL_DIR/xinitrc $HOME/.xinitrc
-$LINK $INSTALL_DIR/xsession $HOME/.xsession
-$LINK $INSTALL_DIR/Xresources $HOME/.Xresources
-$LINK $INSTALL_DIR/Xmodmap $HOME/.Xmodmap
+$link $install_dir/xvars $HOME/.xvars
+$link $install_dir/xinitrc $HOME/.xinitrc
+$link $install_dir/xsession $HOME/.xsession
+$link $install_dir/Xresources $HOME/.Xresources
+$link $install_dir/Xmodmap $HOME/.Xmodmap
 
 mkdir -p $HOME/.config
-$LINK $INSTALL_DIR/compton.conf $HOME/.config/compton.conf
+$link $install_dir/compton.conf $HOME/.config/compton.conf
 

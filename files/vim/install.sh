@@ -1,18 +1,18 @@
 #!/bin/sh
 
-LINK=$DOTFILES/core/link.sh
-INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+link=$DOTFILES/link.sh
+install_dir=$(cd "$(dirname "$0")"; pwd -P)
 
-$LINK $INSTALL_DIR/vimrc $HOME/.vimrc
-$LINK $INSTALL_DIR/gvimrc $HOME/.gvimrc
+$link $install_dir/vimrc $HOME/.vimrc
+$link $install_dir/gvimrc $HOME/.gvimrc
 
 mkdir -p $HOME/.vim
-$LINK $INSTALL_DIR/bootstrap $HOME/.vim/bootstrap
-$LINK $INSTALL_DIR/vimrc $HOME/.vim/init.vim
-$LINK $HOME/.vim $HOME/.config/nvim
+$link $install_dir/bootstrap $HOME/.vim/bootstrap
+$link $install_dir/vimrc $HOME/.vim/init.vim
+$link $HOME/.vim $HOME/.config/nvim
 
 mkdir -p $HOME/.vim/colors
-$LINK $INSTALL_DIR/colors/aurora.vim $HOME/.vim/colors/aurora.vim
+$link $install_dir/colors/aurora.vim $HOME/.vim/colors/aurora.vim
 
 echo "         running :VundleInstall.."
 vim +VundleInstall +qall

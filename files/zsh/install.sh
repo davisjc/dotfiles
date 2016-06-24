@@ -1,15 +1,15 @@
 #!/bin/sh
 
-LINK=$DOTFILES/core/link.sh
-INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+link=$DOTFILES/link.sh
+install_dir=$(cd "$(dirname "$0")"; pwd -P)
 
-$LINK $INSTALL_DIR/zshrc $HOME/.zshrc
-$LINK $INSTALL_DIR/zprofile $HOME/.zprofile
+$link $install_dir/zshrc $HOME/.zshrc
+$link $install_dir/zprofile $HOME/.zprofile
 
 if [[ "$(uname)" == "Linux" ]]; then
-    $LINK $INSTALL_DIR/zshrc.linux $HOME/.zshrc.linux
+    $link $install_dir/zshrc.linux $HOME/.zshrc.linux
 fi
 if [[ "$(uname)" == "Darwin" ]]; then
-    $LINK $INSTALL_DIR/zshrc.osx $HOME/.zshrc.osx
+    $link $install_dir/zshrc.osx $HOME/.zshrc.osx
 fi
 

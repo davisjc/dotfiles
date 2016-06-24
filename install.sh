@@ -12,7 +12,7 @@
 # @author: Johnathan Davis
 #
 
-export DOTFILES=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+export DOTFILES=$(cd "$(dirname "$0")"; pwd -P)
 
 echo
 echo "---> Installing dotfiles"

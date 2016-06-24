@@ -1,7 +1,7 @@
 #!/bin/sh
 
-LINK=$DOTFILES/core/link.sh
-INSTALL_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+link=$DOTFILES/link.sh
+install_dir=$(cd "$(dirname "$0")"; pwd -P)
 
 mkdir -p $HOME/.config/mpd
 mkdir -p $HOME/.config/mpd/art
@@ -12,12 +12,12 @@ touch $HOME/.config/mpd/state
 touch $HOME/.config/mpd/sticker.sql
 
 if [[ "$(uname)" == "Linux" ]]; then
-    $LINK $INSTALL_DIR/black.jpg $HOME/.config/mpd/art/black.jpg
+    $link $install_dir/black.jpg $HOME/.config/mpd/art/black.jpg
 fi
 
 if [[ "$(hostname)" == "ford" ]]; then
-    $LINK $INSTALL_DIR/mpd.conf.carputer $HOME/.config/mpd/mpd.conf
+    $link $install_dir/mpd.conf.carputer $HOME/.config/mpd/mpd.conf
 elif [[ "$(uname)" == "Linux" ]]; then
-    $LINK $INSTALL_DIR/mpd.conf.linux $HOME/.config/mpd/mpd.conf
+    $link $install_dir/mpd.conf.linux $HOME/.config/mpd/mpd.conf
 fi
 
