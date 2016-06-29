@@ -6,7 +6,8 @@ set rtp+=~/.vim/bootstrap
 
 " Vundle plugins.
 call vundle#begin()
-Plugin 'bling/vim-airline' " status bar
+Plugin 'vim-airline/vim-airline' " status bar
+Plugin 'vim-airline/vim-airline-themes' " airline themes
 Plugin 'kien/ctrlp.vim' " let's get fuzzy!
 Plugin 'pangloss/vim-javascript' " javascript syntax
 Plugin 'tpope/vim-fugitive' " git wrapper
