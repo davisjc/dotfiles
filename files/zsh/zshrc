@@ -187,7 +187,14 @@ alias info='info --vi-keys'
 alias la='ls -a'
 alias ll='ls -lh'
 alias lla='ls -lah'
-alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
+if [ $(uname) = "Linux" ]; then
+    alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
+else
+hash gnuls 2> /dev/null
+if [ $? -eq 0 ]; then
+    alias ls='LC_COLLATE=C gnuls --color=auto --group-directories-first'
+fi
+fi
 alias tmux='tmux -2'
 alias ta='tmux attach-session -t'
 alias tl='tmux list-sessions'
