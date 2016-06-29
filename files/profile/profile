@@ -6,6 +6,7 @@ if [ -z "$TMUX" ]; then
     ulimit -c unlimited
 
     export DOTFILES=$HOME/dot
+    export DOTFILES_LOCAL=$HOME/dotlocal
     export HISTFILE=$HOME/.histfile
     export VISUAL=vi
     hash vim 2> /dev/null

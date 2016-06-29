@@ -11,6 +11,7 @@
 #
 
 export DOTFILES=$HOME/dot
+export DOTFILES_LOCAL=$HOME/dotlocal
 PATH=$PATH:$DOTFILES/bin
 
 # Colors!
