@@ -11,13 +11,13 @@ touch $HOME/.config/mpd/pid
 touch $HOME/.config/mpd/state
 touch $HOME/.config/mpd/sticker.sql
 
-if [ "$(uname)" == "Linux" ]; then
+if [ "$(uname)" = "Linux" ]; then
     $link $install_dir/black.jpg $HOME/.config/mpd/art/black.jpg
 fi
 
-if [ "$(hostname)" == "ford" ]; then
+if [ "$(hostname)" = "ford" ]; then
     $link $install_dir/mpd.conf.carputer $HOME/.config/mpd/mpd.conf
-elif [ "$(uname)" == "Linux" ]; then
+elif [ "$(uname)" = "Linux" ]; then
     $link $install_dir/mpd.conf.linux $HOME/.config/mpd/mpd.conf
 fi
 
