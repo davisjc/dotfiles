@@ -5,9 +5,9 @@ PATH=$PATH:$DOTFILES/bin
 if [ -z "$TMUX" ]; then
     ulimit -c unlimited
 
-    export DOTFILES=$HOME/dot
-    export DOTFILES_LOCAL=$HOME/dotlocal
-    export HISTFILE=$HOME/.histfile
+    export DOTFILES="$HOME/dot"
+    export DOTFILES_LOCAL="$HOME/dot.local"
+    export HISTFILE="$HOME/.histfile"
     export VISUAL=vi
     hash vim 2> /dev/null
     if [ "$?" -eq 0 ]; then

@@ -10,8 +10,8 @@
 # @author: Johnathan Davis
 #
 
-export DOTFILES=$HOME/dot
-export DOTFILES_LOCAL=$HOME/dotlocal
+export DOTFILES="$HOME/dot"
+export DOTFILES_LOCAL="$HOME/dot.local"
 PATH=$PATH:$DOTFILES/bin
 
 # Colors!
