@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ "$(uname)" != "Linux" ]]; then
+if [ "$(uname)" != "Linux" ]; then
     exit 0
 fi
 
@@ -13,7 +13,7 @@ $link $install_dir/xsession $HOME/.xsession
 $link $install_dir/Xresources $HOME/.Xresources
 $link $install_dir/Xmodmap $HOME/.Xmodmap
 
-if [[ "$(hostname)" == "marvin" ]]; then
+if [ "$(hostname)" == "marvin" ]; then
     $link $install_dir/xbindkeysrc-marvin $HOME/.xbindkeysrc
 fi
 

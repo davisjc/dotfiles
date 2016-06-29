@@ -6,11 +6,11 @@
 #
 # @author: Johnathan Davis
 
-if (( $# < 1 )); then
+if [ "$#" -lt 1 ]; then
     echo "Please specify symlink target."
     kill -INT $$
 fi
-if (( $# < 2 )); then
+if [ "$#" -lt 2 ]; then
     echo "Please specify destination path."
     kill -INT $$
 fi
@@ -22,7 +22,7 @@ filename=$(basename $sym_path)
 # Ensure destination path exists.
 mkdir -p $(dirname $sym_path)
 
-if [[ -e $sym_path || -L $sym_path ]]; then
+if [ -e "$sym_path" -o -L "$sym_path" ]; then
     # Target exists.
     if cmp $sym_path $sym_target >/dev/null 2>&1; then
         echo "         skipping: $filename -- already installed"

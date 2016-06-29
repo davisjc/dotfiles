@@ -38,7 +38,7 @@ xset m 1 10 &
 xset r rate 220 40 &
 
 # Start compton.
-if [[ "$(hostname)" != "arthur" ]]; then
+if [ "$(hostname)" != "arthur" ]; then
     hash compton 2> /dev/null
     if [ $? -eq 0 ]; then
         pidof compton >& /dev/null
@@ -78,12 +78,12 @@ sh $HOME/.fehbg &
 
 # Load graphics settings.
 hash nvidia-settings 2> /dev/null
-if [[ $? -eq 0 && -e $HOME/.nvidia-settings-rc ]]; then
+if [ $? -eq 0 && -e $HOME/.nvidia-settings-rc ]; then
     nvidia-settings --load-config-only
 fi
 
 # Start window manager.
-if [[ "$(hostname)" == "zaphod" ]]; then
+if [ "$(hostname)" == "zaphod" ]; then
     exec startxfce4
 elif [ -e $HOME/.i3/config.loc ]; then
     exec i3 -c $HOME/.i3/config.loc -V >> $HOME/.i3/i3log 2>&1

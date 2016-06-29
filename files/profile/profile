@@ -9,15 +9,15 @@ if [ -z "$TMUX" ]; then
     export HISTFILE=$HOME/.histfile
     export VISUAL=vi
     hash vim 2> /dev/null
-    if [[ 0 == $? ]]; then
+    if [ 0 == $? ]; then
         VISUAL=vim
     fi
     hash nvim 2> /dev/null
-    if [[ 0 == $? ]]; then
+    if [ 0 == $? ]; then
         VISUAL=nvim
     fi
     export EDITOR=$VISUAL
-    if [[ "$(hostname)" != "ford" ]]; then
+    if [ "$(hostname)" != "ford" ]; then
         export MPD_HOST=/tmp/mpd.sock
     fi
 fi
