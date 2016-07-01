@@ -47,8 +47,8 @@ bindsym $mod+n exec --no-startup-id albumart_display
 # Kill window.
 bindsym $mod+Shift+q kill
 
-# Sleep monitors.
-bindsym Ctrl+$mod+l exec sleep 0.3 && xset dpms force off
+# Lock screen and sleep monitors.
+bindsym Ctrl+$mod+l exec --no-startup-id i3lock -c 252525 && sleep 0.3 && xset dpms force off
 
 # Navigate windows.
 bindsym $mod+h focus left
