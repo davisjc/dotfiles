@@ -1,0 +1,56 @@
+#!/bin/sh
+#
+# Simple mail script that uses msmtp.
+#
+# On most Linux systems, the 'mail' command can be setup to use msmtp as
+# sendmail, and can pass arguments to msmtp (like "--account") using something
+# like "-S sendmail-arguments=". However, FreeBSD has some other undocumented
+# incantation for passing sendmail arguments, and depending on the system,
+# 'sendmail' has to be replaced by 'msmtp' in different ways. This script
+# focuses on what we need and ignores the system's sendmail and mail commands.
+#
+# Options:
+#     -a    (optional) specify msmtp account to use (in msmtprc config)
+#     -s    (optional) specify subject
+#
+#     Remaining arguments are treated as send-to addresses (space-delimited).
+#
+# @author: Johnathan Davis
+
+account=
+subject=
+
+OPTIND=1
+while getopts ":a:s:" opt; do
+    case $opt in
+        a)
+            account=$OPTARG
+            ;;
+        s)
+            subject=$OPTARG
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requires argument." >&2
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+addr_to=$@
+addr_to_comma_delim=$(echo $addr_to | sed 's/[[:blank:]]/, /g')
+if [ -z $account ]; then
+    account_arg=
+else
+    account_arg="-a $account"
+fi
+
+body=$(cat)
+
+printf "To: $addr_to_comma_delim\nSubject: $subject\n\n$body\n" | \
+    msmtp $account_arg $addr_to
+
