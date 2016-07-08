@@ -11,6 +11,8 @@ I wanted to avoid a magic installation solution that I'd have to fight against i
 
 I've found that this approach allows for a great deal of flexibility when I only want certain files linked on certain types of machines.
 
+Also, I have a `bin/` directory filled with common scripts I want available on all machines.  It's added to my `$PATH` for convenience.
+
 ## Installation
 
 1. Clone to ~/dot
