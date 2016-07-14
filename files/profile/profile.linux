@@ -3,7 +3,6 @@
 if [ -z "$TMUX" ]; then
     export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
     export XDG_CONFIG_HOME="$HOME/.config"
-    export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
     export TERMINAL=st
 fi
 
