@@ -26,9 +26,6 @@ bar {
 set $mod Mod4
 floating_modifier $mod
 
-# Window style.
-new_window pixel 2
-
 # Run launcher.
 bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'hack:bold:size=16'"
 
