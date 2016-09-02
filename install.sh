@@ -30,6 +30,8 @@ if [ ! -z "$DOTFILES_LOCAL" ]; then
     done
 fi
 
+# TODO - run sudo pkgfile --update
+
 echo "---> Finished installing dotfiles"
 
 echo
