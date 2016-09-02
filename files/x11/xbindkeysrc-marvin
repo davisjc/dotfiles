@@ -3,16 +3,16 @@
 # Display.
 #
 
-"display_1920_1080_60_and_1920_1080_120 && sh $HOME/.fehbg"
+"display_1920_1080_60_rotated_and_1920_1080_144 && sh $HOME/.fehbg"
 Mod4 + F1
 
-"display_1920_1080_60_rotated_and_1920_1080_120 && sh $HOME/.fehbg"
+"display_1920_1080_60_and_1920_1080_144 && sh $HOME/.fehbg"
 Mod4 + F2
 
-"display_1920_1080_120 && sh $HOME/.fehbg"
+"display_1920_1080_144 && sh $HOME/.fehbg"
 Mod4 + F3
 
-"display_1920_1080_144 && sh $HOME/.fehbg"
+"display_1920_1080_120 && sh $HOME/.fehbg"
 Mod4 + F4
 
 
