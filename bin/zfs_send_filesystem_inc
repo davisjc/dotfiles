@@ -17,7 +17,7 @@ if [ $# -lt 2 ]; then
     exit 1
 fi
 
-if ! ping -c 1 -W 1 $remote_host > /dev/null; then
+if ! ping -c 1 -W 1 $remote_host >/dev/null 2>&1; then
     >&2 echo "Unable to reach $remote_host."
     exit 1
 fi
