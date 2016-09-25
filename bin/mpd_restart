@@ -1,4 +1,4 @@
 #!/bin/sh
 
-systemctl --user restart mpd.service
+systemctl --user restart mpd_waitfordb.service
 
