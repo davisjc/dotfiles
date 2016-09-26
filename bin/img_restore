@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
     _gzip="gzip"
 fi
 
-_command="sudo pv -i 0.5 -p -r -t -e -EE -B 128m $_src | $_gzip -cd > $_dst"
+_command="sudo pv -i 0.5 -p -b -r -t -e -EE -B 128m $_src | $_gzip -cd > $_dst"
 
 echo "$_command"
 eval $_command
