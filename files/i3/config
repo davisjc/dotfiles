@@ -35,6 +35,9 @@ bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 # Browse files.
 bindsym $mod+Ctrl+Return exec --no-startup-id i3-sensible-terminal -e ranger
 
+# Start web browser.
+bindsym $mod+i exec --no-startup-id google-chrome-stable
+
 # Browse music.
 bindsym $mod+m exec --no-startup-id i3-sensible-terminal -e ncmpcpp
 
