@@ -78,7 +78,6 @@ if version >= 703
     nnoremap <Leader>\ :call ToggleColorColumn()<CR>
 endif
 
-
 " Highlight current line only on focused window.
 set cursorline
 autocmd WinEnter * setlocal cursorline
@@ -118,6 +117,9 @@ nnoremap <Leader>n :bnext<CR>
 nnoremap <Leader>p :bprevious<CR>
 nnoremap <Leader><Tab> :e#<CR>
 nnoremap <Leader>d :bdelete<CR>
+
+" Sort visual.
+vnoremap <Leader>s :sort<CR>
 
 " Steal hbw's line centering mappings.
 fun! ScrollToPercent(percent)
