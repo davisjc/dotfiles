@@ -117,7 +117,16 @@ nnoremap <Leader>b :buffer
 nnoremap <Leader>n :bnext<CR>
 nnoremap <Leader>p :bprevious<CR>
 nnoremap <Leader><Tab> :e#<CR>
-nnoremap <Leader>d :bdelete<CR>
+fun! BufKill()
+    if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+        bdelete
+    else
+        bprevious|bdelete #
+    endif
+endfun
+nnoremap <Leader>d :call BufKill()<CR>
+nnoremap <Leader>z :split<CR>
+nnoremap <Leader>x :vsplit<CR>
 
 " Sort visual.
 vnoremap <Leader>s :sort<CR>
