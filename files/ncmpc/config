@@ -32,6 +32,8 @@
 ## Auto center (center the playing track in the playlist)
 #auto-center = no
 
+scroll-offset = 3
+
 ## Show the most recent query when using find.
 #find-show-last = no
 
@@ -119,7 +121,7 @@ list-format = "%album% #| %track% - %title%"
 #chat-prefix = "<user> "
 
 ## Display song length in second column
-second-column = no
+second-column = yes
 
 ############## Colors #######################
 ## colors: none, black, red, green, yellow, blue, magenta, cyan, white
