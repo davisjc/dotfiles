@@ -11,7 +11,10 @@ $link $install_dir/xvars $HOME/.xvars
 $link $install_dir/xinitrc $HOME/.xinitrc
 $link $install_dir/xsession $HOME/.xsession
 $link $install_dir/Xresources $HOME/.Xresources
-$link $install_dir/Xmodmap $HOME/.Xmodmap
+
+if ! uname -a | grep "Ubuntu" > /dev/null; then
+    $link $install_dir/Xmodmap $HOME/.Xmodmap
+fi
 
 if [ "$(hostname)" = "marvin" ]; then
     $link $install_dir/xbindkeysrc-marvin $HOME/.xbindkeysrc
