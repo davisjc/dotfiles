@@ -472,8 +472,8 @@ def_key "."
 def_key "K"
   move_selected_items_up
 #
-#def_key "m"
-#  toggle_media_library_sort_mode
+def_key "m"
+  toggle_media_library_sort_mode
 #
 #def_key "m"
 #  set_visualizer_sample_multiplier
