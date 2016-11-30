@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$(uname)" != "Linux" ]; then
+if [ "$(uname)" != "Linux" -o ! uname -a | grep "Ubuntu" > /dev/null; then
     exit 0
 fi
 
