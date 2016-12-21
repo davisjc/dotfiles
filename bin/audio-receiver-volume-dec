@@ -18,7 +18,7 @@ if (mkdir $LOCK_DIR 2> /dev/null); then
     # Request new volume level.
     curl -X POST -H "Content-Type: text/xml" -d "<YAMAHA_AV cmd=\"PUT\"><Zone_2><Volume><Lvl><Val>${VOLUME_LEVEL}</Val><Exp>1</Exp><Unit>dB</Unit></Lvl></Volume></Zone_2></YAMAHA_AV>" http://yamaha/YamahaRemoteControl/ctrl
 
-    i3_update_volume
+    i3-update-volume
 
     # Release lock.
     rm -r $LOCK_DIR

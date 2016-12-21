@@ -17,6 +17,6 @@ if [[ "$#" -eq 1 ]]; then
     wget -O "$ALBUM_DIR/$ART_NAME.$ART_EXT" "$ART_ADDR"
 
     # Trigger album art update.
-    albumart_set
+    albumart-set
 fi
 

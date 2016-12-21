@@ -1,9 +1,9 @@
 #!/bin/sh
 
 VOLUME_STEP=1
-CHANNEL=$(audio_get_channel)
+CHANNEL=$(audio-get-channel)
 
 amixer set $CHANNEL ${VOLUME_STEP}%-
 
-i3_update_volume
+i3-update-volume
 

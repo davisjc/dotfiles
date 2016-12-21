@@ -4,7 +4,7 @@ _src=$1
 _dst=$2
 
 if [[ $# < 2 ]]; then
-    echo "Usage: img_backup SOURCE DEST"
+    echo "Usage: img-backup SOURCE DEST"
     echo "Perform a compressed, byte-level backup of SOURCE to DEST."
     kill -INT $$
 fi

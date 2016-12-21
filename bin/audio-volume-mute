@@ -1,8 +1,8 @@
 #!/bin/sh
 
-CHANNEL=$(audio_get_channel)
+CHANNEL=$(audio-get-channel)
 
 amixer set $CHANNEL toggle
 
-i3_update_volume
+i3-update-volume
 

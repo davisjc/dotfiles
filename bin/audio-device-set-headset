@@ -2,7 +2,7 @@
 
 asoundconf set-default-card Headset
 
-i3_update_volume
+i3-update-volume
 
-mpd_restart
+mpd-restart
 

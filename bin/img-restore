@@ -4,7 +4,7 @@ _src=$1
 _dst=$2
 
 if [[ $# < 2 ]]; then
-    echo "Usage: img_restore SOURCE DEST"
+    echo "Usage: img-restore SOURCE DEST"
     echo "Restore a compressed, byte-level backup at SOURCE to DEST."
     kill -INT $$
 fi

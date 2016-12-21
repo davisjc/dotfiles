@@ -3,16 +3,16 @@
 # Display.
 #
 
-"display_1920_1080_60_rotated_and_1920_1080_144 && sh $HOME/.fehbg"
+"display-1920-1080-60-rotated-and-1920-1080-144 && sh $HOME/.fehbg"
 Mod4 + F1
 
-"display_1920_1080_60_and_1920_1080_144 && sh $HOME/.fehbg"
+"display-1920-1080-60-and-1920-1080-144 && sh $HOME/.fehbg"
 Mod4 + F2
 
-"display_1920_1080_144 && sh $HOME/.fehbg"
+"display-1920-1080-144 && sh $HOME/.fehbg"
 Mod4 + F3
 
-"display_1920_1080_120 && sh $HOME/.fehbg"
+"display-1920-1080-120 && sh $HOME/.fehbg"
 Mod4 + F4
 
 
@@ -20,43 +20,43 @@ Mod4 + F4
 # Sound.
 #
 
-"audio_volume_inc"
+"audio-volume-inc"
 Mod4 + m:0x0 + b:4
 
-"audio_volume_dec"
+"audio-volume-dec"
 Mod4 + m:0x0 + b:5
 
-"audio_volume_mute"
+"audio-volume-mute"
 Mod4 + m:0x0 + b:2
 
-"audio_volume_inc"
+"audio-volume-inc"
 Mod4 + KP_Add
 
-"audio_volume_inc"
+"audio-volume-inc"
 Mod4 + plus
 
-"audio_volume_inc"
+"audio-volume-inc"
 Mod4 + Mod1 + k
 
-"audio_volume_dec"
+"audio-volume-dec"
 Mod4 + KP_Subtract
 
-"audio_volume_dec"
+"audio-volume-dec"
 Mod4 + minus
 
-"audio_volume_dec"
+"audio-volume-dec"
 Mod4 + Mod1 + j
 
-"audio_volume_mute"
+"audio-volume-mute"
 Mod4 + KP_Multiply
 
-"audio_volume_mute"
+"audio-volume-mute"
 Mod4 + Mod1 + m
 
-"audio_device_set_headset"
+"audio-device-set-headset"
 Mod4 + F11
 
-"audio_device_set_speakers"
+"audio-device-set-speakers"
 Mod4 + F12
 
 
