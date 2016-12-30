@@ -42,7 +42,7 @@ bindsym $mod+i exec --no-startup-id google-chrome-stable
 bindsym $mod+m exec --no-startup-id i3-sensible-terminal -e ncmpcpp
 
 # View album art.
-bindsym $mod+n exec --no-startup-id albumart_display
+bindsym $mod+n exec --no-startup-id albumart-display
 
 # Kill window.
 bindsym $mod+Shift+q kill
