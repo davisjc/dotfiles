@@ -9,7 +9,7 @@ client.focused_inactive #424242 #424242 #ffffff #424242
 client.unfocused #424242 #424242 #ffffff #f0453c
 client.urgent #d33682 #d33682 #ffffff #ffc000
 bar {
-    status_command i3blocks -c /home/eddie/.i3/${I3_STATUS_BAR_CONF}
+    status_command i3blocks -c $HOME/.i3/${I3_STATUS_BAR_CONF}
     position top
     colors {
         separator #ffc000
