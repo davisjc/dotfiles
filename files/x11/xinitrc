@@ -35,6 +35,8 @@ fi
 
 # Adjust mouse sensitivity/acceleration.
 xset m 1 10 &
+
+# Set key repeat rate.
 xset r rate 220 40 &
 
 # Start compton.
