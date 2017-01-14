@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# Dim Miles's lights.
+
+delta=10
+if [ ! -z "$1" ]; then
+    delta=$1
+fi
+
+dat=~/.shrublight.dat
+if [ ! -f $dat ]; then
+    echo 1 > $dat
+fi
+
+brightness=$(($(cat $dat) - $delta))
+if (( $brightness < 1 )); then
+    brightness=1
+fi
+
+if (( $brightness == 1 )); then
+    shrublight-off
+else
+    shrublight-on $brightness
+fi
+
+echo $brightness > $dat
+

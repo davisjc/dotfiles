@@ -53,6 +53,18 @@ Mod4 + KP_Multiply
 "audio-volume-mute"
 Mod4 + Mod1 + m
 
+"shrublight-on"
+Mod4 + F5
+
+"shrublight-off"
+Mod4 + F6
+
+"shrublight-inc"
+Mod1 + Mod4 + m:0x0 + b:4
+
+"shrublight-dec"
+Mod1 + Mod4 + m:0x0 + b:5
+
 "audio-device-set-headset"
 Mod4 + F11
 

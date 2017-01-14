@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Be really annoying.
+
+interval_s=0.01
+if [ ! -z "$1" ]; then
+    interval_s="$1"
+fi
+
+trap "shrublight-off && exit 0" SIGINT SIGTERM
+
+while true; do
+    shrublight-on
+    sleep $interval_s
+    shrublight-off
+    sleep $interval_s
+done
+

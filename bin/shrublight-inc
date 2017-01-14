@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Brighten Miles's lights.
+
+delta=10
+if [ ! -z "$1" ]; then
+    delta=$1
+fi
+
+dat=~/.shrublight.dat
+if [ ! -f $dat ]; then
+    echo 1 > $dat
+fi
+
+brightness=$(($(cat $dat) + $delta))
+if (( $brightness > 254 )); then
+    brightness=254
+fi
+
+shrublight-on $brightness
+echo $brightness > $dat
+

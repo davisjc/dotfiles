@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Turn on Miles's lights.
+
+brightness=254 # valid is 1-254 inclusive
+if [ ! -z "$1" ]; then
+    brightness=$1
+fi
+
+for light in {1..2}; do
+    curl -s -d '{"on":true,"bri":'$brightness',"transitiontime":0}' -X PUT http://shrublight/api/dDOeWvTjOghyvyltPM8lWaTSGdKce8bC3d5YTMWi/lights/$light/state -m 1 > /dev/null
+done
+
