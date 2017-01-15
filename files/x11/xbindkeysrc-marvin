@@ -59,6 +59,9 @@ Mod4 + F5
 "shrublight-off"
 Mod4 + F6
 
+"shrublight-toggle"
+Mod1 + Mod4 + m:0x0 + b:2
+
 "shrublight-inc"
 Mod1 + Mod4 + m:0x0 + b:4
 

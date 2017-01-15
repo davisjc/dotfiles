@@ -2,26 +2,44 @@
 #
 # Dim Miles's lights.
 
-delta=10
+lock_dir=~/.shrublight.lock
+cooldown_s=0.03
+stale_s=10
+delta=40
+
 if [ ! -z "$1" ]; then
     delta=$1
 fi
 
-dat=~/.shrublight.dat
-if [ ! -f $dat ]; then
-    echo 1 > $dat
-fi
+if mkdir $lock_dir 2> /dev/null; then
+    dat=~/.shrublight.dat
+    if [ ! -f $dat ]; then
+        echo 1 > $dat
+    fi
 
-brightness=$(($(cat $dat) - $delta))
-if (( $brightness < 1 )); then
-    brightness=1
-fi
+    if (($(($(date +%s) - $(stat --format '%Y' $dat))) > $stale_s)); then
+        if $(shrublight-ison); then
+            brightness_actual=$(shrublight-get-brightness)
+        else
+            brightness_actual=1
+        fi
+        echo $brightness_actual > $dat
+    fi
 
-if (( $brightness == 1 )); then
-    shrublight-off
-else
-    shrublight-on $brightness
-fi
+    brightness=$(($(cat $dat) - $delta))
+    if (( $brightness < 1 )); then
+        brightness=1
+    fi
 
-echo $brightness > $dat
+    if (( $brightness == 1 )); then
+        shrublight-off
+    else
+        shrublight-on $brightness
+    fi
+
+    echo $brightness > $dat
+
+    sleep $cooldown_s
+    rm -r $lock_dir
+fi
 
