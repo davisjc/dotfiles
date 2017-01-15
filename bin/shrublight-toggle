@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# Toggle Miles's lights.
+
+dat=~/.shrublight.dat
+
+if $(shrublight-ison); then
+    shrublight-off
+    echo 1 > $dat
+else
+    shrublight-on
+    echo 254 > $dat
+fi
+
