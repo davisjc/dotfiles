@@ -8,6 +8,10 @@ fi
 
 export DOTFILES="$HOME/dot"
 export DOTFILES_LOCAL="$HOME/dot.local"
+
+# Override these defaults in ~/.profile.loc
+export DOTFILES_VAR_SWAP_SUPER=false
+
 export HISTFILE="$HOME/.histfile"
 export VISUAL=vi
 hash vim 2> /dev/null

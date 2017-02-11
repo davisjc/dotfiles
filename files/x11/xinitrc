@@ -17,7 +17,7 @@ fi
 setxkbmap -option caps:escape
 
 # Swap Alt/Meta keys.
-if [ -e $HOME/.Xmodmap ]; then
+if $DOTFILES_VAR_SWAP_SUPER && [ -e $HOME/.Xmodmap ]; then
     xmodmap $HOME/.Xmodmap
 fi
 
