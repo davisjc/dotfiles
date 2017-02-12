@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ $(audio-get-channel) == "Headphone" ]]; then
+if [ "$(audio-get-channel)" = "Headphone" ]; then
     echo "🎧 Headset"
 else
     echo "♫ Speakers"
