@@ -45,7 +45,6 @@ if [ $(hostname) != "arthur" ]; then
     if [ $? -eq 0 ]; then
         pidof compton > /dev/null 2>&1
         if [ $? -ne 0 ]; then
-            touch ~/started
             compton &
         fi
     fi

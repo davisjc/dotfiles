@@ -1,1 +1,95 @@
-xinitrc
+#!/bin/sh
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+    for f in /etc/X11/xinit/xinitrc.d/*; do
+        [ -x "$f" ] && . "$f"
+    done
+    unset f
+fi
+
+# Load environment settings.
+source $HOME/.xvars
+if [ -e $HOME/.xvars.loc ]; then
+    source $HOME/.xvars.loc
+fi
+
+# Disable caps lock to control.
+setxkbmap -option caps:escape
+
+# Swap Alt/Meta keys.
+if $DOTFILES_VAR_SWAP_SUPER && [ -e $HOME/.Xmodmap ]; then
+    xmodmap $HOME/.Xmodmap
+fi
+
+# Bind custom keys.
+hash xbindkeys 2> /dev/null
+if [ $? -eq 0 ]; then
+    xbindkeys &
+fi
+
+# Load .Xresources.
+xrdb -merge $HOME/.Xresources
+if [ -e $HOME/.Xresources.loc ]; then
+    xrdb -merge $HOME/.Xresources.loc &
+fi
+
+# Adjust mouse sensitivity/acceleration.
+xset m 1 10 &
+
+# Set key repeat rate.
+xset r rate 220 40 &
+
+# Start compton.
+if [ "$(hostname)" != "arthur" ]; then
+    hash compton 2> /dev/null
+    if [ $? -eq 0 ]; then
+        pidof compton >& /dev/null
+        if [ $? -ne 0 ]; then
+            compton &
+        fi
+    fi
+fi
+
+# Start flux.
+hash xflux 2> /dev/null
+if [ $? -eq 0 ]; then
+    pidof xflux >& /dev/null
+    if [ $? -ne 0 ]; then
+        xflux -z 98105 -k 3800 &
+    fi
+fi
+
+# Set screen blanking. TODO
+
+# Start mpdscribble.
+hash mpdscribble 2> /dev/null
+if [ $? -eq 0 ]; then
+    pidof mpdscribble >& /dev/null
+    if [ $? -ne 0 ]; then
+        mpdscribble &
+    fi
+fi
+
+# Load machine-specific stuff.
+if [ -e $HOME/.xinitrc.loc ]; then
+    source $HOME/.xinitrc.loc
+fi
+
+# Set background.
+sh $HOME/.fehbg &
+
+# Load graphics settings.
+hash nvidia-settings 2> /dev/null
+if [ $? -eq 0 -a -e $HOME/.nvidia-settings-rc ]; then
+    nvidia-settings --load-config-only
+fi
+
+# Start window manager.
+if [ "$(hostname)" = "zaphod" ]; then
+    exec startxfce4
+elif [ -e $HOME/.i3/config.loc ]; then
+    exec i3 -c $HOME/.i3/config.loc -V >> $HOME/.i3/i3log 2>&1
+else
+    exec i3 -c $HOME/.i3/config -V >> $HOME/.i3/i3log 2>&1
+fi
+
