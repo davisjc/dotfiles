@@ -105,9 +105,9 @@ Shift + Mod4 + Mod1 + l
 # System control.
 #
 
-"sudo systemctl poweroff"
-Mod4 + Mod1 + Pause
+"sudo poweroff"
+Mod4 + Mod1 + XF86Launch6
 
-"sudo systemctl reboot"
-Shift + Mod4 + Mod1 + Pause
+"sudo reboot"
+Shift + Mod4 + Mod1 + XF86Launch6
 
