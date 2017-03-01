@@ -1,0 +1,4 @@
+{
+    "\UF729"  = moveToBeginningOfParagraph:; // home
+    "\UF72B"  = moveToEndOfParagraph:; // end
+}
