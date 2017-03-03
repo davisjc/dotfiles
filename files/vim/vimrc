@@ -20,6 +20,7 @@ Plugin 'tpope/vim-surround' " surround things
 Plugin 'tpope/vim-unimpaired' " some simple pair mappings
 Plugin 'vim-airline/vim-airline' " status bar
 Plugin 'vim-airline/vim-airline-themes' " airline themes
+Plugin 'vim-scripts/cscope.vim'
 call vundle#end()
 
 " Remap leader.
