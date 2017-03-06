@@ -348,11 +348,71 @@ you should place your code here."
     (defalias 'evil-vsplit-jump-to-tag
       (lambda () (interactive) (evil-window-vsplit-with-focus) (evil-jump-to-tag))))
 
+  ;; hbw's cscope vim port.
+  (defalias 'helm-cscope-find-calling-this-function
+    'helm-cscope-find-calling-this-funtcion)
+  (let ((cscope-key-maps
+         '(("s" . helm-cscope-find-this-symbol)
+           ("g" . helm-cscope-find-global-definition)
+           ("c" . helm-cscope-find-calling-this-function)
+           ("C" . helm-cscope-find-called-function)
+           ("t" . helm-cscope-find-this-text-string)
+           ("e" . helm-cscope-find-egrep-pattern)
+           ("f" . helm-cscope-find-this-file)
+           ("i" . helm-cscope-find-files-including-file)
+           ("a" . helm-cscope-find-assignments-to-this-symbol))))
+    (loop for key-map in cscope-key-maps
+          collect (lexical-let* ((key (car key-map))
+                                 (handler (cdr key-map)))
+                    (evil-ex-define-cmd (replace-regexp-in-string
+                                         "helm-" "" (symbol-name handler))
+                                        handler)
+                    ;; To do the first type of search, hit 'CTRL-\', followed
+                    ;; by one of the cscope search types above. The result of
+                    ;; your cscope search will be displayed in the current
+                    ;; window.  You can use CTRL-T to go back to where you
+                    ;; were before the search.
+                    (define-key evil-normal-state-map
+                      (kbd (concat "C-\\ " key))
+                      (defalias (intern (replace-regexp-in-string
+                                         "helm-cscope-"
+                                         "cs-"
+                                         (symbol-name handler)))
+                        (lambda () (interactive)
+                          (funcall handler (thing-at-point 'symbol)))))
+                    ;; Using 'CTRL-\ spacebar' then a search type makes the
+                    ;; window split horizontally, with search result displayed
+                    ;; in the new window.
+                    (define-key evil-normal-state-map
+                      (kbd (concat "C-\\ SPC " key))
+                      (defalias (intern (replace-regexp-in-string
+                                         "helm-cscope-"
+                                         "cs-sp-"
+                                         (symbol-name handler)))
+                        (lambda () (interactive) (evil-window-split-with-focus)
+                          (funcall handler (thing-at-point 'symbol)))))
+                    ;; Hitting 'CTRL-\';; then space *twice* before the search
+                    ;; type does a vertical split instead of a horizontal one.
+                    (define-key evil-normal-state-map
+                      (kbd (concat "C-\\ SPC SPC " key))
+                      (defalias (intern (replace-regexp-in-string
+                                         "helm-cscope-"
+                                         "cs-vsp-"
+                                         (symbol-name handler)))
+                        (lambda () (interactive) (evil-window-vsplit-with-focus)
+                          (funcall handler (thing-at-point 'symbol))))))))
+
   ;; Tolerate aggressive pinkies.
   (define-key evil-window-map (kbd "C-h") 'evil-window-left)
   (define-key evil-window-map (kbd "C-j") 'evil-window-down)
   (define-key evil-window-map (kbd "C-k") 'evil-window-up)
   (define-key evil-window-map (kbd "C-l") 'evil-window-right)
+
+  ;; Toggle column marker.
+  (evil-leader/set-key (kbd "\\") 'spacemacs/toggle-fill-column-indicator)
+
+  ;; Remove trailing whitespace.
+  (evil-leader/set-key (kbd "RET") 'delete-trailing-whitespace)
 
   ;; Enable line numbers.
   (global-linum-mode))
