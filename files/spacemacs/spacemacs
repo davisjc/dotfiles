@@ -299,6 +299,62 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+
+  ;; Steal hbw's split opening functions.
+  (evil-define-command evil-window-split-with-focus (&optional count file)
+    "Splits the window horizontally and keeps focus."
+    :repeat nil
+    (interactive "P<f>")
+    (evil-window-split count file)
+    (other-window (if (null count) 1 count)))
+  (evil-define-command evil-window-vsplit-with-focus (&optional count file)
+    "Splits the window vertically and keeps focus."
+    :repeat nil
+    (interactive "P<f>")
+    (evil-window-vsplit count file)
+    (other-window (if (null count) 1 count)))
+
+  ;; Use hbw's hack to suppress large file message for loading tags.
+  (when (fboundp 'spacemacs/check-large-file)
+    (advice-add 'spacemacs/check-large-file
+                :before-while (lambda ()
+                                (if (let ((case-fold-search nil))
+                                      (string-match-p
+                                       "TAGS"
+                                       (file-name-base (buffer-file-name))))
+                                    ;; Just open the tags file literally without
+                                    ;; throwing up a prompt.
+                                    (progn
+                                      (setq buffer-read-only t)
+                                      (buffer-disable-undo)
+                                      (fundamental-mode)
+                                      nil)
+                                  ;; Not a tags file, run the original
+                                  ;; check-large-file function as usual.
+                                  t))))
+
+  ;; Open tags in splits.
+  (define-key evil-window-map (kbd "]")
+    (defalias 'evil-split-jump-to-tag
+      (lambda () (interactive) (evil-window-split-with-focus) (evil-jump-to-tag))))
+  (define-key evil-window-map (kbd "\\")
+    (defalias 'evil-vsplit-jump-to-tag
+      (lambda () (interactive) (evil-window-vsplit-with-focus) (evil-jump-to-tag))))
+  (define-key evil-window-map (kbd "C-]")
+    (defalias 'evil-split-jump-to-tag
+      (lambda () (interactive) (evil-window-split-with-focus) (evil-jump-to-tag))))
+  (define-key evil-window-map (kbd "C-\\")
+    (defalias 'evil-vsplit-jump-to-tag
+      (lambda () (interactive) (evil-window-vsplit-with-focus) (evil-jump-to-tag))))
+
+  ;; Tolerate aggressive pinkies.
+  (define-key evil-window-map (kbd "C-h") 'evil-window-left)
+  (define-key evil-window-map (kbd "C-j") 'evil-window-down)
+  (define-key evil-window-map (kbd "C-k") 'evil-window-up)
+  (define-key evil-window-map (kbd "C-l") 'evil-window-right)
+
+  ;; Enable line numbers.
   (global-linum-mode))
 
 ;; Do not write anything past this comment. This is where Emacs will
