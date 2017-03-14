@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ $(uname) = "Darwin" ]; then
+    sshfs -o "ro,reconnect,defer_permissions,cache_timeout=1000,cache=no,nolocalcaches,no_readahead,noappledouble" heartofgold:/mnt/storage/music ~/music
+else
+    echo >&2 "Not implemented."
+fi
