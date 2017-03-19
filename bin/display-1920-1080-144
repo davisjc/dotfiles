@@ -1,4 +1,4 @@
 #!/bin/sh
 
-xrandr --output DVI-D-0 --off --output DP-1 --mode 1920x1080 --rate 144
+xrandr --output HDMI-0 --off --output DP-4 --mode 1920x1080 --rate 144
 
