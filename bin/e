@@ -9,6 +9,6 @@ if pgrep emacs 2>&1 >/dev/null; then
     echo "Opening in existing emacs process..."
     emacsclient --no-wait $@
 else
-    emacs --no-window-system $@
+    exec emacs --no-window-system $@
 fi
 
