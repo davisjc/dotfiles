@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     php
+     sql
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -353,6 +355,24 @@ and C-g binding."
     (evil-window-vsplit count file)
     (other-window (if (null count) 1 count)))
 
+  ;; hbw's evil define function.
+  (defun evil-define-key-for-states (states keycode handler)
+    "Defines a keybinding mapping KEYCODE to HANDLER only for the evil state
+maps STATES."
+    (loop for state in states
+          collect (define-key (symbol-value state) keycode handler)))
+
+  (defvar evil-non-insert-states '(evil-normal-state-map
+                                   evil-visual-state-map
+                                   evil-replace-state-map
+                                   evil-operator-state-map
+                                   evil-motion-state-map)
+    "All non-insert evil state maps")
+
+  ;; Searching.
+  (evil-define-key-for-states evil-non-insert-states
+                              (kbd "C-p") 'helm-projectile-find-file)
+
   ;; Use hbw's hack to suppress large file message for loading tags.
   (when (fboundp 'spacemacs/check-large-file)
     (advice-add 'spacemacs/check-large-file
@@ -446,11 +466,26 @@ and C-g binding."
   (define-key evil-window-map (kbd "C-k") 'evil-window-up)
   (define-key evil-window-map (kbd "C-l") 'evil-window-right)
 
+  ;; Focus follows splitting.
+  (define-key evil-window-map (kbd "s") 'evil-window-split-with-focus)
+  (define-key evil-window-map (kbd "v") 'evil-window-vsplit-with-focus)
+
   ;; Toggle column marker.
   (evil-leader/set-key (kbd "\\") 'spacemacs/toggle-fill-column-indicator)
 
   ;; Remove trailing whitespace.
   (evil-leader/set-key (kbd "RET") 'delete-trailing-whitespace)
+
+  ;; Get mouse working in terminal mode.
+  (global-set-key (kbd "<mouse-4>")
+                  (defalias 'mouse-wheel-scroll-down
+                    (lambda () (interactive) (scroll-down 1))))
+  (global-set-key (kbd "<mouse-5>")
+                  (defalias 'mouse-wheel-scroll-up
+                    (lambda () (interactive) (scroll-up 1))))
+
+  ;; Skip the startup message and display first buffer directly.
+  (setq-default inhibit-startup-message t)
 
   ;;;
   ;;; Formatting (taken from hbw).
@@ -613,8 +648,10 @@ function name font face."
   (enable-theme 'vim-aurora)
   (set-transparent-bg)
 
-  ;; Enable line numbers.
-  ;;(global-linum-mode))
+  (add-to-list 'auto-mode-alist '("\\.ct\\'" . c-mode))
+  (add-to-list 'auto-mode-alist '("[Ss][Cc]\\(onstruct\\|onscript\\)\\'" . python-mode))
+
+  ;; end
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -624,9 +661,10 @@ function name font face."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc helm-cscope xcscope disaster cython-mode cmake-mode clang-format anaconda-mode pythonic org-projectile org-present org-pomodoro alert log4e gntp org-download mmm-mode markdown-toc markdown-mode htmlize gnuplot gh-md smeargle orgit org magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
+    (phpunit phpcbf php-extras php-auto-yasnippets yasnippet drupal-mode php-mode sql-indent yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc helm-cscope xcscope disaster cython-mode cmake-mode clang-format anaconda-mode pythonic org-projectile org-present org-pomodoro alert log4e gntp org-download mmm-mode markdown-toc markdown-mode htmlize gnuplot gh-md smeargle orgit org magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
  '(vc-follow-symlinks nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

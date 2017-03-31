@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if pgrep -u $(whoami) emacs 2>&1 >/dev/null; then
+if pgrep -xu $(whoami) emacs 2>&1 >/dev/null; then
     if [ $# -lt 1 ]; then
         echo >&2 "Please specify file."
         exit 1
