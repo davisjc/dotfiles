@@ -200,7 +200,6 @@ alias tmux='tmux -2'
 alias ta='tmux attach-session -t'
 alias tl='tmux list-sessions'
 alias tn='tmux new-session -s'
-alias vcat='vimcat'
 alias feh='feh -q --scale-down --image-bg black'
 function gl() {
     local n=$([ -z $1 ] && echo 10 || echo $1)
