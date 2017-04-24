@@ -498,9 +498,13 @@ maps STATES."
   ;; Always re-read the tags file without prompting
   (setq-default tags-revert-without-query t)
 
-  ;; Disable smart autocompletion of quotes
-  (sp-pair "'" nil :actions :rem)
-  (sp-pair "\"" nil :actions :rem)
+  ;; Disable some smart autocompletion.
+  (sp-pair "'"  nil :actions '(wrap))
+  (sp-pair "\"" nil :actions '(wrap))
+  (sp-pair "\\\"" nil :actions '(wrap))
+  (sp-pair "\(" nil :actions '(wrap))
+  (sp-pair "\[" nil :actions '(wrap))
+  (sp-pair "\{" nil :actions '(wrap))
 
   ;;; These were taken from https://www.emacswiki.org/emacs/NoTabs#toc2
 
