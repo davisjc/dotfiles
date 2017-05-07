@@ -34,7 +34,7 @@ audio_output {
 audio_output {
     type        "httpd"
     name        "HTTP"
-    encoder     "lame"          # vorbis, lame
+    encoder     "vorbis"        # vorbis, lame
     port        "8000"
 #   quality     "5.0"           # do not define if bitrate is defined
     bitrate     "320"           # do not define if quality is defined
