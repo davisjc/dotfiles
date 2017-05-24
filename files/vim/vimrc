@@ -63,7 +63,7 @@ endif
 set mouse=a
 
 " Enable line numbers.
-set number
+set nonumber
 nmap <Leader>l :setlocal number!<CR>
 
 " Highlight line end.
