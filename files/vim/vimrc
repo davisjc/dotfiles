@@ -68,7 +68,7 @@ nmap <Leader>l :setlocal number!<CR>
 
 " Highlight line end.
 if version >= 703
-	set colorcolumn=81
+	set colorcolumn=
     " Toggle column guide
     fun! ToggleColorColumn()
         if empty(&colorcolumn)
