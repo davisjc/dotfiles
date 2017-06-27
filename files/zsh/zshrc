@@ -129,13 +129,18 @@ function precmd() {
     local _is_root=$(( 0 == $EUID ))
     local _host
     if [[ 1 == $_is_root ]]; then
-        _host="%{${fg[red]}%}%n@%m%{${reset_color}%}"
+        _host="%{${fg[red]}%}%n@%m%{${reset_color}%} "
     else
-        _host="%{${fg[white]}%}%n@%m%{${reset_color}%}"
+        _host="%{${fg[white]}%}%n@%m%{${reset_color}%} "
     fi
 
     if [ ! -z $SSH_CONNECTION ]; then
         _host="%{$fg[green]%}ssh://%{$reset_color%}$_host"
+    fi
+
+    local _prefix
+    if [ ! -z $DOT_PROMPT_PREFIX ]; then
+        _prefix="%{$fg[magenta]%}[ %{$fg[cyan]%}${DOT_PROMPT_PREFIX} %{$fg[magenta]%}]%{$reset_color%} "
     fi
 
     local _symbol
@@ -145,7 +150,7 @@ function precmd() {
         _symbol="%{${fg[yellow]}%}$%{${reset_color}%}"
     fi
 
-    PROMPT="%{${_host}%} %{${fg[yellow]}%}%3~%{$reset_color%}"$'\n'
+    PROMPT="%{${_host}%}%{${_prefix}%}%{${fg[yellow]}%}%3~%{$reset_color%}"$'\n'
     PROMPT="$PROMPT$_return_code$_symbol%{${reset_color}%} "
     export PROMPT
     export RPROMPT
