@@ -42,3 +42,7 @@ if [ -e $HOME/.profile.loc ]; then
     source $HOME/.profile.loc
 fi
 
+if [ $(uname) = 'Linux' -a $(whoami) != 'root' -a ! $(pgrep -x Xorg) ]; then
+    exec startx
+fi
+
