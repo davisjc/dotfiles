@@ -156,8 +156,29 @@ function precmd() {
     export RPROMPT
 }
 
-# Fix some binds.
-bindkey "^R" history-incremental-search-backward
+# History search.
+hash fzf 2> /dev/null
+if [ $? -eq 0 ]; then
+    fzf-history-widget() {
+        local selected num
+        setopt localoptions noglobsubst noposixbuiltins pipefail 2> /dev/null
+        selected=( $(fc -l 1 | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-20%} $FZF_DEFAULT_OPTS --tac -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS --query=${(q)LBUFFER} +m" fzf) )
+        local ret=$?
+        if [ -n "$selected" ]; then
+            num=$selected[1]
+            if [ -n "$num" ]; then
+                zle vi-fetch-history -n $num
+            fi
+        fi
+        zle redisplay
+        typeset -f zle-line-init >/dev/null && zle zle-line-init
+        return $ret
+    }
+    zle     -N   fzf-history-widget
+    bindkey '^R' fzf-history-widget
+else
+    bindkey "^R" history-incremental-search-backward
+fi
 
 # Completely disable ctrl-s/ctrl-q shell flow control.
 stty -ixon
