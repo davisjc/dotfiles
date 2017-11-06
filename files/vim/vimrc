@@ -10,7 +10,6 @@ let g:glsl_file_extensions = '*.glsl,*.geom,*.vert,*.frag,*.gsh,*.vsh,*.fsh,*.vs
 " Vundle plugins.
 call vundle#begin()
 Plugin 'beyondmarc/glsl.vim' " OpenGL shader language syntax highlighting
-Plugin 'lilydjwg/colorizer' " color definition highlighting
 Plugin 'scrooloose/nerdcommenter' " commenting
 Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'tpope/vim-repeat' " ability to repeat plugin actions
