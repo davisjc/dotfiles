@@ -138,6 +138,8 @@ map zv :call ScrollToPercent(75)<CR>
 " Configure search.
 set incsearch " jump while entering query
 set hlsearch
+set ignorecase
+set smartcase
 nnoremap <Leader>h :noh<CR>
 
 " Completion settings (:help ins-completion)
