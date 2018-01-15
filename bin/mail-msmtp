@@ -43,7 +43,7 @@ while getopts ":a:s:" opt; do
 done
 shift $((OPTIND - 1))
 
-addr_to=$@
+addr_to="$@"
 addr_to_comma_delim=$(echo $addr_to | sed 's/[[:blank:]]/, /g')
 if [ -z $account ]; then
     account_arg=
