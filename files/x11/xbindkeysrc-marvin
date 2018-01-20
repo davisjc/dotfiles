@@ -1,8 +1,3 @@
-
-#
-# Display.
-#
-
 "display-1920-1080-60-rotated-and-1920-1080-144 && sh $HOME/.fehbg"
 Mod4 + F1
 
@@ -14,11 +9,6 @@ Mod4 + F3
 
 "display-1920-1080-120 && sh $HOME/.fehbg"
 Mod4 + F4
-
-
-#
-# Sound.
-#
 
 "audio-volume-inc"
 Mod4 + m:0x0 + b:4
@@ -59,17 +49,6 @@ Mod4 + KP_Multiply
 "audio-volume-mute"
 Mod4 + Mod1 + m
 
-"audio-device-set-headset"
-Mod4 + F11
-
-"audio-device-set-speakers"
-Mod4 + F12
-
-
-#
-# MPD.
-#
-
 "mpc toggle"
 Mod4 + Mod1 + space
 
@@ -90,11 +69,6 @@ Shift + Mod4 + Mod1 + h
 
 "mpc seek +1"
 Shift + Mod4 + Mod1 + l
-
-
-#
-# System control.
-#
 
 "sudo poweroff"
 Mod4 + Mod1 + XF86Launch6
