@@ -1,0 +1,20 @@
+#!/bin/bash
+
+lock="$HOME/.display-brightness.lock"
+dat="$HOME/.display-brightness.dat"
+step=0.05
+min=0.1
+
+if (mkdir "$lock" 2>/dev/null); then
+    if [ ! -e "$dat" ]; then
+        echo "1.0" > "$dat" # init
+    fi
+    level=$(< "$dat")
+    level_new=$(echo "$level - $step" | bc)
+    if [ $(echo "$level_new < $min" | bc) = 1 ]; then
+        level_new=0.1
+    fi
+    echo "$level_new" > "$dat"
+    xrandr --output "HDMI-0" --brightness "$level_new" --output "DP-4" --brightness "$level_new"
+    rmdir "$lock"
+fi

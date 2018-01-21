@@ -10,6 +10,12 @@ Mod4 + F3
 "display-1920-1080-120 && sh $HOME/.fehbg"
 Mod4 + F4
 
+"display-brightness-inc"
+Mod4 + Mod1 + Prior
+
+"display-brightness-dec"
+Mod4 + Mod1 + Next
+
 "audio-volume-inc"
 Mod4 + m:0x0 + b:4
 
