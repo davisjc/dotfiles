@@ -103,6 +103,7 @@ bindsym $mod+0 workspace 10
 bindsym $mod+bracketleft workspace prev
 bindsym $mod+bracketright workspace next
 bindsym $mod+grave workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
 
 # Move workspaces.
 bindsym $mod+Shift+1 move container to workspace 1
