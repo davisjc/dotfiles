@@ -67,7 +67,7 @@ if version >= 703
     " Toggle column guide
     fun! ToggleColorColumn()
         if empty(&colorcolumn)
-            setlocal colorcolumn=81
+            setlocal colorcolumn=80
         else
             setlocal colorcolumn=
         endif
