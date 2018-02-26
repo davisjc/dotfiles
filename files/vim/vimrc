@@ -1,13 +1,13 @@
 
-" Vundle init.
+" vundle init
 set nocompatible
 filetype off
 set rtp+=~/.vim/bootstrap
 
-" Set OpenGL shader language file types.
+" set opengl shader language file types
 let g:glsl_file_extensions = '*.glsl,*.geom,*.vert,*.frag,*.gsh,*.vsh,*.fsh,*.vs,*.fs,*.gs,*.tcs,*.tes'
 
-" Vundle plugins.
+" vundle plugins
 call vundle#begin()
 Plugin 'beyondmarc/glsl.vim' " OpenGL shader language syntax highlighting
 Plugin 'scrooloose/nerdcommenter' " commenting
@@ -18,15 +18,20 @@ Plugin 'tpope/vim-unimpaired' " some simple pair mappings
 Plugin 'vim-scripts/cscope.vim'
 call vundle#end()
 
-" Remap leader.
+" remap leader
 let mapleader=" "
 
-" Colors!
+" encoding
+set enc=utf-8
+set fenc=utf-8
+set termencoding=utf-8
+
+" colors!
 set t_ut=
 set t_Co=256
 colorscheme aurora
 
-" Toggle colorscheme.
+" toggle colorscheme
 fun! ToggleColorScheme()
     if "aurora" ==? g:colors_name
         colorscheme industry
@@ -36,32 +41,32 @@ fun! ToggleColorScheme()
 endfun
 nnoremap <Leader>c :call ToggleColorScheme()<CR>
 
-" Airline.
+" airline
 set laststatus=2
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme = 'powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 
-" Remove escape delay.
+" remove escape delay
 set timeoutlen=1000 ttimeoutlen=0
 
-" Enable syntax.
+" enable syntax
 syntax enable
 
-" Clipboard
+" clipboard
 if $TMUX == ''
 	set clipboard+=unnamed
 endif
 
-" Enable mouse.
+" enable mouse
 set mouse=a
 
-" Enable line numbers.
+" line numbers
 set nonumber
 nmap <Leader>l :setlocal number!<CR>
 
-" Highlight line end.
+" highlight line end
 if version >= 703
 	set colorcolumn=
     " Toggle column guide
@@ -75,33 +80,38 @@ if version >= 703
     nnoremap <Leader>\ :call ToggleColorColumn()<CR>
 endif
 
-" Tab completion.
+" line wrap
+set textwidth=80
+
+" tab completion
 set wildmode=longest,list,full
 set wildmenu
 
-" Indentation.
+" indentation
 filetype plugin indent on
+set autoindent
+set smartindent
 set expandtab
 set tabstop=4
 set shiftwidth=4
 nmap <S-Tab> <<
 imap <S-Tab> <Esc><<i
 
-" Fix backspace.
+" fix backspace
 set backspace=indent,eol,start
 
-" Fix PGUP/PGDN.
+" fix PGUP/PGDN
 map <silent> <PageUp> 1000<C-U>
 map <silent> <PageDown> 1000<C-D>
 imap <silent> <PageUp> <C-O>1000<C-U>
 imap <silent> <PageDown> <C-O>1000<C-D>
 set nostartofline
 
-" Trailing whitespace.
+" trailing whitespace
 match ErrorMsg '\s\+$'
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
-" Buffer mappings.
+" buffer mappings.
 nnoremap <Leader>b :buffer 
 nnoremap <Leader>n :bnext<CR>
 nnoremap <Leader>p :bprevious<CR>
@@ -109,10 +119,10 @@ nnoremap <Leader><Tab> :e#<CR>
 nnoremap <Leader>z :split<CR>
 nnoremap <Leader>x :vsplit<CR>
 
-" Sort visual.
+" sort visual
 vnoremap <Leader>s :sort<CR>
 
-" Steal hbw's line centering mappings.
+" steal hbw's line centering mappings
 fun! ScrollToPercent(percent)
     let movelines=winheight(0)*(50-a:percent)/100
     echo movelines
@@ -135,29 +145,29 @@ endfun
 map zr :call ScrollToPercent(25)<CR>
 map zv :call ScrollToPercent(75)<CR>
 
-" Configure search.
+" configure search
 set incsearch " jump while entering query
 set hlsearch
 set ignorecase
 set smartcase
 nnoremap <Leader>h :noh<CR>
 
-" Completion settings (:help ins-completion)
+" completion settings (:help ins-completion)
 set complete+=i " scan current and included files
 set complete+=d " scan current and included files for defined name or macro
 
-" Toggle paste-mode.
+" toggle paste-mode
 nnoremap <Leader>v :set paste!<CR>
 
-" Uncomment US in pacman mirrorlist.
+" uncomment US in pacman mirrorlist.
 fun! UncommentMirrorList()
     exec "silent! normal! /United States\<CR>jV/\\n\\n\<CR>:s/\#//g\<CR>:wq\<CR>"
 endfun
 
-" Sudo save shortcut.
+" sudo save shortcut
 cmap w!! w !sudo tee > /dev/null %
 
-" Load machine-specific stuff.
+" load machine-specific stuff
 if filereadable(expand("$HOME/.vimrc.loc"))
     source $HOME/.vimrc.loc
 endif
