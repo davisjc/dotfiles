@@ -1,24 +1,18 @@
 
-" vundle init
 set nocompatible
-filetype off
-set rtp+=~/.vim/bootstrap
 
-" set opengl shader language file types
-let g:glsl_file_extensions = '*.glsl,*.geom,*.vert,*.frag,*.gsh,*.vsh,*.fsh,*.vs,*.fs,*.gs,*.tcs,*.tes'
-
-" vundle plugins
-call vundle#begin()
-Plugin 'sheerun/vim-polyglot' " syntax highlighting for many languages
-Plugin 'scrooloose/nerdcommenter' " commenting
-Plugin 'tpope/vim-fugitive' " git wrapper
-Plugin 'tpope/vim-repeat' " ability to repeat plugin actions
-Plugin 'tpope/vim-surround' " surround things
-Plugin 'tpope/vim-unimpaired' " some simple pair mappings
-Plugin 'junegunn/fzf' " fzf (another copy for vim)
-Plugin 'junegunn/fzf.vim' " fzf integration
-Plugin 'vim-scripts/cscope.vim'
-call vundle#end()
+" plugins
+call plug#begin('~/.vim/plugged')
+Plug 'sheerun/vim-polyglot' " syntax highlighting for many languages
+Plug 'scrooloose/nerdcommenter' " commenting
+Plug 'tpope/vim-fugitive' " git wrapper
+Plug 'tpope/vim-repeat' " ability to repeat plugin actions
+Plug 'tpope/vim-surround' " surround things
+Plug 'tpope/vim-unimpaired' " some simple pair mappings
+Plug 'junegunn/fzf' " fzf (another copy for vim)
+Plug 'junegunn/fzf.vim' " fzf integration
+Plug 'vim-scripts/cscope.vim'
+call plug#end()
 
 " remap leader
 let mapleader=" "
