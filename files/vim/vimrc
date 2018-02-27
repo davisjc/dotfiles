@@ -3,7 +3,7 @@ set nocompatible
 
 " plugins
 call plug#begin('~/.vim/plugged')
-Plug 'sheerun/vim-polyglot' " syntax highlighting for many languages
+Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdcommenter' " commenting
 Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'tpope/vim-repeat' " ability to repeat plugin actions
@@ -49,6 +49,8 @@ set timeoutlen=1000 ttimeoutlen=0
 
 " enable syntax
 syntax enable
+let g:highlighter#project_root_signs = ['.git']
+let g:highlighter#auto_update = 2 " 0: disable (default), 1: after saving the file, 2: after saving and opening the file
 
 " clipboard
 if $TMUX == ''
