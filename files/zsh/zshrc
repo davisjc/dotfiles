@@ -14,17 +14,17 @@ export DOTFILES="$HOME/dot"
 export DOTFILES_LOCAL="$HOME/dot.local"
 PATH=$PATH:$DOTFILES/bin
 
-# Colors!
+# colors!
 source $HOME/.dir_colors
 autoload -U colors && colors;
 
-# Load some plugins.
+# load some plugins
 plugins=(colored-man sprunge extract)
 for plugin in "${plugins[@]}"; do
     source $DOTFILES/files/zsh/plugins/$plugin/$plugin.plugin.zsh
 done
 
-# ZSH completion (man zshcompsys).
+# zsh completion (man zshcompsys)
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' completions 1
@@ -46,7 +46,7 @@ zstyle ':completion:*' substitute 1
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 
-# ZSH options (man zshoptions).
+# zsh options (man zshoptions)
 setopt always_to_end # move cursor to end of word after completion
 setopt auto_pushd # automatically pushd on cd
 setopt complete_in_word # perform bi-directional completion from position
@@ -65,24 +65,24 @@ unsetopt beep # be quiet, you..
 unsetopt flow_control # don't use ctrl-s/ctrl-q for shell flow control
 unsetopt share_history # favor inc_append_history
 
-# Load ZSH completion.
+# load zsh completion
 autoload -Uz compinit
 compinit -i
 
-# Define ZSH's definition of a "word".
+# define zsh's definition of a "word"
 autoload -U select-word-style
 select-word-style bash
 
-# Compile zcompdump if necessary.
+# compile zcompdump if necessary
 if [ ~/.zcompdump -nt ~/.zcompdump.zwc -o ! -e ~/.zcompdump.zwc ]; then
   zcompile ~/.zcompdump
 fi
 
-# Shell history.
+# shell history
 HISTSIZE=10000
 SAVEHIST=1000
 
-# Setup vim keys (bindkey -v needs to happen before the mass key[] fix).
+# setup vim keys (bindkey -v needs to happen before the mass key[] fix)
 bindkey -v
 bindkey "^?" backward-delete-char
 bindkey "^W" backward-kill-word
@@ -90,7 +90,7 @@ bindkey "^H" backward-delete-char
 bindkey "^U" backward-kill-line
 KEYTIMEOUT=0 # don't delay esc
 
-# Fix bindings in zle (pulled from arch wiki).
+# fix bindings in zle (pulled from arch wiki)
 typeset -A key
 key[Home]=${terminfo[khome]}
 key[End]=${terminfo[kend]}
@@ -156,9 +156,73 @@ function precmd() {
     export RPROMPT
 }
 
-# History search.
+# fzf
 hash fzf 2> /dev/null
 if [ $? -eq 0 ]; then
+    # CTRL-T - Paste the selected file path(s) into the command line
+    __fsel() {
+        local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+            -o -type f -print \
+            -o -type d -print \
+            -o -type l -print 2> /dev/null | cut -b3-"}"
+        setopt localoptions pipefail 2> /dev/null
+        eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__fzfcmd) -m "$@" | while read item; do
+            echo -n "${(q)item} "
+        done
+        local ret=$?
+        echo
+        return $ret
+    }
+
+    __fzf_use_tmux__() {
+        [ -n "$TMUX_PANE" ] && [ "${FZF_TMUX:-0}" != 0 ] && [ ${LINES:-40} -gt 15 ]
+    }
+
+    __fzfcmd() {
+        __fzf_use_tmux__ &&
+            echo "fzf-tmux -d${FZF_TMUX_HEIGHT:-40%}" || echo "fzf"
+    }
+
+    fzf-file-widget() {
+        LBUFFER="${LBUFFER}$(__fsel)"
+        local ret=$?
+        zle redisplay
+        typeset -f zle-line-init >/dev/null && zle zle-line-init
+        return $ret
+    }
+    zle     -N   fzf-file-widget
+    bindkey '^T' fzf-file-widget
+
+    # Ensure precmds are run after cd
+    fzf-redraw-prompt() {
+        local precmd
+        for precmd in $precmd_functions; do
+            $precmd
+        done
+        zle reset-prompt
+    }
+    zle -N fzf-redraw-prompt
+
+    # ALT-C - cd into the selected directory
+    fzf-cd-widget() {
+        local cmd="${FZF_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+            -o -type d -print 2> /dev/null | cut -b3-"}"
+        setopt localoptions pipefail 2> /dev/null
+        local dir="$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd) +m)"
+        if [[ -z "$dir" ]]; then
+            zle redisplay
+            return 0
+        fi
+        cd "$dir"
+        local ret=$?
+        zle fzf-redraw-prompt
+        typeset -f zle-line-init >/dev/null && zle zle-line-init
+        return $ret
+    }
+    zle     -N    fzf-cd-widget
+    bindkey '\ec' fzf-cd-widget
+
+    # CTRL-R - Paste the selected command from history into the command line
     fzf-history-widget() {
         local selected num
         setopt localoptions noglobsubst noposixbuiltins pipefail 2> /dev/null
@@ -180,10 +244,10 @@ else
     bindkey "^R" history-incremental-search-backward
 fi
 
-# Completely disable ctrl-s/ctrl-q shell flow control.
+# completely disable ctrl-s/ctrl-q shell flow control
 stty -ixon
 
-# Aliases/functions.
+# aliases/functions
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gs='git status'
@@ -209,17 +273,17 @@ function gl() {
     git log --pretty=oneline HEAD~$n..HEAD
 }
 
-# Load Linux stuff.
+# load linux stuff
 if [ -e $HOME/.zshrc.linux ]; then
     source $HOME/.zshrc.linux
 fi
 
-# Load OS X stuff.
+# load os x stuff
 if [ -e $HOME/.zshrc.osx ]; then
     source $HOME/.zshrc.osx
 fi
 
-# Load machine-specific stuff.
+# load machine-specific stuff
 if [ -e $HOME/.zshrc.loc ]; then
     source $HOME/.zshrc.loc
 fi
