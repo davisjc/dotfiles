@@ -30,8 +30,9 @@ if [ -e $HOME/.Xresources.loc ]; then
     xrdb -merge $HOME/.Xresources.loc &
 fi
 
-# disable mouse acceleration
-xset m 0 0 &
+# mouse
+xset m 0 0 & # disable acceleration
+mouse-set-sens 0.7
 
 # set key repeat rate
 xset r rate 220 50 &

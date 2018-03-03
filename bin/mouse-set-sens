@@ -1,0 +1,20 @@
+#!/bin/sh
+
+PATTERN="DeathAdder.*pointer"
+DEFAULT_SENS=1
+
+if [ $# -gt 0 ]; then
+    sens=$1
+else
+    sens=$DEFAULT_SENS
+fi
+
+dev_id=$(xinput list | awk -v pattern="$PATTERN" '$0 ~ pattern {
+                           match($0, /id=[0-9]+/);
+                           print substr($0, RSTART+3, RLENGTH-3);
+                           exit;}')
+
+xinput --set-prop $dev_id "Coordinate Transformation Matrix" \
+       $sens 0 0 \
+       0 $sens 0 \
+       0 0 1
