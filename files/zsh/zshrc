@@ -141,6 +141,8 @@ function precmd() {
     local _prefix
     if [ ! -z $DOT_PROMPT_PREFIX ]; then
         _prefix="%{$fg[magenta]%}[ %{$fg[cyan]%}${DOT_PROMPT_PREFIX} %{$fg[magenta]%}]%{$reset_color%} "
+    elif [ ! -z $VIRTUAL_ENV ]; then
+        _prefix="%{$fg[magenta]%}[ %{$fg[cyan]%}python -> %{$fg[yellow]%}$(basename ${VIRTUAL_ENV}) %{$fg[magenta]%}]%{$reset_color%} "
     fi
 
     local _symbol
@@ -271,6 +273,23 @@ alias feh='feh -q --scale-down --image-bg black'
 function gl() {
     local n=$([ -z $1 ] && echo 10 || echo $1)
     git log --pretty=oneline HEAD~$n..HEAD
+}
+function python-virt-activate() {
+    local d=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+    if [ $# -gt 0 ]; then
+        d="$1"
+    fi
+    d=$(readlink -f "$d")
+    while [ "$d" != / ]; do
+        if [ -e "$d/bin/activate" ]; then
+            . "$d/bin/activate"
+            alias python-virt-deactivate=deactivate
+            return
+        fi
+        d=$(dirname "$d")
+    done
+    >&2 echo "error: couldn't find env"
+    return 1
 }
 
 # load linux stuff
