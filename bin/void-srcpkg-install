@@ -1,0 +1,22 @@
+#!/bin/bash -e
+
+if [ $# -lt 1 ]; then
+    >&2 echo "error: please specify pkg"
+    exit 1
+fi
+
+PKG_DIR="$HOME/void-packages"
+pkg="$1"
+
+set -x
+cd "$PKG_DIR"
+./xbps-src pkg $pkg
+
+read -n 1 -p "Install pkg? [Y/n]: " result
+if [ "$result" = 'n' ]; then
+    exit 1
+fi
+sudo xbps-install --repository=hostdir/binpkgs \
+                  --repository=hostdir/binpkgs/nonfree \
+                  -S $pkg
+

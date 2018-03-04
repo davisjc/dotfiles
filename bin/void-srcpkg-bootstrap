@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+PKG_DIR="$HOME/void-packages"
+
+set -x
+mkdir "$PKG_DIR"
+git clone https://github.com/voidlinux/void-packages "$PKG_DIR"
+cd "$PKG_DIR"
+./xbps-src binary-bootstrap
+echo "XBPS_ALLOW_RESTRICTED=YES" >> etc/conf
+
