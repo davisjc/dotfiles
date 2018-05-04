@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+    echo 2>&1 "Please specify patch URL."
+    exit 1
+fi
+
+curl $1 | tr '\r' '\n' | git apply
