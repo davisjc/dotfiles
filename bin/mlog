@@ -1,0 +1,21 @@
+#!/bin/sh
+
+LOG="$HOME/documents/medical/daily.log"
+LOG_TEMPLATE="$HOME/documents/medical/daily.log.template"
+
+today=$(date "+%Y-%m-%d")
+
+if [ ! -f "$LOG" ]; then
+    >&2 echo "error: could not find \"$LOG\""
+    exit 1
+fi
+if [ ! -f "$LOG_TEMPLATE" ]; then
+    >&2 echo "error: could not find \"$LOG_TEMPLATE\""
+    exit 1
+fi
+if ! grep -e "^--> $today" "$LOG" 2>&1 >/dev/null; then
+    echo >> "$LOG"
+    echo "--> $today" >> "$LOG"
+    cat "$LOG_TEMPLATE" >> "$LOG"
+fi
+exec v + "$LOG"
