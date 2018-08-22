@@ -12,7 +12,7 @@
 
 export DOTFILES="$HOME/dot"
 export DOTFILES_LOCAL="$HOME/dot.local"
-PATH=$PATH:$DOTFILES/bin
+PATH="$PATH:$DOTFILES/bin:$HOME/bin"
 
 # colors!
 source $HOME/.dir_colors
