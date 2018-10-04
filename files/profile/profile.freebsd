@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ -z "$TMUX" ]; then
+    export TERMINAL=st
+fi
+

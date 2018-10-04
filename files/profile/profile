@@ -27,17 +27,15 @@ if [ "$(hostname)" != "ford" ]; then
     export MPD_HOST=/tmp/mpd.sock
 fi
 
-# Load Linux stuff.
+if [ -e $HOME/.profile.freebsd ]; then
+    source $HOME/.profile.freebsd
+fi
 if [ -e $HOME/.profile.linux ]; then
     source $HOME/.profile.linux
 fi
-
-# Load OS X stuff.
 if [ -e $HOME/.profile.osx ]; then
     source $HOME/.profile.osx
 fi
-
-# Load machine-specific stuff.
 if [ -e $HOME/.profile.loc ]; then
     source $HOME/.profile.loc
 fi
