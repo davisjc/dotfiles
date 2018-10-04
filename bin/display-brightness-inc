@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 lock="$HOME/.display-brightness.lock"
 dat="$HOME/.display-brightness.dat"

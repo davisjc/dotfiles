@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 FEH_IMAGE_PATH=$HOME/.config/mpd/art/albumart
 

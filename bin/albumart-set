@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ART_DIR=$HOME/.config/mpd/art
 LOCK_DIR=$ART_DIR/lock
