@@ -11,10 +11,10 @@ Mod4 + F3
 Mod4 + F4
 
 "display-brightness-inc"
-Mod4 + Mod1 + Prior
+Mod4 + Prior
 
 "display-brightness-dec"
-Mod4 + Mod1 + Next
+Mod4 + Next
 
 "audio-volume-inc"
 Mod4 + m:0x0 + b:4
