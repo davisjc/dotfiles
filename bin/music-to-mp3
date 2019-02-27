@@ -1,0 +1,7 @@
+#!/bin/sh
+
+flac_dir=~/music/
+mp3_dir=~/music-mp3/
+cd "$flac_dir"
+find . -type f -iname '*.flac' -print0 | \
+    xargs -0 -n1 -P8 sh -c 'mp3_dir="$0" && src=$(readlink -f "$1") && dest=$(echo "$1" | sed "s/.flac$/.mp3/") && dest_dir=$(dirname "$dest") && mkdir -p "$mp3_dir" && cd "$mp3_dir" && mkdir -p "$dest_dir" && stat "$dest" >/dev/null 2>&1 || ffmpeg -nostats -loglevel panic -i "$src" -ab 320k "$dest"' -- "$mp3_dir"
