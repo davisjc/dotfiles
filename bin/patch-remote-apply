@@ -5,4 +5,4 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-curl $1 | tr '\r' '\n' | git apply
+curl $1 | tr '\r' '\n' | patch -p1
