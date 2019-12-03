@@ -1,0 +1,16 @@
+#!/bin/sh
+
+LOG="$HOME/documents/misterhouse.log"
+
+today=$(date "+%Y-%m-%d")
+
+if [ ! -f "$LOG" ]; then
+    >&2 echo "error: could not find \"$LOG\""
+    exit 1
+fi
+if ! grep -e "^$today" "$LOG" 2>&1 >/dev/null; then
+    echo >> "$LOG"
+    echo "$today" >> "$LOG"
+    echo >> "$LOG"
+fi
+exec v + "$LOG"
