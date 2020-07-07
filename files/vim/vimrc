@@ -154,6 +154,9 @@ nnoremap <Leader>h :noh<CR>
 set complete+=i " scan current and included files
 set complete+=d " scan current and included files for defined name or macro
 
+" tags
+set tags=./tags,./CTAGS,tags,CTAGS
+
 " fzf
 nnoremap <Leader>a :Ag<CR>
 nnoremap <Leader>b :Buffers<CR>
