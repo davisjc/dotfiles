@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+
+REMOTE="heartofgold"
+REMOTE_DIR="~/archive/games/saves/ftl"
+
+PROF_FILE="ae_prof.sav"
+SAVE_FILE="continue.sav"
+
+# determine LOCAL_DIR path
+if uname -a | grep -i microsoft 2>&1 >/dev/null; then
+    LOCAL_DIR="/mnt/c/users/$(whoami)/documents/my games/fasterthanlight"
+elif [ $(uname) = "Darwin" ]; then
+    LOCAL_DIR="/Users/$(whoami)/Library/ApplicationSupport/FasterThanLight"
+else
+    echo "os $(uname) not yet supported"
+fi
+
+# add helper functions
+if uname -a | grep -i microsoft 2>&1 >/dev/null; then
+    function mtime_str {
+        date -d @$1
+    }
+elif [ $(uname) = "Darwin" ]; then
+    function mtime_str {
+        date -r $1
+    }
+else
+    echo "os $(uname) not yet supported"
+fi
+function ask {
+    read -p "$1" ask_answer
+    echo $ask_answer | grep -i "^y" >/dev/null
+}
+function sync {
+    local name="$1"
+    local file="$2"
+
+    echo "--> syncing $name..."
+    if [ -e "$LOCAL_DIR/$file" ]; then
+        # local file found
+        local local_mtime=$(date -r "$LOCAL_DIR/$file" +"%s")
+        local local_mtime_human=$(mtime_str "$local_mtime")
+
+        if ssh "$REMOTE" test -e "$REMOTE_DIR/$file"; then
+            # remote file exists
+            local remote_mtime=$(ssh "$REMOTE" date -r "$REMOTE_DIR/$file" +"%s")
+            local remote_mtime_human=$(mtime_str "$remote_mtime")
+            if (( $local_mtime < $remote_mtime )); then
+                echo "local $name is older than remote:"
+                echo "  local  ($local_mtime_human)"
+                echo "  remote ($remote_mtime_human)"
+                if ask "download $name from remote, overwriting local? (y/N): "; then
+                    echo "---> downloading $name from remote..."
+                    cp -p "$file" "$file.bak"
+                    scp -p "$REMOTE:$REMOTE_DIR/$file" .
+                    echo "made local $name backup as $file.bak"
+                else
+                    echo "skipped $name sync."
+                fi
+            elif (( $local_mtime > $remote_mtime )); then
+                echo "local $name is newer than remote:"
+                echo "  local  ($local_mtime_human)"
+                echo "  remote ($remote_mtime_human)"
+                if ask "do you wish overwrite the remote $name with the newer local? (y/N): "; then
+                    echo "---> uploading $name to remote..."
+                    ssh "$REMOTE" cp -p "$REMOTE_DIR/$file" "$REMOTE_DIR/$file.bak"
+                    scp -p "$file" "$REMOTE:$REMOTE_DIR/"
+                    echo "made remote $name backup as $file.bak"
+                else
+                    echo "skipped $name sync."
+                fi
+            else
+                echo "$name is already synced."
+            fi
+        else
+            # remote file does not exist
+            echo "remote $name not found; uploading..."
+            scp -p "$file" "$REMOTE:$REMOTE_DIR/"
+        fi
+    else
+        echo "no local $name found; downloading..."
+        scp -p "$REMOTE:$REMOTE_DIR/$file" .
+    fi
+}
+
+# do sync
+if [ ! -e "$LOCAL_DIR" ]; then
+    echo "did not find local game dir:"
+    echo "  $LOCAL_DIR"
+    exit 1
+fi
+
+echo "files on local:"
+cd "$LOCAL_DIR"
+for f in $(ls); do
+    echo "  $f - $(date -r "$f")";
+done
+
+echo "files on remote:"
+for f in $(ssh "$REMOTE" ls "$REMOTE_DIR"); do
+    echo "  $f - $(ssh "$REMOTE" date -r "$REMOTE_DIR/$f")";
+done
+
+echo
+sync "profile" "$PROF_FILE"
+
+echo
+sync "save" "$SAVE_FILE"
+
+echo
+echo "sync complete!"
