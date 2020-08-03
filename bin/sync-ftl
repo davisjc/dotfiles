@@ -12,7 +12,8 @@ if uname -a | grep -i microsoft 2>&1 >/dev/null; then
 elif [ $(uname) = "Darwin" ]; then
     LOCAL_DIR="/Users/$(whoami)/Library/ApplicationSupport/FasterThanLight"
 else
-    echo "os $(uname) not yet supported"
+    >&2 echo "os $(uname) not yet supported"
+    exit 1
 fi
 
 # add helper functions
@@ -25,7 +26,8 @@ elif [ $(uname) = "Darwin" ]; then
         date -r $1
     }
 else
-    echo "os $(uname) not yet supported"
+    >&2 echo "os $(uname) not yet supported"
+    exit 1
 fi
 function ask {
     read -p "$1" ask_answer
@@ -85,8 +87,8 @@ function sync {
 
 # do sync
 if [ ! -e "$LOCAL_DIR" ]; then
-    echo "did not find local game dir:"
-    echo "  $LOCAL_DIR"
+    >&2 echo "did not find local game dir:"
+    >&2 echo "  $LOCAL_DIR"
     exit 1
 fi
 
