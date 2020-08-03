@@ -92,6 +92,11 @@ if [ ! -e "$LOCAL_DIR" ]; then
     exit 1
 fi
 
+if ! ssh "$REMOTE" exit; then
+    >&2 echo "failed to auth with $REMOTE"
+    exit 1
+fi
+
 echo "files on local:"
 cd "$LOCAL_DIR"
 for f in $(ls); do
