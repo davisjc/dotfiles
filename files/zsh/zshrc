@@ -306,5 +306,3 @@ fi
 if [ -e $HOME/.zshrc.loc ]; then
     source $HOME/.zshrc.loc
 fi
-
-zsh -c echo derp
