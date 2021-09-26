@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash -e
 
-_src=$1
-_dst=$2
+_src="$1"
+_dst="$2"
 
 if [[ $# < 2 ]]; then
     echo "Usage: img-backup SOURCE DEST"
@@ -17,7 +17,8 @@ if [ $? -ne 0 ]; then
     _gzip="gzip"
 fi
 
-_command="sudo pv -i 0.5 -p -b -r -t -e -EE -B 128m $_src | $_gzip > $_dst"
+_command="pv -i 0.5 -p -b -r -a -t -e -EE -B 128m $_src | $_gzip > $_dst"
 
-echo "$_command"
+set -x
 eval $_command
+sync
