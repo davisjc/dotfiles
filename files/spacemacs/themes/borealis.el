@@ -1,13 +1,10 @@
-;;; vim-aurora.el --- Emacs theme with a dark background.
+;;; borealis.el --- Emacs theme with a dark background.
 
-;; Copyright (C) 2016, Henry Baba-Weiss
+;; Copyright (C) 2018, Henry Baba-Weiss
 
 ;; Author: Henry Baba-Weiss
-;; https://github.com/henrybw/vim-colors-aurora
 ;; Version: 0.1
-;; Package-Requires: ((emacs "24"))
-;; Created with emacs-theme-generator, https://github.com/mswift42/theme-creator.
-
+;; Package-Requires: ((emacs "24")) ;; only tested on 26.1 these days
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -25,6 +22,9 @@
 ;; This file is not part of Emacs.
 
 ;;; Commentary:
+;;;
+;;; 'Borealis' is a successor to Aurora, but with a more blue and less dark
+;;; background color.
 ;;;
 ;;; 'Aurora' is my custom vim color scheme, modeled closely after the Solarized
 ;;; Dark color scheme. It was designed using Solarized Dark as a base starting
@@ -60,13 +60,13 @@
 
 ;;; Code:
 
-(deftheme vim-aurora)
+(deftheme borealis)
 (let ((class '((class color) (min-colors 89)))
-      (fg1        "#c7c7c7")
+      (fg1        "#ebebeb")
       (fg2        "#ababab")
       (fg3        "#9b9b9b")
       (fg4        "#8b8b8b")
-      (bg1        "#003b47")
+      (bg1        "#073761")
       (bg2        "#303030")
       (bg3        "#2b4852")
       (bg4        "#3e5861")
@@ -106,7 +106,7 @@
       (mode-fg    "#dfdfdf")
       )
   (custom-theme-set-faces
-   'vim-aurora
+   'borealis
    `(default ((,class (:background ,bg1 :foreground ,fg1))))
    `(font-lock-builtin-face ((,class (:foreground ,builtin))))
    `(font-lock-comment-face ((,class (:foreground ,comment))))
@@ -364,11 +364,11 @@
 (add-hook 'window-setup-hook 'set-transparent-bg)
 (add-hook 'server-switch-hook 'set-transparent-bg)
 
-(provide 'vim-aurora)
-(provide-theme 'vim-aurora)
+(provide 'borealis)
+(provide-theme 'borealis)
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; End:
 
-;;; vim-aurora.el ends here
+;;; borealis.el ends here
