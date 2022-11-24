@@ -51,7 +51,7 @@ else
     account_arg="-a $account"
 fi
 
-body=$(cat)
+body=$(cat | sed 's/%/%%/g')
 
 printf "To: $addr_to_comma_delim\nSubject: $subject\n\n$body\n" | \
     msmtp $account_arg $addr_to
