@@ -12,7 +12,6 @@ Plug 'tpope/vim-sleuth' " auto-indent detection
 Plug 'tpope/vim-unimpaired' " some simple pair mappings
 Plug 'junegunn/fzf' " fzf (another copy for vim)
 Plug 'junegunn/fzf.vim' " fzf integration
-Plug 'vim-scripts/cscope.vim'
 call plug#end()
 
 " remap leader
