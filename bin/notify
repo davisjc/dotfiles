@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+ntfy -t "[$(hostname)] $(echo $@)" send "$(echo $@)"
