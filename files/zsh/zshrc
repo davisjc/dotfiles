@@ -72,6 +72,11 @@ if hash brew 2> /dev/null; then
 fi
 autoload -U compinit && compinit
 
+# load some man pages
+if hash rustup 2> /dev/null; then
+    export MANPATH="$(rustc --print sysroot)/share/man:$MANPATH"
+fi
+
 # define zsh's definition of a "word"
 autoload -U select-word-style && select-word-style bash
 
