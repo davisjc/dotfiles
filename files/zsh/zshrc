@@ -66,16 +66,18 @@ unsetopt flow_control # don't use ctrl-s/ctrl-q for shell flow control
 unsetopt share_history # favor inc_append_history
 
 # load zsh completion
-autoload -Uz compinit
-compinit -i
+fpath+="$HOME/.zfunc"
+if hash brew 2> /dev/null; then
+    fpath+="$(brew --prefix)/completions/zsh"
+fi
+autoload -U compinit && compinit
 
 # define zsh's definition of a "word"
-autoload -U select-word-style
-select-word-style bash
+autoload -U select-word-style && select-word-style bash
 
 # compile zcompdump if necessary
 if [ ~/.zcompdump -nt ~/.zcompdump.zwc -o ! -e ~/.zcompdump.zwc ]; then
-  zcompile ~/.zcompdump
+    zcompile ~/.zcompdump
 fi
 
 # shell history
