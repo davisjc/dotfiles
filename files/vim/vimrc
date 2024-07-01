@@ -1,9 +1,7 @@
-
 set nocompatible
 
 " plugins
 call plug#begin('~/.vim/plugged')
-Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdcommenter' " commenting
 Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'tpope/vim-repeat' " ability to repeat plugin actions
@@ -12,6 +10,7 @@ Plug 'tpope/vim-sleuth' " auto-indent detection
 Plug 'tpope/vim-unimpaired' " some simple pair mappings
 Plug 'junegunn/fzf' " fzf (another copy for vim)
 Plug 'junegunn/fzf.vim' " fzf integration
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 " remap leader
@@ -26,6 +25,7 @@ set termencoding=utf-8
 set t_ut=
 set t_Co=256
 colorscheme aurora
+syntax enable
 
 " toggle colorscheme
 fun! ToggleColorScheme()
@@ -37,6 +37,32 @@ fun! ToggleColorScheme()
 endfun
 nnoremap <Leader>c :call ToggleColorScheme()<CR>
 
+" tree-sitter
+if has('nvim')
+lua << EOF
+require("nvim-treesitter.configs").setup({
+    ensure_installed = {
+        "c",
+        "lua",
+        "python",
+        "rust",
+    },
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+    indent = {
+        enable = true,
+    },
+    rainbow = {
+        enable = true,
+        extended_mode = true,
+        max_file_lines = nil,
+    }
+})
+EOF
+endif
+
 " airline
 set laststatus=2
 let g:airline_left_sep=''
@@ -47,14 +73,9 @@ let g:airline#extensions#tabline#enabled = 1
 " remove escape delay
 set timeoutlen=1000 ttimeoutlen=0
 
-" enable syntax
-syntax enable
-let g:highlighter#project_root_signs = ['.git']
-let g:highlighter#auto_update = 2 " 0: disable (default), 1: after saving the file, 2: after saving and opening the file
-
 " clipboard
 if $TMUX == ''
-	set clipboard+=unnamed
+    set clipboard+=unnamed
 endif
 
 " enable mouse
