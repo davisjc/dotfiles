@@ -21,17 +21,6 @@ for install_script in $DOTFILES/files/*/install.sh; do
     $install_script
 done
 
-if [ ! -z "$DOTFILES_LOCAL" ]; then
-    echo "---> Installing dotfiles (local)"
-
-    for install_script in $DOTFILES_LOCAL/files/*/install.sh; do
-        echo "       running $install_script..."
-        $install_script
-    done
-fi
-
-# TODO - run sudo pkgfile --update
-
 echo "---> Finished installing dotfiles"
 
 echo
