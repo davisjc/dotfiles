@@ -158,7 +158,7 @@ hi Error        ctermbg=16    guibg=Grey0
 
 " Menu colors (including wild menus)
 " Colors got weird for this one, so I had to make the GUI and terminal colors differ :(
-hi Pmenu        ctermfg=18    guifg=#002b36
+hi Pmenu        ctermfg=18    guifg=#bcbcbc
 hi Pmenu        ctermbg=102   guibg=#839496
 hi PmenuSel     ctermfg=231   guifg=Grey100
 hi PmenuSel     ctermbg=241   guibg=Grey39

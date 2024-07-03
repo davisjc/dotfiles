@@ -11,6 +11,7 @@ Plug 'tpope/vim-unimpaired' " some simple pair mappings
 Plug 'junegunn/fzf' " fzf (another copy for vim)
 Plug 'junegunn/fzf.vim' " fzf integration
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
 " remap leader
@@ -24,18 +25,17 @@ set termencoding=utf-8
 " colors!
 set t_ut=
 set t_Co=256
+set termguicolors
 colorscheme aurora
 syntax enable
 
-" toggle colorscheme
-fun! ToggleColorScheme()
-    if "aurora" ==? g:colors_name
-        colorscheme industry
-    else
-        colorscheme aurora
-    endif
-endfun
-nnoremap <Leader>c :call ToggleColorScheme()<CR>
+" toggle true colors
+nnoremap <Leader>c :set termguicolors!<CR>
+
+" color hex values
+if has('nvim')
+lua require("colorizer").setup()
+endif
 
 " tree-sitter
 if has('nvim')
