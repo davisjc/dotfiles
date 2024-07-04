@@ -77,6 +77,13 @@ assign_gutter_sym("DiagnosticSignWarn", "W")
 assign_gutter_sym("DiagnosticSignHint", "H")
 assign_gutter_sym("DiagnosticSignInfo", "I")
 
+-- don't print diagnostic text in buffer by default
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false,
+    }
+)
+
 attach_init = function(client, bufnr)
     vim.opt.signcolumn = "yes" -- hold gutter open to prevent shifting cols
 end
@@ -114,6 +121,9 @@ cmp.setup({
 })
 EOF
 endif
+
+" binding to pop-up diagnostic info
+nnoremap <Leader>d :lua vim.diagnostic.open_float()<CR>
 
 " airline
 set laststatus=2
