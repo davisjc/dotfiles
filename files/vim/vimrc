@@ -39,6 +39,7 @@ require("gruvbox").setup({
         comments = false,
         folds = false,
     },
+    transparent_mode = true,
 })
 EOF
     set background=dark
