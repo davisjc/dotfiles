@@ -15,6 +15,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'ellisonleao/gruvbox.nvim'
 call plug#end()
 
 " remap leader
@@ -29,7 +30,22 @@ set termencoding=utf-8
 set t_ut=
 set t_Co=256
 set termguicolors
-colorscheme aurora
+if has('nvim')
+lua << EOF
+require("gruvbox").setup({
+    bold = false,
+    italic = {
+        strings = false,
+        comments = false,
+        folds = false,
+    },
+})
+EOF
+    set background=dark
+    colorscheme gruvbox
+else
+    colorscheme aurora
+endif
 syntax enable
 
 " toggle true colors
