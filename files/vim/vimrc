@@ -104,6 +104,7 @@ attach_init = function(client, bufnr)
     vim.opt.signcolumn = "yes" -- hold gutter open to prevent shifting cols
 end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = false
 require("lspconfig").rust_analyzer.setup({
     on_attach = attach_init,
     capabilities = capabilities,
