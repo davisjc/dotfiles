@@ -131,8 +131,9 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm(),
     }),
     sources = cmp.config.sources({
-        {name = 'buffer'},
+        -- order determines priority
         {name = 'nvim_lsp'},
+        {name = 'buffer'},
     }),
     window = {
         completion = cmp.config.window.bordered(),
