@@ -13,6 +13,7 @@ Plug 'junegunn/fzf.vim' " fzf integration
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'ellisonleao/gruvbox.nvim'
@@ -130,6 +131,7 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm(),
     }),
     sources = cmp.config.sources({
+        {name = 'buffer'},
         {name = 'nvim_lsp'},
     }),
     window = {
