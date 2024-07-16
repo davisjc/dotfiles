@@ -2,6 +2,22 @@
 
 PATH=$PATH:$DOTFILES/bin
 
+if [ -e "$HOME/.profile.freebsd" ]; then
+    source $HOME/.profile.freebsd
+fi
+if [ -e "$HOME/.profile.linux" ]; then
+    source $HOME/.profile.linux
+fi
+if [ -e "$HOME/.profile.osx" ]; then
+    source $HOME/.profile.osx
+fi
+if [ -e "$HOME/.profile.loc" ]; then
+    source $HOME/.profile.loc
+fi
+if [ -e "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
+
 if [ -z "$TMUX" ]; then
     ulimit -c unlimited
 fi
@@ -25,20 +41,4 @@ fi
 export EDITOR=$VISUAL
 if [ $(hostname) != "ford" ]; then
     export MPD_HOST=/tmp/mpd.sock
-fi
-
-if [ -e "$HOME/.profile.freebsd" ]; then
-    source $HOME/.profile.freebsd
-fi
-if [ -e "$HOME/.profile.linux" ]; then
-    source $HOME/.profile.linux
-fi
-if [ -e "$HOME/.profile.osx" ]; then
-    source $HOME/.profile.osx
-fi
-if [ -e "$HOME/.profile.loc" ]; then
-    source $HOME/.profile.loc
-fi
-if [ -e "$HOME/.cargo/env" ]; then
-    source "$HOME/.cargo/env"
 fi
