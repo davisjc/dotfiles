@@ -6,7 +6,6 @@ Plug 'scrooloose/nerdcommenter' " commenting
 Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'tpope/vim-repeat' " ability to repeat plugin actions
 Plug 'tpope/vim-surround' " surround things
-Plug 'tpope/vim-sleuth' " auto-indent detection
 Plug 'tpope/vim-unimpaired' " some simple pair mappings
 Plug 'junegunn/fzf' " fzf (another copy for vim)
 Plug 'junegunn/fzf.vim' " fzf integration
