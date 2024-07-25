@@ -2,7 +2,6 @@ set nocompatible
 
 " plugins
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdcommenter' " commenting
 Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'tpope/vim-repeat' " ability to repeat plugin actions
 Plug 'tpope/vim-surround' " surround things
