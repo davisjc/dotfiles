@@ -6,8 +6,9 @@ Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'tpope/vim-repeat' " ability to repeat plugin actions
 Plug 'tpope/vim-surround' " surround things
 Plug 'tpope/vim-unimpaired' " some simple pair mappings
-Plug 'junegunn/fzf' " fzf (another copy for vim)
-Plug 'junegunn/fzf.vim' " fzf integration
+Plug 'nvim-lua/plenary.nvim' " required for telescope
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " sorter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
@@ -54,6 +55,34 @@ nnoremap <Leader>c :set termguicolors!<CR>
 " color hex values
 if has('nvim')
 lua require("colorizer").setup()
+endif
+
+" telescope
+nnoremap <C-p> :Telescope find_files<CR>
+nnoremap <Leader>/ :Telescope live_grep<CR>
+nnoremap <Leader>s :Telescope current_buffer_fuzzy_find<CR>
+nnoremap <Leader>b :Telescope buffers<CR>
+nnoremap <Leader>g :Telescope git_bcommits<CR>
+nnoremap <Leader>o :Telescope vim_options<CR>
+nnoremap <Leader>js :lua require("telescope.builtin").lsp_dynamic_workspace_symbols({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
+nnoremap <Leader>jr :lua require("telescope.builtin").lsp_references({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
+nnoremap <Leader>ji :lua require("telescope.builtin").lsp_implementations({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
+nnoremap <Leader>jt :lua require("telescope.builtin").lsp_type_definitions({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
+if has('nvim')
+lua << EOF
+local actions = require("telescope.actions")
+require("telescope").setup({
+    defaults = {
+        layout_strategy = "vertical",
+        mappings = {
+            i = {
+                ["<Esc>"] = actions.close,
+            },
+        },
+    },
+})
+require("telescope").load_extension("fzf") -- native sorting
+EOF
 endif
 
 " tree-sitter
@@ -260,14 +289,6 @@ set complete+=d " scan current and included files for defined name or macro
 
 " tags
 set tags=./tags,./CTAGS,tags,CTAGS
-
-" fzf
-nnoremap <Leader>a :Ag<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>g :BCommits<CR>
-nnoremap <Leader>s :BLines<CR>
-nnoremap <Leader><C-]> :Tags<CR>
-nnoremap <C-p> :Files<CR>
 
 " toggle paste-mode
 nnoremap <Leader>v :set paste!<CR>
