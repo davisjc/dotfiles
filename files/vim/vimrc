@@ -211,7 +211,10 @@ set nostartofline
 match ErrorMsg '\s\+$'
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
-" buffer mappings.
+" buffer management
+set splitright
+set splitbelow
+set splitkeep=topline
 nnoremap <Leader>n :bnext<CR>
 nnoremap <Leader>p :bprevious<CR>
 nnoremap <Leader><Tab> :e#<CR>
