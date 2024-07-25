@@ -1,0 +1,6 @@
+bind -v
+bind "^R" em-inc-search-prev
+bind "^N" ed-search-next-history
+bind "^P" ed-search-prev-history
+bind "^L" ed-clear-screen
+bind "\\t" rl_complete
