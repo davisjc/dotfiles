@@ -112,6 +112,11 @@ EOF
 endif
 
 " lsp
+nnoremap <Leader>d :lua vim.diagnostic.open_float()<CR>
+nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
+nnoremap <C-w>\ :vsplit<CR> :lua vim.lsp.buf.definition()<CR>
+nnoremap <C-w><C-\> :vsplit<CR> :lua vim.lsp.buf.definition()<CR>
+
 if has('nvim')
 lua << EOF
 local assign_gutter_sym = function(label, sym)
@@ -169,9 +174,6 @@ cmp.setup({
 })
 EOF
 endif
-
-" binding to pop-up diagnostic info
-nnoremap <Leader>d :lua vim.diagnostic.open_float()<CR>
 
 " airline
 set laststatus=2
