@@ -14,6 +14,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'ellisonleao/gruvbox.nvim'
 call plug#end()
@@ -181,6 +182,19 @@ cmp.setup({
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
+})
+
+require("lsp_signature").setup({
+    bind = true,
+    handler_opts = {
+        border = "rounded",
+    },
+    toggle_key = "<C-k>",
+    verbose = true,
+    max_width = 200,
+    -- don't open these by default
+    floating_window = false,
+    hint_enable = false,
 })
 EOF
 endif
