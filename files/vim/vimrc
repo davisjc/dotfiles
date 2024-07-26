@@ -65,6 +65,7 @@ nnoremap <Leader>s :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <Leader>b :Telescope buffers<CR>
 nnoremap <Leader>g :Telescope git_bcommits<CR>
 nnoremap <Leader>o :Telescope vim_options<CR>
+nnoremap <Leader>q :Telescope help_tags<CR>
 nnoremap <Leader>js :lua require("telescope.builtin").lsp_dynamic_workspace_symbols({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
 nnoremap <Leader>jr :lua require("telescope.builtin").lsp_references({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
 nnoremap <Leader>ji :lua require("telescope.builtin").lsp_implementations({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
