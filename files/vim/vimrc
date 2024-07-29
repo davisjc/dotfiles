@@ -9,6 +9,7 @@ Plug 'tpope/vim-unimpaired' " some simple pair mappings
 Plug 'nvim-lua/plenary.nvim' " required for telescope
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " sorter
+Plug 'nvim-telescope/telescope-ui-select.nvim' " replace default ui-select
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'williamboman/mason.nvim' " another package manager
 Plug 'williamboman/mason-lspconfig.nvim' " interop with lspconfig
@@ -68,6 +69,7 @@ nnoremap <Leader>b :Telescope buffers<CR>
 nnoremap <Leader>g :Telescope git_bcommits<CR>
 nnoremap <Leader>o :Telescope vim_options<CR>
 nnoremap <Leader>q :Telescope help_tags<CR>
+nnoremap <Leader>a :lua vim.lsp.buf.code_action()<CR>
 nnoremap <Leader>js :lua require("telescope.builtin").lsp_dynamic_workspace_symbols({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
 nnoremap <Leader>jr :lua require("telescope.builtin").lsp_references({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
 nnoremap <Leader>ji :lua require("telescope.builtin").lsp_implementations({fname_width = vim.api.nvim_get_option('columns') / 3})<CR>
@@ -86,6 +88,7 @@ require("telescope").setup({
     },
 })
 require("telescope").load_extension("fzf") -- native sorting
+require("telescope").load_extension("ui-select")
 EOF
 endif
 
