@@ -10,6 +10,8 @@ Plug 'nvim-lua/plenary.nvim' " required for telescope
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " sorter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'williamboman/mason.nvim' " another package manager
+Plug 'williamboman/mason-lspconfig.nvim' " interop with lspconfig
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
@@ -113,6 +115,17 @@ require("nvim-treesitter.configs").setup({
 EOF
 endif
 
+" mason package manager
+if has('nvim')
+lua << EOF
+require("mason").setup({
+    ui = {
+        border = "rounded",
+    },
+})
+EOF
+endif
+
 " lsp
 nnoremap <Leader>d :lua vim.diagnostic.open_float()<CR>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
@@ -145,6 +158,12 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
         border = "rounded",
     }
 )
+
+require("mason-lspconfig").setup({
+    ensure_installed = {
+        "pyright",
+    },
+})
 
 attach_init = function(client, bufnr)
     vim.opt.signcolumn = "yes" -- hold gutter open to prevent shifting cols
