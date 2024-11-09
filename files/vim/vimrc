@@ -13,13 +13,15 @@ Plug 'nvim-telescope/telescope-ui-select.nvim' " replace default ui-select
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'williamboman/mason.nvim' " another package manager
 Plug 'williamboman/mason-lspconfig.nvim' " interop with lspconfig
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'ellisonleao/gruvbox.nvim'
+Plug 'neovim/nvim-lspconfig' " configure various lsp setups
+Plug 'hrsh7th/nvim-cmp' " autocompletion
+Plug 'hrsh7th/cmp-buffer' " lsp source from buffer
+Plug 'hrsh7th/cmp-nvim-lsp' " lsp source from lsp
+Plug 'ray-x/lsp_signature.nvim' " prototype signature hints on K
+Plug 'mfussenegger/nvim-dap' " debug adapter protocl client
+Plug 'mrcjkb/rustaceanvim', {'tag': '5.1.1'} " debugging framework for rust
+Plug 'norcalli/nvim-colorizer.lua' " color hex codes
+Plug 'ellisonleao/gruvbox.nvim' " a theme with semantic highlighting
 call plug#end()
 
 " remap leader
@@ -168,19 +170,54 @@ require("mason-lspconfig").setup({
     },
 })
 
-attach_init = function(client, bufnr)
+on_attach_common = function(client, bufnr)
     vim.opt.signcolumn = "yes" -- hold gutter open to prevent shifting cols
 end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false
-require("lspconfig").rust_analyzer.setup({
-    on_attach = attach_init,
-    capabilities = capabilities,
-})
 require("lspconfig").pyright.setup({
-    on_attach = attach_init,
+    on_attach = function(client, bufnr)
+        on_attach_common(client, bufn)
+    end,
     capabilities = capabilities,
 })
+
+vim.g.rustaceanvim = {
+    tools = {
+        float_win_config = {
+            auto_focus = true,
+            border = "rounded",
+        },
+    },
+    server = {
+        on_attach = function(client, bufnr)
+            on_attach_common(client, bufnr)
+            vim.keymap.set("n", "<Leader>a", ":RustLsp codeAction<CR>")
+            vim.keymap.set("n", "<Leader>k", ":RustLsp openDocs<CR>")
+            vim.keymap.set("n", "<Leader>m", ":RustLsp expandMacro<CR>")
+            vim.keymap.set("n", "<Leader>dd", ":RustLsp renderDiagnostic<CR>")
+            vim.keymap.set("n", "<Leader>de", ":RustLsp explainError<CR>")
+            vim.keymap.set("n", "<Leader>db", ":DapToggleBreakpoint<CR>")
+            vim.keymap.set("n", "<Leader>dc", ":DapContinue<CR>")
+            vim.keymap.set("n", "<Leader>dq", ":DapTerminate<CR>")
+            vim.keymap.set("n", "<Leader>dt", ":DapStepOut<CR>")
+            vim.keymap.set("n", "<Leader>ds", ":DapStepInto<CR>")
+            vim.keymap.set("n", "<Leader>dn", ":DapStepOver<CR>")
+            vim.keymap.set("n", "<Leader>dr", ":DapToggleRepl<CR>")
+            vim.keymap.set("n", "<Leader>dl", function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Logpoint: ')) end)
+            vim.keymap.set("n", "<Leader>dv", function() require('dap.ui.widgets').preview() end)
+        end,
+        default_settings = {
+            ['rust-analyzer'] = {
+                cargo = {
+                    extraArgs = { "--profile", "rust-analyzer" },
+                },
+            },
+        },
+    },
+    dap = {
+    },
+}
 
 cmp = require("cmp")
 cmp.setup({
