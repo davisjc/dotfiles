@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+    echo 2>&1 "Please specify remote host and port."
+    exit 1
+fi
+if [ $# -lt 2 ]; then
+    echo 2>&1 "Please specify port."
+    exit 1
+fi
+host="$1"
+port="$2"
+
+echo "Holding open forward of port $port to host $host... (^C to close)"
+ssh -o ControlMaster=no -N -L "$port:localhost:$port" "$host"
