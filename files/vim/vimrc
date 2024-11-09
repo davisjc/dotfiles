@@ -130,7 +130,6 @@ EOF
 endif
 
 " lsp
-nnoremap <Leader>d :lua vim.diagnostic.open_float()<CR>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 nnoremap <C-w>\ :vsplit<CR> :lua vim.lsp.buf.definition()<CR>
 nnoremap <C-w><C-\> :vsplit<CR> :lua vim.lsp.buf.definition()<CR>
