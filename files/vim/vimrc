@@ -134,6 +134,7 @@ endif
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 nnoremap <C-w>\ :vsplit<CR> :lua vim.lsp.buf.definition()<CR>
 nnoremap <C-w><C-\> :vsplit<CR> :lua vim.lsp.buf.definition()<CR>
+nnoremap K :lua vim.lsp.buf.hover({border="rounded"})<CR>
 
 if has('nvim')
 lua << EOF
@@ -145,13 +146,6 @@ assign_gutter_sym("DiagnosticSignWarn", "W")
 assign_gutter_sym("DiagnosticSignHint", "H")
 assign_gutter_sym("DiagnosticSignInfo", "I")
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-    vim.lsp.handlers.hover,
-    {
-        border = "rounded",
-    }
-)
-
 require("mason-lspconfig").setup({
     ensure_installed = {
         "pyright",
@@ -160,9 +154,13 @@ require("mason-lspconfig").setup({
 
 on_attach_common = function(client, bufnr)
     vim.opt.signcolumn = "yes" -- hold gutter open to prevent shifting cols
-    vim.diagnostic.config({ virtual_text = false })
-    vim.diagnostic.config({ underline = false })
-    vim.diagnostic.config({ float = { border = "rounded" } })
+    vim.diagnostic.config({
+        virtual_text = false,
+        underline = false,
+        float = {
+            border = "rounded"
+        },
+    })
 end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false
