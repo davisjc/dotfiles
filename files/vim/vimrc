@@ -166,7 +166,7 @@ on_attach_common = function(client, bufnr)
 end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false
-require("lspconfig").pyright.setup({
+vim.lsp.config("pyright", {
     on_attach = function(client, bufnr)
         on_attach_common(client, bufn)
     end,
