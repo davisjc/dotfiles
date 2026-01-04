@@ -7,9 +7,11 @@ Plug 'tpope/vim-repeat' " ability to repeat plugin actions
 Plug 'tpope/vim-surround' " surround things
 Plug 'tpope/vim-unimpaired' " some simple pair mappings
 Plug 'nvim-lua/plenary.nvim' " required for telescope
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+Plug 'nvim-telescope/telescope.nvim'
+" fzf-native needs gmake on freebsd
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " sorter
 Plug 'nvim-telescope/telescope-ui-select.nvim' " replace default ui-select
+" treesitter needs tree-sitter-cli now to compile parsers
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'williamboman/mason.nvim' " another package manager
 Plug 'williamboman/mason-lspconfig.nvim' " interop with lspconfig
@@ -19,8 +21,7 @@ Plug 'hrsh7th/cmp-buffer' " lsp source from buffer
 Plug 'hrsh7th/cmp-nvim-lsp' " lsp source from lsp
 Plug 'ray-x/lsp_signature.nvim' " prototype signature hints on K
 Plug 'mfussenegger/nvim-dap' " debug adapter protocl client
-Plug 'mrcjkb/rustaceanvim', {'tag': '5.1.1'} " debugging framework for rust
-Plug 'norcalli/nvim-colorizer.lua' " color hex codes
+Plug 'mrcjkb/rustaceanvim' " debugging framework for rust
 Plug 'ellisonleao/gruvbox.nvim' " a theme with semantic highlighting
 call plug#end()
 
@@ -57,11 +58,6 @@ syntax enable
 " toggle true colors
 nnoremap <Leader>c :set termguicolors!<CR>
 
-" color hex values
-if has('nvim')
-lua require("colorizer").setup()
-endif
-
 " telescope
 nnoremap <C-p> :Telescope find_files<CR>
 nnoremap <Leader>/ :Telescope live_grep<CR>
@@ -96,25 +92,105 @@ endif
 " tree-sitter
 if has('nvim')
 lua << EOF
-require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-        "c",
-        "lua",
-        "python",
-        "rust",
+-- names in ~/.vim/plugged/nvim-treesitter/runtime/queries
+local treesitter_filetypes = {
+    "asm",
+    "awk",
+    "bash",
+    "c",
+    "c_sharp",
+    "clojure",
+    "cmake",
+    "comment",
+    "commonlisp",
+    "cpp",
+    "css",
+    "csv",
+    "diff",
+    "dockerfile",
+    "dot",
+    "git_config",
+    "git_rebase",
+    "gitattributes",
+    "gitcommit",
+    "gitignore",
+    "glsl",
+    "go",
+    "hlsl",
+    "html",
+    "http",
+    "java",
+    "javadoc",
+    "javascript",
+    "jq",
+    "jsdoc",
+    "json",
+    "json5",
+    "linkerscript",
+    "llvm",
+    "lua",
+    "luadoc",
+    "make",
+    "markdown",
+    "markdown_inline",
+    "nginx",
+    "objdump",
+    "passwd",
+    "pem",
+    "perl",
+    "php",
+    "phpdoc",
+    "properties",
+    "python",
+    "readline",
+    "regex",
+    "ruby",
+    "rust",
+    "scala",
+    "scheme",
+    "sql",
+    "ssh_config",
+    "tcl",
+    "terraform",
+    "tmux",
+    "toml",
+    "typescript",
+    "udev",
+    "vim",
+    "vimdoc",
+    "wgsl",
+    "xml",
+    "yaml",
+    "zig",
+    "zsh",
+}
+require("nvim-treesitter").install(treesitter_filetypes)
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = treesitter_filetypes,
+    callback = function()
+        -- enable treesitter highlighting
+        vim.treesitter.start()
+
+        -- enable treesitter indentation
+        vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+    end,
+})
+EOF
+endif
+
+" disable comment continuation in some filetypes
+if has('nvim')
+lua << EOF
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "vim", -- embedded lua quotes are confused as comments
     },
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-    indent = {
-        enable = true,
-    },
-    rainbow = {
-        enable = true,
-        extended_mode = true,
-        max_file_lines = nil,
-    }
+    callback = function()
+        vim.opt_local.formatoptions:remove {
+            "r", -- continue comments when pressing return
+            "o", -- continue comments when pressing o or O
+        }
+    end,
 })
 EOF
 endif
@@ -122,11 +198,7 @@ endif
 " mason package manager
 if has('nvim')
 lua << EOF
-require("mason").setup({
-    ui = {
-        border = "rounded",
-    },
-})
+require("mason").setup()
 EOF
 endif
 
@@ -138,38 +210,59 @@ nnoremap K :lua vim.lsp.buf.hover({border="rounded"})<CR>
 
 if has('nvim')
 lua << EOF
-local assign_gutter_sym = function(label, sym)
-    vim.fn.sign_define(label, {texthl = label, numhl = label, text = sym})
-end
-assign_gutter_sym("DiagnosticSignError", "E")
-assign_gutter_sym("DiagnosticSignWarn", "W")
-assign_gutter_sym("DiagnosticSignHint", "H")
-assign_gutter_sym("DiagnosticSignInfo", "I")
+-- rounded borders
+vim.o.winborder = "rounded"
+
+-- clean up diagnostics
+vim.diagnostic.config({
+    severity_sort = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "E",
+            [vim.diagnostic.severity.WARN] = "W",
+            [vim.diagnostic.severity.HINT] = "H",
+            [vim.diagnostic.severity.INFO] = "I",
+        },
+    },
+    underline = false,
+    --virtual_lines = {
+    --    current_line = true,
+    --},
+    virtual_text = false,
+})
 
 require("mason-lspconfig").setup({
     ensure_installed = {
+        "clangd",
         "pyright",
     },
 })
 
 on_attach_common = function(client, bufnr)
     vim.opt.signcolumn = "yes" -- hold gutter open to prevent shifting cols
-    vim.diagnostic.config({
-        virtual_text = false,
-        underline = false,
-        float = {
-            border = "rounded"
-        },
-    })
 end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false
 vim.lsp.config("pyright", {
     on_attach = function(client, bufnr)
-        on_attach_common(client, bufn)
+        on_attach_common(client, bufnr)
     end,
     capabilities = capabilities,
 })
+vim.lsp.config("clangd", {
+    on_attach = function(client, bufnr)
+        on_attach_common(client, bufnr)
+    end,
+    cmd = {
+      'clangd',
+      '--clang-tidy',
+      '--background-index',
+      '--offset-encoding=utf-8',
+    },
+    root_markers = { '.clangd', 'compile_commands.json' },
+    filetypes = { 'c', 'cpp' },
+})
+vim.lsp.enable("clangd")
 
 -- in macos, enable debugging with: DevToolsSecurity -enable
 vim.g.rustaceanvim = {
